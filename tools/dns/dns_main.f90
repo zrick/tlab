@@ -559,6 +559,10 @@ PROGRAM DNS
 ! ###################################################################
 ! Initialize data for boundary conditions
 ! ###################################################################
+
+  IF ( itranslate_x .EQ. EQNS_TRNSLT )                       q(:,1) = q(:,1) -trnslt_vector(1)
+  IF ( itranslate_z .EQ. EQNS_TRNSLT .AND. inb_flow .GT. 2 ) q(:,3) = q(:,3) -trnslt_vector(3) 
+
 ! buffer zone and reference pressures
   CALL BOUNDARY_INIT(vaux(vindex(VA_BUFF_HT)), vaux(vindex(VA_BUFF_HB)), &
                      vaux(vindex(VA_BUFF_VI)), vaux(vindex(VA_BUFF_VO)), &
@@ -582,6 +586,9 @@ PROGRAM DNS
 ! Initialize time step dt
 ! ###################################################################
   CALL TIME_COURANT(dx,dy,dz, q,s, wrk2d,wrk3d)
+
+  IF ( itranslate_x .EQ. EQNS_TRNSLT )                       q(:,1) = q(:,1) + trnslt_vector(1)
+  IF ( itranslate_z .EQ. EQNS_TRNSLT .AND. inb_flow .GT. 2 ) q(:,3) = q(:,3) + trnslt_vector(3)
 
 ! ###################################################################
 ! Initialize logfiles

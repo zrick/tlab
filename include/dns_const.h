@@ -27,6 +27,8 @@
 ! Equation terms
 #define EQNS_NONE             0
 
+#define EQNS_TRNSLT           1
+
 #define EQNS_DIVERGENCE       1
 #define EQNS_SKEWSYMMETRIC    2
 #define EQNS_CONVECTIVE       3

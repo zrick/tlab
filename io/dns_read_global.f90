@@ -342,7 +342,8 @@ SUBROUTINE DNS_READ_GLOBAL(inifile)
   rotn_vector(:) = C_0_R
   CALL SCANINICHAR(bakfile, inifile, 'Rotation', 'Vector', '0.0,1.0,0.0', sRes)
   idummy = 3
-  CALL LIST_REAL(sRes, idummy, rotn_vector)
+  CALL LIST_REAL(sRes, idummy, rotn_vector) 
+
   
   icoriolis_x = EQNS_NONE; icoriolis_y = EQNS_NONE; icoriolis_z = EQNS_NONE
   IF ( ABS(rotn_vector(1)) .GT. C_0_R ) THEN; icoriolis_x = icoriolis; CALL IO_WRITE_ASCII(lfile, 'Angular velocity along Ox.'); ENDIF
@@ -362,6 +363,27 @@ SUBROUTINE DNS_READ_GLOBAL(inifile)
      CALL IO_WRITE_ASCII(efile,'DNS_READ_GLOBAL. TermCoriolis option only allows for angular velocity along Oy.')
      CALL DNS_STOP(DNS_ERROR_OPTION)
      ENDIF
+  ENDIF
+
+! ###################################################################
+! Translation
+! ###################################################################
+  CALL IO_WRITE_ASCII(bakfile, '#')
+  CALL IO_WRITE_ASCII(bakfile, '#[Translation]')
+  CALL IO_WRITE_ASCII(bakfile, '#Vector=<Fx,Fy,Fz>')
+
+  trnslt_vector(:) = C_0_R
+  CALL SCANINICHAR(bakfile, inifile, 'Translation', 'Vector', '0.0,0.0,0.0', sRes)
+  idummy = 3
+  CALL LIST_REAL(sRes, idummy, trnslt_vector)
+  
+  IF ( ABS(trnslt_vector(1)) .GT. C_0_R ) THEN; itranslate_x = EQNS_TRNSLT; CALL IO_WRITE_ASCII(lfile, 'Translation velocity along Ox.'); ENDIF
+  IF ( ABS(trnslt_vector(2)) .GT. C_0_R ) THEN; itranslate_y = EQNS_TRNSLT; CALL IO_WRITE_ASCII(lfile, 'Translation velocity along Oy.'); ENDIF
+  IF ( ABS(trnslt_vector(3)) .GT. C_0_R ) THEN; itranslate_z = EQNS_TRNSLT; CALL IO_WRITE_ASCII(lfile, 'Translation velocity along Oz.'); ENDIF
+           
+  IF ( itranslate_y .NE. EQNS_NONE ) THEN 
+     CALL IO_WRITE_ASCII(efile,'DNS_READ_GLOBAL. [Translation] option only allows for velocity along Ox.')
+     CALL DNS_STOP(DNS_ERROR_OPTION)
   ENDIF
 
 ! ###################################################################

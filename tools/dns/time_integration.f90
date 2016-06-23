@@ -34,6 +34,7 @@ SUBROUTINE TIME_INTEGRATION(x,y,z,dx,dy,dz, q,hq,s,hs, &
   USE DNS_GLOBAL, ONLY : itransport, visc
   USE DNS_GLOBAL, ONLY : itime, rtime
   USE DNS_GLOBAL, ONLY : nspa_rest, nspa_step, iupdate_stat
+  USE DNS_GLOBAL, ONLY : itranslate_x, itranslate_z, trnslt_vector
   USE THERMO_GLOBAL, ONLY : imixture
   USE DNS_LOCAL 
   USE DNS_TOWER
@@ -114,6 +115,9 @@ SUBROUTINE TIME_INTEGRATION(x,y,z,dx,dy,dz, q,hq,s,hs, &
 
   DO WHILE ( itime .LT. nitera_last )
 
+     IF ( itranslate_x .EQ. EQNS_TRNSLT )                        u(:) = u(:) - trnslt_vector(1)
+     IF ( itranslate_z .EQ. EQNS_TRNSLT .AND. inb_flow .GT. 2 )  w(:) = w(:) - trnslt_vector(3)
+
      CALL TIME_RUNGEKUTTA(x,y,z,dx,dy,dz, q,hq,s,hs, &
           x_inf,y_inf,z_inf,q_inf,s_inf, txc, vaux, wrk1d,wrk2d,wrk3d, &
           l_q, l_hq, l_txc, l_tags, l_comm)
@@ -172,6 +176,9 @@ SUBROUTINE TIME_INTEGRATION(x,y,z,dx,dy,dz, q,hq,s,hs, &
 
 ! -----------------------------------------------------------------------
      CALL TIME_COURANT(dx,dy,dz, q,s, wrk2d,wrk3d)
+
+     IF ( itranslate_x .EQ. EQNS_TRNSLT )                      u(:) = u(:) + trnslt_vector(1)
+     IF ( itranslate_z .EQ. EQNS_TRNSLT .AND. inb_flow .GT. 2) w(:) = w(:) + trnslt_vector(3)
 
 ! ###################################################################
 ! The rest: Logging, postprocessing and saving

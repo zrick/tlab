@@ -146,6 +146,13 @@ MODULE DNS_GLOBAL
   TINTEGER :: icoriolis_x,icoriolis_y,icoriolis_z
 
 ! ###################################################################
+! Translation parameters
+! ###################################################################
+  TREAL    :: trnslt_vector(3) 
+  TINTEGER :: itranslate_x, itranslate_y, itranslate_z 
+
+
+! ###################################################################
 ! Radiation parameters
 ! ###################################################################
   TINTEGER :: irad_scalar                         ! index of scalar in which radiation acts

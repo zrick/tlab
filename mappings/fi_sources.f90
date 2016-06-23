@@ -17,7 +17,8 @@ SUBROUTINE FI_SOURCES_FLOW(q,s, hq, b_ref, wrk1d,wrk3d)
 
   USE DNS_GLOBAL, ONLY : imax,jmax,kmax, isize_field, isize_wrk1d
   USE DNS_GLOBAL, ONLY : ibodyforce, body_param, body_vector
-  USE DNS_GLOBAL, ONLY : icoriolis, rotn_param, rotn_vector
+  USE DNS_GLOBAL, ONLY : icoriolis, rotn_param, rotn_vector 
+  USE DNS_GLOBAL, ONLY : itranslate_x,itranslate_z,trnslt_vector
 
   IMPLICIT NONE
 
@@ -29,7 +30,7 @@ SUBROUTINE FI_SOURCES_FLOW(q,s, hq, b_ref, wrk1d,wrk3d)
 
 ! -----------------------------------------------------------------------
   TINTEGER ij, iq
-  TREAL dummy, u_geo, w_geo
+  TREAL dummy, u_geo, w_geo, u_trans, w_trans
 
   TINTEGER siz, srt, end    !  Variables for OpenMP Partitioning 
 
@@ -48,15 +49,25 @@ SUBROUTINE FI_SOURCES_FLOW(q,s, hq, b_ref, wrk1d,wrk3d)
   IF ( icoriolis .EQ. EQNS_COR_NORMALIZED ) THEN
      u_geo = COS(rotn_param(1))
      w_geo =-SIN(rotn_param(1))
-
+     u_trans=0 
+     w_trans=0
+     
 !$omp parallel default( shared ) &
 !$omp private( ij, dummy,srt,end,siz )
      CALL DNS_OMP_PARTITION(isize_field,srt,end,siz) 
 
      dummy = rotn_vector(2)
+     !
+     IF ( itranslate_x .EQ. EQNS_TRNSLT ) THEN
+        u_trans = trnslt_vector(1) 
+     ENDIF
+     IF ( itranslate_z .EQ. EQNS_TRNSLT ) THEN 
+        w_trans = trnslt_vector(3) 
+     ENDIF
+     
      DO ij = srt,end
-        hq(ij,1) = hq(ij,1) + dummy*( w_geo-q(ij,3) )
-        hq(ij,3) = hq(ij,3) + dummy*( q(ij,1)-u_geo ) 
+        hq(ij,1) = hq(ij,1) + dummy*( w_geo- ( q(ij,3) + w_trans ) )
+        hq(ij,3) = hq(ij,3) + dummy*( q(ij,1)+u_trans-u_geo ) 
      ENDDO
   ENDIF
 
