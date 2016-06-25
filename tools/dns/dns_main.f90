@@ -560,8 +560,16 @@ PROGRAM DNS
 ! Initialize data for boundary conditions
 ! ###################################################################
 
-  IF ( itranslate_x .EQ. EQNS_TRNSLT )                       q(:,1) = q(:,1) -trnslt_vector(1)
-  IF ( itranslate_z .EQ. EQNS_TRNSLT .AND. inb_flow .GT. 2 ) q(:,3) = q(:,3) -trnslt_vector(3) 
+  IF ( itranslate_x .EQ. EQNS_TRNSLT ) THEN
+     WRITE(line,*) trnslt_vector(1); line='Translation along Ox: '//TRIM(ADJUSTL(line))
+     CALL IO_WRITE_ASCII(lfile,line)
+     q(:,1) = q(:,1) -trnslt_vector(1)
+  ENDIF
+  IF ( itranslate_z .EQ. EQNS_TRNSLT .AND. inb_flow .GT. 2 )  THEN
+     WRITE(line,*) trnslt_vector(3); line='Translation along Oz: '//TRIM(ADJUSTL(line))
+     CALL IO_WRITE_ASCII(lfile,line)
+     q(:,3) = q(:,3) -trnslt_vector(3)
+  ENDIF
 
 ! buffer zone and reference pressures
   CALL BOUNDARY_INIT(vaux(vindex(VA_BUFF_HT)), vaux(vindex(VA_BUFF_HB)), &
