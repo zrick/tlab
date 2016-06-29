@@ -581,14 +581,63 @@ if [ $answer = "yes" ]; then
 		    
 		    total_pe = '$QSEND_NP';
 		    rpn      = '$QSEND_RANKSPERNODE';
-                    nodes = int((total_pe-1)/rpn) + 1;
-
+                    nodes    = int((total_pe-1)/rpn) + 1;
+                    mplanes  = int(nodes-1)/512+1;  
+                    # MAX ON JUQUEEN is 2x7x2x2
+                    
                     print  "#@ job_name = '$QSEND_NAME'"
 		    print  "#@ output = ll_out.$(jobid).log-'$TIMESTAMP'"
 		    print  "#@ error= ll_err.$(jobid).log-'$TIMESTAMP'"
- 		    print  "#@ bg_size = " nodes
 		    printf "#@ wall_clock_limit = %.2d:%.2d:%.2d\n", hours, min, sec
-		}
+
+                    if ( nodes < 512 ) { 
+                      print "#@ bg_size = " nodes 
+                    }else{
+                      mplanes  = int((nodes-1)/512)+1;    
+                      mplanes_save=mplanes
+                      for (i=2; i<=7; ++i) { 
+                        m_loc[i]=0; rem=0
+                        while ( rem == 0 && mplanes > i-1) { 
+                          test = int(mplanes/(i**(m_loc[i]+1)))
+                          rem  = test*(i**(m_loc[i]+1))  - mplanes 
+                          if ( rem == 0 ) { 
+                            m_loc[i] = m_loc[i]+1 
+                          }  
+                          if (test == 1) { 
+                            break 
+                          }
+                        }
+                        mplanes = mplanes / (i**m_loc[i]) 
+                      }
+                      if ( mplanes > 1 ) { 
+                        print "ERROR: cannot decompose for " mplanes " midplanes on juqueen"
+                        exit 1
+                      }
+                      m_a=1; m_b=1; m_c=1; m_d=1
+                      for (i=2;i<=7; ++i){
+                        while ( m_loc[i] > 0 ) { 
+                          if ( m_a*i < 2+1 && m_loc[i] >0 ){ 
+                            m_a = m_a * i; m_loc[i] = m_loc[i]-1 }
+                          if ( m_c*i < 2+1 && m_loc[i] >0 ){ 
+                            m_c = m_c * i; m_loc[i] = m_loc[i]-1 }
+                          if ( m_b*i < 7+1 && m_loc[i] >0 ){ 
+                            m_b = m_b * i; m_loc[i] = m_loc[i]-1 }
+                          if ( m_d*i < 2+1 && m_loc[i] >0 ){ 
+                            m_d = m_d * i; m_loc[i] = m_loc[i]-1 }
+                        }
+                      }
+                      if ( m_a*m_b*m_c*m_d != mplanes_save ) { 
+                        print "ERROR: cannot decompose for " mplanes_save " midplanes on juqueen"  
+                        exit
+                      } 
+                      print "#@ bg_shape= " m_a "x" m_b "x" m_c "x" m_d 
+                      if ( '$QSEND_COMMMODE' ==nonblocking ) {
+                        print "#@ bg_rotate = FALSE"
+                      } else {
+                        print "#@ bg_rotate= TRUE" 
+                      }
+                    }
+                }
 	    else if ($4 == "MODIFY")
 		{
 		    print "JOBDIR='$QSEND_JOBDIR'"
