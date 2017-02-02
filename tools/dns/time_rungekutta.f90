@@ -33,7 +33,7 @@ SUBROUTINE TIME_RUNGEKUTTA(q,hq,s,hs, &
   USE DNS_GLOBAL, ONLY : isize_field, inb_flow,inb_scal, icalc_particle
   USE DNS_GLOBAL, ONLY : icalc_flow,icalc_scal, imode_eqns
   USE DNS_GLOBAL, ONLY : isize_particle
-  USE DNS_GLOBAL, ONLY : rtime
+  USE DNS_GLOBAL, ONLY : imax,kmax,inb_vars,rtime
   USE LAGRANGE_GLOBAL, ONLY : particle_number, inb_particle_evolution
   USE DNS_LOCAL
 
@@ -49,7 +49,8 @@ SUBROUTINE TIME_RUNGEKUTTA(q,hq,s,hs, &
 
   TREAL, DIMENSION(isize_field,*) :: q,hq, s,hs
   TREAL, DIMENSION(*)             :: x_inf,y_inf,z_inf, q_inf,s_inf
-  TREAL, DIMENSION(*)             :: txc, wrk1d,wrk2d,wrk3d, vaux
+  TREAL, DIMENSION(*)             :: txc, wrk1d,wrk2d,wrk3d
+  TREAL, DIMENSION(*), TARGET     :: vaux
 
   TREAL, DIMENSION(isize_particle,*) :: l_q, l_hq
   TREAL, DIMENSION(*)                :: l_comm, l_txc
@@ -63,6 +64,8 @@ SUBROUTINE TIME_RUNGEKUTTA(q,hq,s,hs, &
   TREAL kex(3), kim(3) 
 
   TINTEGER srt,end,siz ! Variables for OpenMP Paritioning  
+  TREAL, DIMENSION(:), POINTER :: bcs_hb, bcs_ht
+  TINTEGER bcs_VA_start,bcs_VA_end
 #ifdef USE_PROFILE
   TINTEGER t_srt,t_end,t_dif,idummy,PROC_CYCLES,MAX_CYCLES 
   CHARACTER*256 time_string
@@ -76,6 +79,12 @@ SUBROUTINE TIME_RUNGEKUTTA(q,hq,s,hs, &
 #ifdef USE_BLAS
   ilen = isize_field
 #endif
+
+  bcs_VA_start = vindex(VA_BCS_HB);  bcs_VA_end=vindex(VA_BCS_HB) + imax*kmax*inb_vars
+  bcs_hb(1:) => vaux(bcs_VA_start:bcs_VA_end)
+
+  bcs_VA_start = vindex(VA_BCS_HT);  bcs_VA_end=vindex(VA_BCS_HT) + imax*kmax*inb_vars
+  bcs_ht(1:) => vaux(bcs_VA_start:bcs_VA_end)
 
   IF      ( rkm_mode .EQ. RKM_EXP3           ) THEN; rkm_endstep = 3;
   ELSE IF ( rkm_mode .EQ. RKM_EXP4           ) THEN; rkm_endstep = 5;
@@ -133,6 +142,8 @@ SUBROUTINE TIME_RUNGEKUTTA(q,hq,s,hs, &
 ! Initialize arrays to zero for the explcit low-storage algorithm
 ! -------------------------------------------------------------------
   IF ( rkm_mode .EQ. RKM_EXP3 .OR. rkm_mode .EQ. RKM_EXP4 ) THEN 
+     bcs_hb(:) = C_0_R
+     bcs_ht(:) = C_0_R
      IF ( icalc_flow .EQ. 1 ) THEN
         DO is = 1,inb_flow; hq(:,is) = C_0_R; ENDDO
      ENDIF
@@ -196,6 +207,9 @@ SUBROUTINE TIME_RUNGEKUTTA(q,hq,s,hs, &
 #endif 
 
         alpha = kco(rkm_substep)
+
+        bcs_hb(:) = alpha*bcs_hb(:)
+        bcs_ht(:) = alpha*bcs_ht(:)
 
         IF ( icalc_flow .EQ. 1 ) THEN
            DO is = 1,inb_flow

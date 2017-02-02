@@ -315,8 +315,8 @@ SUBROUTINE  RHS_GLOBAL_INCOMPRESSIBLE_1&
 ! #######################################################################
 ! Boundary conditions
 ! #######################################################################
-  bcs_hb(:,:,1:inb_vars) = C_0_R ! default is no-slip (dirichlet)
-  bcs_ht(:,:,1:inb_vars) = C_0_R
+  bcs_hb(:,:,1:inb_flow) = C_0_R ! default is no-slip (dirichlet)
+  bcs_ht(:,:,1:inb_flow) = C_0_R
 
 ! -----------------------------------------------------------------------
 ! Preliminaries
@@ -330,6 +330,7 @@ SUBROUTINE  RHS_GLOBAL_INCOMPRESSIBLE_1&
   ENDIF
 
   DO is = 1,inb_scal
+  bcs_ht(:,:,inb_flow+is) = C_0_R
   ibc = 0
   IF ( bcs_scal_jmin(is) .EQ. DNS_BCS_NEUMANN ) ibc = ibc + 1
   IF ( bcs_scal_jmax(is) .EQ. DNS_BCS_NEUMANN ) ibc = ibc + 2
@@ -339,12 +340,26 @@ SUBROUTINE  RHS_GLOBAL_INCOMPRESSIBLE_1&
   ENDDO
 
 ! -----------------------------------------------------------------------
-! Impose bottom BCs at Jmin 
+! Surface model
+! -----------------------------------------------------------------------
+
+  IF ( .TRUE. ) THEN        ! If surface model active, BC is prognostic and must be accumulated
+     DO is=1,inb_scal
+        CALL DNS_SURFACE_UPDATE(is,bcs_hb,q,hq,s,hs,tmp1,tmp2,tmp3,wrk1d,wrk2d,wrk3d)
+     ENDDO
+  ELSE                      ! If surface model is inactive, BC is set
+     DO is=1,inb_scal
+        bcs_hb(:,:,inb_flow+is) = 0
+     ENDDO
+  ENDIF
+
+! -----------------------------------------------------------------------
+! Impose bottom BCs at Jmin
 ! -----------------------------------------------------------------------
   ip_b =                 1
   DO k = 1,kmax
      DO is = 1,inb_scal
-        hs(ip_b:ip_b+imax-1,is) = bcs_hb(1:imax,k,is+inb_flow) 
+        hs(ip_b:ip_b+imax-1,is) = bcs_hb(:,k,inb_flow+is)
      ENDDO
      h1(ip_b:ip_b+imax-1) = bcs_hb(1:imax,k,1)
      h2(ip_b:ip_b+imax-1) = C_0_R               ! no penetration
