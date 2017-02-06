@@ -330,28 +330,20 @@ SUBROUTINE  RHS_GLOBAL_INCOMPRESSIBLE_1&
   ENDIF
 
   DO is = 1,inb_scal
-  bcs_ht(:,:,inb_flow+is) = C_0_R
   ibc = 0
-  IF ( bcs_scal_jmin(is) .EQ. DNS_BCS_NEUMANN ) ibc = ibc + 1
-  IF ( bcs_scal_jmax(is) .EQ. DNS_BCS_NEUMANN ) ibc = ibc + 2
+  IF ( bcs_scal_jmin(is) .EQ. DNS_BCS_INTERACT ) ibc =-4
+  IF ( bcs_scal_jmin(is) .EQ. DNS_BCS_NEUMANN )  ibc = ibc + 1
+  IF ( bcs_scal_jmax(is) .EQ. DNS_BCS_NEUMANN )  ibc = ibc + 2
   IF ( ibc .GT. 0 ) THEN
      CALL BOUNDARY_BCS_NEUMANN_Y(ibc, imax,jmax,kmax, g(2), hs(1,is), bcs_hb(1,1,is+inb_flow),bcs_ht(1,1,is+inb_flow), wrk1d,tmp1,wrk3d)
+  ELSEIF ( ibc .LT. 0 ) THEN
+     CALL RHS_SURFACE(is,bcs_hb,q,hq,s,hs,tmp1,tmp2,tmp3,wrk1d,wrk2d,wrk3d)
+     bcs_ht(:,:,inb_flow+is) = C_0_R
+  ELSE
+     bcs_hb(:,:,inb_flow+is) = C_0_R
+     bcs_ht(:,:,inb_flow+is) = C_0_R
   ENDIF
   ENDDO
-
-! -----------------------------------------------------------------------
-! Surface model
-! -----------------------------------------------------------------------
-
-  IF ( .TRUE. ) THEN        ! If surface model active, BC is prognostic and must be accumulated
-     DO is=1,inb_scal
-        CALL DNS_SURFACE_UPDATE(is,bcs_hb,q,hq,s,hs,tmp1,tmp2,tmp3,wrk1d,wrk2d,wrk3d)
-     ENDDO
-  ELSE                      ! If surface model is inactive, BC is set
-     DO is=1,inb_scal
-        bcs_hb(:,:,inb_flow+is) = 0
-     ENDDO
-  ENDIF
 
 ! -----------------------------------------------------------------------
 ! Impose bottom BCs at Jmin
@@ -381,4 +373,3 @@ SUBROUTINE  RHS_GLOBAL_INCOMPRESSIBLE_1&
 
   RETURN
 END SUBROUTINE RHS_GLOBAL_INCOMPRESSIBLE_1
-

@@ -1,12 +1,15 @@
 #include "types.h"
 #include "dns_const.h"
-! SUBROUTINE SURFACE UPDATE
-! Calculates and provides interactive surface boundary condition 
-SUBROUTINE DNS_SURFACE_UPDATE(is,bcs_hb,q,hq,s,hs,tmp1,tmp2,aux,wrk1d,wrk2d,wrk3d)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! SUBROUTINE RHS_SURFACE
+! Calculates and updates interactive surface boundary condition
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+SUBROUTINE RHS_SURFACE(is,bcs_hb,q,hq,s,hs,tmp1,tmp2,aux,wrk1d,wrk2d,wrk3d)
 
   USE DNS_GLOBAL, ONLY : imax,jmax,kmax,inb_flow,inb_vars,inb_scal,j1bc 
   USE DNS_GLOBAL, ONLY : isize_field,isize_wrk1d 
-  USE DNS_GLOBAL, ONLY : visc,itime,schmidt
+  USE DNS_GLOBAL, ONLY : visc,itime,schmidt,coupling
   USE DNS_GLOBAL, ONLY : imode_fdm 
   USE DNS_LOCAL,  ONLY : dtime
 
@@ -22,11 +25,11 @@ SUBROUTINE DNS_SURFACE_UPDATE(is,bcs_hb,q,hq,s,hs,tmp1,tmp2,aux,wrk1d,wrk2d,wrk3
   TREAL, DIMENSION(isize_wrk1d,*)      :: wrk1d
   TREAL, DIMENSION(*)                  :: wrk2d,wrk3d
 
-  TINTEGER nxy,ip,k 
+  TINTEGER nxy,ip,j,k
   TREAL dx(1), dy(1), dz(1)   ! To use uld wrappers for derivatives  
 
   TREAL, DIMENSION(:,:), POINTER       :: hfx,hfx_anom
-  TREAL :: diff,hfx_avg,l_couple 
+  TREAL :: diff,hfx_avg
 
   TREAL AVG1V2D
 
@@ -46,10 +49,9 @@ SUBROUTINE DNS_SURFACE_UPDATE(is,bcs_hb,q,hq,s,hs,tmp1,tmp2,aux,wrk1d,wrk2d,wrk3
 
   hfx_avg = diff*AVG1V2D(imax,jmax,kmax,1,1,tmp1) 
   hfx_anom = hfx - hfx_avg
-  bcs_hb(:,:,inb_flow+is) = bcs_hb(:,:,inb_flow+is) + l_couple*hfx_anom
+  bcs_hb(:,:,inb_flow+is) = bcs_hb(:,:,inb_flow+is) + coupling(is)*hfx_anom
 
-  WRITE(*,*) 'Heat flux:', hfx_avg, AVG1V2D(imax,1,kmax,1,2,hfx)-hfx_avg**2,AVG1V2D(imax,jmax,kmax,1,2,s)-1
-
+  ! WRITE(*,*) itime,'Heat flux:', hfx_avg, AVG1V2D(imax,1,kmax,1,2,hfx)-hfx_avg**2,AVG1V2D(imax,jmax,kmax,1,1,s)-C_1_R,AVG1V2D(imax,jmax,kmax,1,2,s)
   ! TESTING: solve ds/dt=s => s(t) = exp(t) on the surface boundary
   ! ip=1 
   ! DO k=1,kmax  
@@ -57,4 +59,4 @@ SUBROUTINE DNS_SURFACE_UPDATE(is,bcs_hb,q,hq,s,hs,tmp1,tmp2,aux,wrk1d,wrk2d,wrk3
   !    ip = ip+nxy
   ! ENDDO
 
-END SUBROUTINE DNS_SURFACE_UPDATE
+END SUBROUTINE RHS_SURFACE

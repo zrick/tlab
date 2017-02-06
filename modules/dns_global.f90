@@ -152,6 +152,7 @@ MODULE DNS_GLOBAL
   TREAL    :: settling                            ! sedimentation parameter for liquid particle
 
   TREAL    :: visc                                ! simply 1/reynolds
+  TREAL    :: coupling(MAX_NSP)
 
 ! ###################################################################
 ! FFTW

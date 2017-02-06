@@ -185,7 +185,7 @@ SUBROUTINE DNS_READ_LOCAL(inifile)
   CALL IO_WRITE_ASCII(bakfile, '#SigmaInfJ=<value>')
   CALL IO_WRITE_ASCII(bakfile, '#BetaTransverse=<value>')
   CALL IO_WRITE_ASCII(bakfile, '#ScalarImin=<none/dirichlet/neumman>')
-  CALL IO_WRITE_ASCII(bakfile, '#ScalarJmin=<none/dirichlet/neumman>')
+  CALL IO_WRITE_ASCII(bakfile, '#ScalarJmin=<none/dirichlet/neumman/interactive>')
   CALL IO_WRITE_ASCII(bakfile, '#ScalarKmin=<none/dirichlet/neumman>')
   CALL IO_WRITE_ASCII(bakfile, '#VelocityImin=<none/dirichlet/neumman>')
   CALL IO_WRITE_ASCII(bakfile, '#VelocityJmin=<none/dirichlet/neumman>')
@@ -292,6 +292,7 @@ SUBROUTINE DNS_READ_LOCAL(inifile)
      IF      ( TRIM(ADJUSTL(sRes)) .eq. 'none'      ) THEN; bcs_scal_jmin(is) = DNS_BCS_NONE
      ELSE IF ( TRIM(ADJUSTL(sRes)) .eq. 'dirichlet' ) THEN; bcs_scal_jmin(is) = DNS_BCS_DIRICHLET
      ELSE IF ( TRIM(ADJUSTL(sRes)) .eq. 'neumann'   ) THEN; bcs_scal_jmin(is) = DNS_BCS_NEUMANN
+     ELSE IF ( TRIM(ADJUSTL(sRes)) .eq. 'interact'  ) THEN; bcs_scal_jmin(is) = DNS_BCS_INTERACT
      ELSE
         CALL IO_WRITE_ASCII(efile, 'DNS_READ_LOCAL. BoundaryConditions.'//TRIM(ADJUSTL(lstr)))
         CALL DNS_STOP(DNS_ERROR_IBC)

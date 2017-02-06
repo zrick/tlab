@@ -285,6 +285,7 @@ SUBROUTINE DNS_READ_GLOBAL(inifile)
   CALL IO_WRITE_ASCII(bakfile,  '#Damkohler=<value>')
   CALL IO_WRITE_ASCII(bakfile,  '#Stokes=<value>')
   CALL IO_WRITE_ASCII(bakfile,  '#Settling=<value>')
+  CALL IO_WRITE_ASCII(bakfile,  '#Coupling=<value>')
 
   CALL SCANINIREAL(bakfile, inifile, 'Parameters', 'Reynolds', '100', reynolds  )
   CALL SCANINIREAL(bakfile, inifile, 'Parameters', 'Gama',     '1.4', gama0     )
@@ -307,6 +308,12 @@ SUBROUTINE DNS_READ_GLOBAL(inifile)
      CALL IO_WRITE_ASCII(efile,'DNS_READ_GLOBAL. Schmidt and Damkholer sizes do not match.')
      CALL DNS_STOP(DNS_ERROR_OPTION)
   ENDIF
+
+  CALL SCANINICHAR(bakfile, inifile, 'Parameters', 'Coupling',  '1.0', sRes)
+  coupling(:) = C_0_R; inb_scal_local1 = MAX_NSP
+  CALL LIST_REAL(sRes, inb_scal_local1, coupling)
+
+
 
 ! ###################################################################
 ! Buoyancy

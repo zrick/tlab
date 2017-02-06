@@ -77,6 +77,7 @@
 #define DNS_BCS_INFLOW      2
 #define DNS_BCS_DIRICHLET   3
 #define DNS_BCS_NEUMANN     4
+#define DNS_BCS_INTERACT    5
 
 ! Filters
 #define DNS_FILTER_NONE     0
