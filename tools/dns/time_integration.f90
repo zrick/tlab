@@ -55,7 +55,7 @@ SUBROUTINE TIME_INTEGRATION(q,hq, s,hs, q_inf,s_inf, txc, wrk1d,wrk2d,wrk3d, &
 
 ! -------------------------------------------------------------------
   TINTEGER is, iq, ip
-  TINTEGER idummy, splanes_i(5), splanes_j(5), splanes_k(5), splanes_jp(5)
+  TINTEGER idummy, splanes_i(5), splanes_j(5), splanes_k(5), splanes_jp(5),iloc(3) 
   CHARACTER*32 fname, varname(1)
   CHARACTER*250 line1
   LOGICAL flag_save
@@ -129,7 +129,25 @@ SUBROUTINE TIME_INTEGRATION(q,hq, s,hs, q_inf,s_inf, txc, wrk1d,wrk2d,wrk3d, &
 
 ! ###################################################################
 ! The rest: Logging, postprocessing and saving
-! ###################################################################
+! ################################################################### 
+
+     ! Write some information to lfile for benchmarking
+     iloc(1)=2             ! i-position
+     iloc(2)=int(jmax/4)+1 ! j-position
+     iloc(3)=2             ! k-position
+
+     idummy = iloc(3)*imax*jmax + iloc(2)*imax + iloc(1)
+#ifdef USE_MPI
+     IF ( ims_pro.EQ.0 ) THEN
+#endif
+        WRITE( line1,999) itime,iloc(1),iloc(2),iloc(3),u(idummy),v(idummy),w(idummy)
+999     FORMAT('it=',I3,' LOC= (',I3,',',I3,',',I3,'):(',E0.9,',',E0.9,',',E0.9,')' )
+        CALL IO_WRITE_ASCII(lfile,line1)
+#ifdef USE_MPI
+     ENDIF
+#endif
+
+
      IF ( MOD(itime-nitera_first,nitera_log) .EQ. 0 .OR. INT(logs_data(1)) .NE. 0 ) THEN ! Log files
         CALL DNS_LOGS(i2)
 #ifdef LES
