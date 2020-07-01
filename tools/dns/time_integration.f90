@@ -132,16 +132,17 @@ SUBROUTINE TIME_INTEGRATION(q,hq, s,hs, q_inf,s_inf, txc, wrk1d,wrk2d,wrk3d, &
 ! ################################################################### 
 
      ! Write some information to lfile for benchmarking
-     iloc(1)=2             ! i-position
+     iloc(1)=1             ! i-position ; have to use first point for compatibility with arbitrary decomposition 
      iloc(2)=int(jmax/4)+1 ! j-position
-     iloc(3)=2             ! k-position
+     iloc(3)=1             ! k-position ; have to use first point for compatibility with arbitrary decomposition 
+                           !              and 2D cases. 
 
      idummy = iloc(3)*imax*jmax + iloc(2)*imax + iloc(1)
 #ifdef USE_MPI
      IF ( ims_pro.EQ.0 ) THEN
 #endif
         WRITE( line1,999) itime,iloc(1),iloc(2),iloc(3),u(idummy),v(idummy),w(idummy)
-999     FORMAT('it=',I3,' LOC= (',I3,',',I3,',',I3,'):(',E0.9,',',E0.9,',',E0.9,')' )
+999     FORMAT('it=',I3,' LOC= (',I3,',',I3,',',I3,'):(',E15.9,',',E15.9,',',E15.9,')' )
         CALL IO_WRITE_ASCII(lfile,line1)
 #ifdef USE_MPI
      ENDIF
