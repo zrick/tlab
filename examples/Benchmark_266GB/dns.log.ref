@@ -1,29 +1,3 @@
-Starting on 20200702 at 114223.605
-Git-hash not available
-Number of MPI tasks 128
-Reading global input data.
-Angular velocity along Oy.
-Initializing domain partition 8x16
-Reading local input data.
-Initializing MPI communicators.
-Initializing MPI types for Ox derivatives.
-Initializing MPI types for Oz derivatives.
-Initializing MPI types for Ox FFTW in Poisson solver.
-Initializing MPI types for Ox FFTW in Poisson solver.
-Initializing MPI types for Oz FFTW in Poisson solver.
-Allocating array x of size 28x1280
-Allocating array y of size 36x1024
-Allocating array z of size 28x1280
-Allocating array flow  of size 3x13107200
-Allocating array scal  of size 1x13107200
-Allocating array txc   of size 6x13299200
-Allocating array wrk3d of size 13299200
-Allocating array rhs flow of size 3x13107200
-Allocating array rhs scal of size 1x13107200
-Checking MPI transposition for Ox derivatives: Residual 0.00000E+000. Max. elapsed time 0.41150E+000 sec.
-Checking MPI transposition for Oz derivatives: Residual 0.00000E+000. Max. elapsed time 0.78470E+000 sec.
-Checking FFT routines: Residual 0.97902E-015. Max. elapsed time 0.21949E+001 sec.
-Reading field flow.0 of size 1280x1024x1280...
 Starting on 20200702 at 114319.422
 Git-hash not available
 Number of MPI tasks 128

@@ -1,39 +1,3 @@
-Starting on 20200702 at 114100.750
-Git-hash not available
-Number of MPI tasks 128
-Reading global input data.
-Angular velocity along Oy.
-Initializing domain partition 8x16
-Reading local input data.
-Initializing MPI communicators.
-Initializing MPI types for Ox derivatives.
-Initializing MPI types for Oz derivatives.
-Initializing MPI types for Ox FFTW in Poisson solver.
-Initializing MPI types for Ox FFTW in Poisson solver.
-Initializing MPI types for Oz FFTW in Poisson solver.
-Allocating array x of size 28x1280
-Allocating array y of size 36x896
-Allocating array z of size 28x1280
-Allocating array flow  of size 3x11468800
-Allocating array scal  of size 1x11468800
-Allocating array txc   of size 6x11640320
-Allocating array wrk3d of size 11640320
-Allocating array rhs flow of size 3x11468800
-Allocating array rhs scal of size 1x11468800
-Checking MPI transposition for Ox derivatives: Residual 0.00000E+000. Max. elapsed time 0.30560E+000 sec.
-Checking MPI transposition for Oz derivatives: Residual 0.00000E+000. Max. elapsed time 0.57630E+000 sec.
-Checking FFT routines: Residual 0.10368E-014. Max. elapsed time 0.19255E+001 sec.
-Reading field flow.0 of size 1280x896x1280...
-Writing field flow.bcs.jmax.0.1...
-Writing field flow.bcs.jmax.0.2...
-Writing field flow.bcs.jmax.0.3...
-Writing field scal.bcs.jmax.0.1...
-Checking bounds of field 1 at upper buffer: 0.00000E+000 and 0.00000E+000
-Checking bounds of field 2 at upper buffer: 0.00000E+000 and 0.00000E+000
-Checking bounds of field 3 at upper buffer: 0.00000E+000 and 0.00000E+000
-Checking bounds of field 1 at upper buffer: 0.00000E+000 and 0.00000E+000
-Starting time integration at It0.
-it=  1 LOC= (  1,225,  1):(0.136361989E-10,-.147945298E-21,-.522229802E-05)
 Starting on 20200702 at 114312.178
 Git-hash not available
 Number of MPI tasks 128
