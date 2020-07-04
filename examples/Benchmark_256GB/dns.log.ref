@@ -1,0 +1,47 @@
+Starting on 20200704 at 160123.122
+Git-hash not available
+Number of MPI tasks 192
+Reading global input data.
+Angular velocity along Oy.
+Initializing domain partition 16x12
+Reading local input data.
+Initializing MPI communicators.
+Initializing MPI types for Ox derivatives.
+Initializing MPI types for Oz derivatives.
+Initializing MPI types for Ox FFTW in Poisson solver.
+Initializing MPI types for Ox FFTW in Poisson solver.
+Initializing MPI types for Oz FFTW in Poisson solver.
+Allocating array x of size 28x1152
+Allocating array y of size 36x1152
+Allocating array z of size 28x1152
+Allocating array flow  of size 3x7962624
+Allocating array scal  of size 1x7962624
+Allocating array txc   of size 6x8199936
+Allocating array wrk3d of size 8199936
+Allocating array rhs flow of size 3x7962624
+Allocating array rhs scal of size 1x7962624
+Checking MPI transposition for Ox derivatives: Residual 0.00000E+000. Max. elapsed time 0.37460E+000 sec.
+Checking MPI transposition for Oz derivatives: Residual 0.00000E+000. Max. elapsed time 0.57250E+000 sec.
+Checking FFT routines: Residual 0.12055E-014. Max. elapsed time 0.20466E+001 sec.
+Reading field flow.0 of size 1152x1152x1152...
+Writing field flow.bcs.jmax.0.1...
+Writing field flow.bcs.jmax.0.2...
+Writing field flow.bcs.jmax.0.3...
+Writing field scal.bcs.jmax.0.1...
+Checking bounds of field 1 at upper buffer: 0.00000E+000 and 0.00000E+000
+Checking bounds of field 2 at upper buffer: 0.00000E+000 and 0.00000E+000
+Checking bounds of field 3 at upper buffer: 0.00000E+000 and 0.00000E+000
+Checking bounds of field 1 at upper buffer: 0.00000E+000 and 0.00000E+000
+Starting time integration at It0.
+it=  1 LOC= (  1,289,  1):(0.568879772E-11,-.305976685E-21,-.337306909E-05)
+it=  2 LOC= (  1,289,  1):(0.227551896E-10,-.547972708E-21,-.674613790E-05)
+it=  3 LOC= (  1,289,  1):(0.511991736E-10,-.767264396E-21,-.101192064E-04)
+Calculating flow statistics at It3...
+it=  4 LOC= (  1,289,  1):(0.910207479E-10,0.144355840E-20,-.134922746E-04)
+it=  5 LOC= (  1,289,  1):(0.142219910E-09,-.368245269E-20,-.168653426E-04)
+it=  6 LOC= (  1,289,  1):(0.204796659E-09,0.193953585E-20,-.202384102E-04)
+Calculating flow statistics at It6...
+Writing field flow.6 of size 1152x1152x1152...
+Finalizing program ../../build_PARALLEL/dns.x
+Time elapse ....................: 0.51314E+003
+########################################

@@ -1,10 +1,10 @@
 [x-direction]
-number of points .......: 1536
+number of points .......: 1152
 origin .................: 0.00000E+00
-end point ..............: 0.13491E+00
+end point ..............: 0.13488E+00
 scale ..................: 0.13500E+00
-minimum step ...........: 0.87891E-04
-maximum step ...........: 0.87891E-04
+minimum step ...........: 0.11719E-03
+maximum step ...........: 0.11719E-03
 minimum stretching .....: 0.10000E+01
 maximum stretching .....: 0.10000E+01
 [y-direction]
@@ -17,11 +17,11 @@ maximum step ...........: 0.49996E-03
 minimum stretching .....: 0.10010E+01
 maximum stretching .....: 0.10102E+01
 [z-direction]
-number of points .......:  768
+number of points .......: 1152
 origin .................: 0.00000E+00
-end point ..............: 0.13482E+00
+end point ..............: 0.13488E+00
 scale ..................: 0.13500E+00
-minimum step ...........: 0.17578E-03
-maximum step ...........: 0.17578E-03
+minimum step ...........: 0.11719E-03
+maximum step ...........: 0.11719E-03
 minimum stretching .....: 0.10000E+01
 maximum stretching .....: 0.10000E+01

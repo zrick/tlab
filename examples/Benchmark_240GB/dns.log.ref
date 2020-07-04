@@ -1,9 +1,9 @@
-Starting on 20200702 at 114312.178
+Starting on 20200704 at 155802.837
 Git-hash not available
-Number of MPI tasks 128
+Number of MPI tasks 192
 Reading global input data.
 Angular velocity along Oy.
-Initializing domain partition 8x16
+Initializing domain partition 16x12
 Reading local input data.
 Initializing MPI communicators.
 Initializing MPI types for Ox derivatives.
@@ -11,19 +11,19 @@ Initializing MPI types for Oz derivatives.
 Initializing MPI types for Ox FFTW in Poisson solver.
 Initializing MPI types for Ox FFTW in Poisson solver.
 Initializing MPI types for Oz FFTW in Poisson solver.
-Allocating array x of size 28x1280
-Allocating array y of size 36x896
-Allocating array z of size 28x1280
-Allocating array flow  of size 3x11468800
-Allocating array scal  of size 1x11468800
-Allocating array txc   of size 6x11640320
-Allocating array wrk3d of size 11640320
-Allocating array rhs flow of size 3x11468800
-Allocating array rhs scal of size 1x11468800
-Checking MPI transposition for Ox derivatives: Residual 0.00000E+000. Max. elapsed time 0.32620E+000 sec.
-Checking MPI transposition for Oz derivatives: Residual 0.00000E+000. Max. elapsed time 0.56430E+000 sec.
-Checking FFT routines: Residual 0.10333E-014. Max. elapsed time 0.19029E+001 sec.
-Reading field flow.0 of size 1280x896x1280...
+Allocating array x of size 28x1536
+Allocating array y of size 36x1152
+Allocating array z of size 28x768
+Allocating array flow  of size 3x7077888
+Allocating array scal  of size 1x7077888
+Allocating array txc   of size 6x7239168
+Allocating array wrk3d of size 7239168
+Allocating array rhs flow of size 3x7077888
+Allocating array rhs scal of size 1x7077888
+Checking MPI transposition for Ox derivatives: Residual 0.00000E+000. Max. elapsed time 0.44020E+000 sec.
+Checking MPI transposition for Oz derivatives: Residual 0.00000E+000. Max. elapsed time 0.95500E+000 sec.
+Checking FFT routines: Residual 0.95785E-015. Max. elapsed time 0.17515E+001 sec.
+Reading field flow.0 of size 1536x1152x768...
 Writing field flow.bcs.jmax.0.1...
 Writing field flow.bcs.jmax.0.2...
 Writing field flow.bcs.jmax.0.3...
@@ -33,15 +33,15 @@ Checking bounds of field 2 at upper buffer: 0.00000E+000 and 0.00000E+000
 Checking bounds of field 3 at upper buffer: 0.00000E+000 and 0.00000E+000
 Checking bounds of field 1 at upper buffer: 0.00000E+000 and 0.00000E+000
 Starting time integration at It0.
-it=  1 LOC= (  1,225,  1):(0.136361989E-10,-.147945298E-21,-.522229802E-05)
-it=  2 LOC= (  1,225,  1):(0.545447908E-10,0.524256522E-21,-.104445954E-04)
-it=  3 LOC= (  1,225,  1):(0.122725769E-09,0.445776563E-20,-.156668920E-04)
+it=  1 LOC= (  1,289,  1):(0.560689120E-11,0.124493518E-21,-.334869857E-05)
+it=  2 LOC= (  1,289,  1):(0.224275635E-10,-.534757868E-21,-.669739685E-05)
+it=  3 LOC= (  1,289,  1):(0.504620151E-10,-.114268520E-20,-.100460948E-04)
 Calculating flow statistics at It3...
-it=  4 LOC= (  1,225,  1):(0.218179125E-09,0.281761684E-21,-.208891879E-04)
-it=  5 LOC= (  1,225,  1):(0.340904852E-09,-.853220709E-21,-.261114832E-04)
-it=  6 LOC= (  1,225,  1):(0.490902944E-09,-.141201501E-20,-.313337777E-04)
+it=  4 LOC= (  1,289,  1):(0.897102439E-10,-.269539400E-20,-.133947925E-04)
+it=  5 LOC= (  1,289,  1):(0.140172248E-09,-.918614294E-21,-.167434900E-04)
+it=  6 LOC= (  1,289,  1):(0.201848026E-09,0.243023342E-21,-.200921871E-04)
 Calculating flow statistics at It6...
-Writing field flow.6 of size 1280x896x1280...
+Writing field flow.6 of size 1536x1152x768...
 Finalizing program ../../build_PARALLEL/dns.x
-Time elapse ....................: 0.49763E+003
+Time elapse ....................: 0.45450E+003
 ########################################
