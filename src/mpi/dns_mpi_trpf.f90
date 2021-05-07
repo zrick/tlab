@@ -57,14 +57,19 @@ SUBROUTINE DNS_MPI_TRPF_K(a, b, dsend, drecv, tsend, trecv)
   INTEGER ip
   TREAL rdum
   CHARACTER*256 line
-#ifdef PROFILE_ON
+  CHARACTER*32, PARAMETER ::  trp_log_file='dns.tlog' 
+!#ifdef PROFILE_ON
   TREAL time_loc_1, time_loc_2
-#endif
+!#endif
 
 ! #######################################################################
-#ifdef PROFILE_ON  
+!#ifdef PROFILE_ON  
   time_loc_1 = MPI_WTIME()
-#endif
+!#endif
+
+  WRITE(line,*) itime 
+  line='Starting TRPF_K (it ' // TRIM(ADJUSTL(line))//')'
+  CALL IO_WRITE_ASCII(trp_log_file,line) 
 
   l=0
   DO m=1,ims_npro_k
@@ -88,10 +93,12 @@ SUBROUTINE DNS_MPI_TRPF_K(a, b, dsend, drecv, tsend, trecv)
 
   CALL DNS_MPI_TAGUPDT
 
-#ifdef PROFILE_ON  
   time_loc_2 = MPI_WTIME()
   ims_time_trans = ims_time_trans + (time_loc_2 - time_loc_1)
-#endif
+
+  WRITE(line,*) time_loc_2-time_loc_1
+  line='Finished TRPF_K:'//TRIM(ADJUSTL(LINE)) //'s'
+  CALL IO_WRITE_ASCII(trp_log_file,line) 
 
   RETURN
 END SUBROUTINE DNS_MPI_TRPF_K
@@ -100,11 +107,15 @@ END SUBROUTINE DNS_MPI_TRPF_K
 !########################################################################
 SUBROUTINE DNS_MPI_TRPF_I(a, b, dsend, drecv, tsend, trecv)
   
+  USE DNS_CONSTANTS, ONLY : lfile 
+
   USE DNS_MPI, ONLY : ims_npro_i, ims_pro_i
   USE DNS_MPI, ONLY : ims_comm_x
   USE DNS_MPI, ONLY : ims_tag, ims_err 
   USE DNS_MPI, ONLY : ims_plan_trps_i,ims_plan_trpr_i 
   USE DNS_MPI, ONLY : ims_trp_mode_i
+
+  USE DNS_GLOBAL, ONLY : itime 
 
   IMPLICIT NONE
   
@@ -120,6 +131,17 @@ SUBROUTINE DNS_MPI_TRPF_I(a, b, dsend, drecv, tsend, trecv)
   INTEGER status(MPI_STATUS_SIZE,2*ims_npro_i)
   INTEGER mpireq(                2*ims_npro_i)
   INTEGER ip
+
+  CHARACTER*256 line  
+  CHARACTER*32, PARAMETER :: trp_log_file='dns.tlog'
+  TREAL time_loc_1, time_loc_2 
+
+  time_loc_1 = MPI_WTIME() 
+  
+  WRITE(line,*) itime
+  line='Starting TRPF_I (it '//TRIM(ADJUSTL(line))//')'
+  CALL IO_WRITE_ASCII(trp_log_file,line) 
+  
 
   l = 0
   DO m=1,ims_npro_i  
@@ -142,6 +164,11 @@ SUBROUTINE DNS_MPI_TRPF_I(a, b, dsend, drecv, tsend, trecv)
        CALL MPI_WAITALL(ims_npro_i*2, mpireq(1:), status(1,1), ims_err) 
 
   CALL DNS_MPI_TAGUPDT
+
+  time_loc_2=MPI_WTIME()  
+  WRITE(line,*) time_loc_2-time_loc_1  
+  line='FINISHED TRPF_I: '//TRIM(ADJUSTL(line))//'s' 
+  CALL IO_WRITE_ASCII(trp_log_file,line) 
 
   RETURN
 END SUBROUTINE DNS_MPI_TRPF_I
