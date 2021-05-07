@@ -1,8 +1,7 @@
 #!/bin/bash
 #
-#SBATCH --partition=batch
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=juan-pedro.mellado@mpimet.mpg.de
+#SBATCH --mail-user=juan.pedro.mellado@upc.edu
 #SBATCH --account=hhh07
 ########################### CHANGE ONLY THIS ###############################
 ########################### END LSF DIRECTIVES #############################
@@ -31,14 +30,15 @@ dns.pre $LOCALDIR $STEP
 touch *
 
 #Load environment
+#module purge
+#module use /gpfs/software/juwels/otherstages
+#module load Stages/2018b
 module load Intel
-#module load IntelMPI 
-module load ParaStationMPI 
-module load pscom
-
+#module load IntelMPI
+module load ParaStationMPI
+#module load pscom
 module load imkl
-#module load FFTW
-
+module load FFTW
 
 if [ $THREADSPERRANK -ge 2 ]; then
     export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
@@ -48,18 +48,18 @@ fi
 
 # Environment variables for switching from pscom’s OpenIB-Plugin
 # to its UCX/UXP-Plugin with UD usage:
-export PSP_OPENIB=0
-export PSP_UCP=1
-export PSP_ONDEMAND=0
-export PSP_GUARD=0
-export UCX_TLS=ud_mlx5,self,sm
-export UCX_NET_DEVICES=mlx5_0:1
-export UCX_IB_DEVICE_SPECS=0x119f:4115:ConnectX-4:5:30
+#export PSP_OPENIB=0
+#export PSP_UCP=1
+#export PSP_ONDEMAND=0
+#export PSP_GUARD=0
+#export UCX_TLS=ud_mlx5,self,sm
+#export UCX_NET_DEVICES=mlx5_0:1
+#export UCX_IB_DEVICE_SPECS=0x119f:4115:ConnectX-4:5:30
 
-#IntelMPI process pinning 
-#export I_MPI_PIN=yes       # force process pinning 
-#export I_MPI_PIN_MODE=pm   # use pinning by launcher; should collocate CPU and memory; not guaranteed for option 'lib' 
-#export I_MPI_PIN_DOMAIN=omp 
+#Mode 2
+export PSP_GUARD=0
+export PSP_ONDEMAND=1
+export PSP_UCP=1
 
 # Run Simulation
 case $RUNMODE in
@@ -71,7 +71,7 @@ case $RUNMODE in
     simulation $TIMESTAMP
     if [ $? -ne 0 ]; then
        ABORT="yes"
-    fi 
+    fi
     ;;
   "postprocess" )
     postprocess $TIMESTAMP
@@ -83,14 +83,14 @@ esac
 if [ -f dns.err ]; then
     ABORT="yes"
 fi
-	
+
 if [ -f dns.err.0 ]; then
     ABORT="yes"
 fi
 
 stat -t core* >/dev/null 2>&1 && ABORT="yes"
 
-#clean 
+#clean
 if [ -f dns.ini ]; then
     cp dns.ini dns.ini-$TIMESTAMP
 fi
@@ -114,7 +114,7 @@ if [ ! -e $STATSDIR ]; then
        mv dns.def $STATSDIR
     fi
 
-    LIST=`ls | egrep 'avg[0-9]|?cr[0-9]|?sp[0-9]|pdf[0-9]|cavgXi[0-9]|pdfXi[0-9]|int[0-9]|kin[0-9]'`
+    LIST=`ls | egrep 'avg[a-zA-Z]*[0-9]|[xzr](sp|cr)[0-9]|pdf[0-9]|int[0-9]|kin[0-9]'`
     echo "Moving statistic files into $STATSDIR"
     if [ -n "$LIST" ]; then
        mv $LIST $STATSDIR
@@ -122,6 +122,17 @@ if [ ! -e $STATSDIR ]; then
 
 else
     echo "$STATSDIR exists. Aborting"
+
+fi
+
+# Organize planes
+PLANESDIR=planes-$TIMESTAMP
+if [ ! -e $PLANESDIR ]; then
+    mkdir $PLANESDIR
+    mv planes?.* $PLANESDIR
+
+else
+    echo "$PLANESDIR exists. Aborting"
 
 fi
 
@@ -134,24 +145,23 @@ if [ $RUNMODE = "simulation" ];then
 	fi
 
 	if [ -f $LOCALDIR/dns.ini ]; then
-	    ITIME=`awk -F"=" '{ 
-				if ( $1 == "End" ) 
+	    ITIME=`awk -F"=" '{
+				if ( $1 == "End" )
 				    {
-				    print $2 
+				    print $2
 				    }
-			    }' $LOCALDIR/dns.ini` 
+			    }' $LOCALDIR/dns.ini`
 	else
 	    echo "Error getting max time"
 	    exit 1
 	fi
- 
+
 	if [ $ITIME -lt $MAXITER ]; then
 	    # Submit Script
-	    qsend -name $NAME -time $TIME -maxiter $MAXITER -mem $MEM \
+	    qsend -name $NAME -queue $QUEUE -time $TIME -maxiter $MAXITER -mem $MEM \
 	          -script $SCRIPT -jobdir $JOBDIR -step $STEP -np $NP \
                   -rankspernode $RANKSPERNODE -threadsperrank $THREADSPERRANK -commmode $COMMMODE
 
-	fi       
+	fi
     fi
 fi
-

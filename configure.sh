@@ -19,7 +19,7 @@ case $kernel in
                 SYST=mpipc;; 
             juqueen* )
                 SYST=juqueen;; 
-            laptop* )
+            laptop*|home* )
                 SYST=archlinux;; 
             eetac* )
                 SYST=eetac;; 
@@ -33,7 +33,7 @@ for B in $BUILDS; do
        rm -rf $dir
     fi
     mkdir $dir; cd $dir;  
-    $CMAKE .. -DSYST=$SYST -DBUILD_TYPE=$B #| grep 'flags' | cut -d':' -f2
+    $CMAKE ../src -DSYST=$SYST -DBUILD_TYPE=$B #| grep 'flags' | cut -d':' -f2
     cd .. 
 done
 
