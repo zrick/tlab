@@ -67,10 +67,6 @@ SUBROUTINE DNS_MPI_TRPF_K(a, b, dsend, drecv, tsend, trecv)
   time_loc_1 = MPI_WTIME()
 !#endif
 
-  WRITE(line,*) itime 
-  line='Starting TRPF_K (it ' // TRIM(ADJUSTL(line))//')'
-  CALL IO_WRITE_ASCII(trp_log_file,line) 
-
   l=0
   DO m=1,ims_npro_k
      ns=ims_plan_trps_k(m)+1; ips=ns-1
@@ -95,10 +91,6 @@ SUBROUTINE DNS_MPI_TRPF_K(a, b, dsend, drecv, tsend, trecv)
 
   time_loc_2 = MPI_WTIME()
   ims_time_trans = ims_time_trans + (time_loc_2 - time_loc_1)
-
-  WRITE(line,*) time_loc_2-time_loc_1
-  line='Finished TRPF_K:'//TRIM(ADJUSTL(LINE)) //'s'
-  CALL IO_WRITE_ASCII(trp_log_file,line) 
 
   RETURN
 END SUBROUTINE DNS_MPI_TRPF_K
@@ -138,11 +130,6 @@ SUBROUTINE DNS_MPI_TRPF_I(a, b, dsend, drecv, tsend, trecv)
 
   time_loc_1 = MPI_WTIME() 
   
-  WRITE(line,*) itime
-  line='Starting TRPF_I (it '//TRIM(ADJUSTL(line))//')'
-  CALL IO_WRITE_ASCII(trp_log_file,line) 
-  
-
   l = 0
   DO m=1,ims_npro_i  
      ns=ims_plan_trps_i(m)+1;   ips=ns-1 
@@ -164,11 +151,6 @@ SUBROUTINE DNS_MPI_TRPF_I(a, b, dsend, drecv, tsend, trecv)
        CALL MPI_WAITALL(ims_npro_i*2, mpireq(1:), status(1,1), ims_err) 
 
   CALL DNS_MPI_TAGUPDT
-
-  time_loc_2=MPI_WTIME()  
-  WRITE(line,*) time_loc_2-time_loc_1  
-  line='FINISHED TRPF_I: '//TRIM(ADJUSTL(line))//'s' 
-  CALL IO_WRITE_ASCII(trp_log_file,line) 
 
   RETURN
 END SUBROUTINE DNS_MPI_TRPF_I

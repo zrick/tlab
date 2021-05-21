@@ -1,0 +1,3896 @@
+#[Version]
+#Major=<mayor version number>
+#Minor=<minor version number>
+Major=7
+Minor=0
+#
+#[Main]
+#FileFormat=<RawArray/RawSplit/NetCDF>
+#VerbosityLevel=<0/1/2>
+#Type=<temporal/spatial>
+#CalculateFlow=<yes/no>
+#CalculateScalar=<yes/no>
+#Equations=<total/internal/incompressible/anelastic>
+#TermAdvection=<divergence/skewsymmetric>
+#TermViscous=<divergence/explicit>
+#TermDiffusion=<divergence/explicit>
+#TermBodyForce=<none/Explicit/Linear/Bilinear/Quadratic>
+#TermCoriolis=<none/explicit/normalized>
+#TermRadiation=<none/Bulk1dGlobal/Bulk1dLocal>
+#TermSubsidence=<none/ConstantDivergenceLocal/ConstantDivergenceGlobal>
+#TermTransport=<constant/powerlaw/sutherland/Airwater/AirwaterSimplified>
+#TermChemistry=<none/quadratic/layeredrelaxation/ozone>
+#SpaceOrder=<CompactJacobian4/CompactJacobian6/CompactJacobian8/CompactDirect6>
+#ComModeITranspose=<none,asynchronous,sendrecv>
+#ComModeKTranspose=<none,asynchronous,sendrecv>
+FileFormat=none
+VerbosityLevel=1
+Type=temporal
+CalculateFlow=yes
+CalculateScalar=no
+CalculateParticle=no
+Equations=incompressible
+Mixture=none
+TermAdvection=convective
+TermViscous=explicit
+TermDiffusion=explicit
+TermBodyForce=linear
+TermCoriolis=normalized
+TermRadiation=none
+TermSubsidence=none
+TermTransport=constant
+TermChemistry=none
+SpaceOrder=compactdirect6
+ComModeITranspose=asynchronous
+ComModeKTranspose=asynchronous
+#
+#[Parameters]
+#Reynolds=<value>
+#Prandtl=<value>
+#Froude=<value>
+#Rossby=<value>
+#Mach=<value>
+#Gama=<value>
+#Schmidt=<value>
+#Damkohler=<value>
+#Stokes=<value>
+#Settling=<value>
+Reynolds=25000
+Gama=1.4
+Prandtl=1.0
+Mach=1.0
+Froude=0.01
+Rossby=1.0
+Stokes=0.0
+Settling=0.0
+Schmidt=1.0
+Damkohler=0.0
+#
+#[BodyForce]
+#Vector=<Gx,Gy,Gz>
+#Parameters=<value>
+Vector=0.0,0.0,0.0
+Parameters=0.0
+#
+#[Rotation]
+#Vector=<Fx,Fy,Fz>
+#Parameters=<value>
+Vector=0.0,1.0,0.0
+Parameters=0.0,1.0
+#
+#[Radiation]
+#Scalar=<value>
+#Parameters=<value>
+#
+#[Subsidence]
+#Parameters=<value>
+#
+#[Transport]
+#Parameters=<value>
+#Exponent=<value>
+#
+#[Chemistry]
+#Parameters=<value>
+#
+#[Thermodynamics]
+#Parameters=<value>
+#
+#[Grid]
+#Imax=<imax>
+#Imax(*)=<imax_proc>
+#Jmax=<jmax>
+#Kmax=<kmax>
+#Kmax(*)=<kmax_proc>
+#XUniform=<yes/no>
+#YUniform=<yes/no>
+#ZUniform=<yes/no>
+#XPeriodic=<yes/no>
+#YPeriodic=<yes/no>
+#ZPeriodic=<yes/no>
+Imax=1536
+Jmax=1152
+Kmax=768
+Kmax(*)=768
+Imax(*)=24
+XUniform=yes
+YUniform=no
+ZUniform=yes
+XPeriodic=yes
+YPeriodic=no
+ZPeriodic=yes
+#
+#[Filter]
+#Type=<none/compact/explicit6/explicit4/adm/helmholtz/SpectralBand/SpectralErf/tophat>
+#Parameters=<values>
+#ActiveX=<yes/no>
+#ActiveY=<yes/no>
+#ActiveZ=<yes/no>
+#BcsJmin=<free,solid,zero>
+#BcsJmax=<free,solid,zero>
+#Step=<filter step>
+Type=none
+BcsJmin=biased
+BcsJmax=biased
+Parameters=void
+Repeat=1
+ActiveX=yes
+ActiveY=yes
+ActiveZ=yes
+#
+#[Statistics]
+#IAvera=<plane1,plane2,...>
+IAvera=1
+#
+#[Flow]
+#VelocityX=<mean velocity X>
+#VelocityY=<mean velocity Y>
+#VelocityZ=<mean velocity Z>
+#Pressure=<mean pressure>
+#Density=<mean density>
+#Temperature=<mean temperature>
+#ProfileVelocity=<None/Linear/Tanh/Erf/Ekman/EkmanP/Parabolic>
+#YCoorVelocity=<Relative Y reference point>
+#DiamVelocity=<value>
+#ThickVelocity=<value>
+#DeltaVelocity=<value>
+#ProfileDensity=<None/Linear/Tanh/Erf>
+#YCoorDensity=<Relative Y reference point>
+#DiamDensity=<value>
+#ThickDensity=<value>
+#DeltaDensity=<value>
+#ProfileTemperature=<None/Linear/Tanh/Erf>
+#YCoorTemperature=<Relative Y reference point>
+#DiamTemperature=<value>
+#ThickTemperature=<value>
+#DeltaTemperature=<value>
+ProfileVelocity=ekman
+VelocityX=0.0
+YCoorVelocity=0.0
+ThickVelocity=0.004
+DeltaVelocity=1.0
+DiamVelocity=0.0
+SurfaceThickVelocity=1.0
+SurfaceDeltaVelocity=0.0
+ProfileVelocityY=none
+VelocityY=0.0
+YCoorVelocityY=0.5
+ThickVelocityY=0.0
+DeltaVelocityY=0.0
+DiamVelocityY=0.0
+SurfaceThickVelocityY=1.0
+SurfaceDeltaVelocityY=0.0
+ProfileVelocityZ=none
+VelocityZ=0.0
+YCoorVelocityZ=0.5
+ThickVelocityZ=0.0
+DeltaVelocityZ=0.0
+DiamVelocityZ=0.0
+SurfaceThickVelocityZ=1.0
+SurfaceDeltaVelocityZ=0.0
+ProfileDensity=none
+Density=1.0
+YCoorDensity=0.5
+ThickDensity=0.0
+DeltaDensity=0.0
+DiamDensity=0.0
+ProfileTemperature=none
+Temperature=0.0
+YCoorTemperature=0.5
+ThickTemperature=0.0
+DeltaTemperature=0.0
+DiamTemperature=0.0
+BottomSlope=0.0
+UpperSlope=0.0
+Pressure=0.0
+YCoorPressure=0.5
+ReferencePressure=0.0
+ScaleHeight=0.0
+#
+#[Scalar]
+#Profile=<value>
+#YCoor=<value>
+#Diam=<value>
+#Thick=<value>
+#Mean=<value>
+#Delta=<value>
+ProfileScalar1=erf
+MeanScalar1=1.0
+YCoorScalar1=0.0
+ThickScalar1=0.0006
+DeltaScalar1=2.0
+ReferenceScalar1=1.000000000000000
+DiamScalar1=0.0
+BottomSlopeScalar1=0.0
+UpperSlopeScalar1=0.0
+SurfaceThickScalar1=0.0
+SurfaceDeltaScalar1=0.0
+ProfileScalar2=none
+MeanScalar2=0.0
+YCoorScalar2=0.5
+ThickScalar2=0.0
+DeltaScalar2=0.0
+ReferenceScalar2=0.000000000000000
+DiamScalar2=0.0
+BottomSlopeScalar2=0.0
+UpperSlopeScalar2=0.0
+SurfaceThickScalar2=0.0
+SurfaceDeltaScalar2=0.0
+ProfileScalar3=none
+MeanScalar3=0.0
+YCoorScalar3=0.5
+ThickScalar3=0.0
+DeltaScalar3=0.0
+ReferenceScalar3=0.000000000000000
+DiamScalar3=0.0
+BottomSlopeScalar3=0.0
+UpperSlopeScalar3=0.0
+SurfaceThickScalar3=0.0
+SurfaceDeltaScalar3=0.0
+ProfileScalar4=none
+MeanScalar4=0.0
+YCoorScalar4=0.5
+ThickScalar4=0.0
+DeltaScalar4=0.0
+ReferenceScalar4=0.000000000000000
+DiamScalar4=0.0
+BottomSlopeScalar4=0.0
+UpperSlopeScalar4=0.0
+SurfaceThickScalar4=0.0
+SurfaceDeltaScalar4=0.0
+ProfileScalar5=none
+MeanScalar5=0.0
+YCoorScalar5=0.5
+ThickScalar5=0.0
+DeltaScalar5=0.0
+ReferenceScalar5=0.000000000000000
+DiamScalar5=0.0
+BottomSlopeScalar5=0.0
+UpperSlopeScalar5=0.0
+SurfaceThickScalar5=0.0
+SurfaceDeltaScalar5=0.0
+ProfileScalar6=none
+MeanScalar6=0.0
+YCoorScalar6=0.5
+ThickScalar6=0.0
+DeltaScalar6=0.0
+ReferenceScalar6=0.000000000000000
+DiamScalar6=0.0
+BottomSlopeScalar6=0.0
+UpperSlopeScalar6=0.0
+SurfaceThickScalar6=0.0
+SurfaceDeltaScalar6=0.0
+ProfileScalar7=none
+MeanScalar7=0.0
+YCoorScalar7=0.5
+ThickScalar7=0.0
+DeltaScalar7=0.0
+ReferenceScalar7=0.000000000000000
+DiamScalar7=0.0
+BottomSlopeScalar7=0.0
+UpperSlopeScalar7=0.0
+SurfaceThickScalar7=0.0
+SurfaceDeltaScalar7=0.0
+ProfileScalar8=none
+MeanScalar8=0.0
+YCoorScalar8=0.5
+ThickScalar8=0.0
+DeltaScalar8=0.0
+ReferenceScalar8=0.000000000000000
+DiamScalar8=0.0
+BottomSlopeScalar8=0.0
+UpperSlopeScalar8=0.0
+SurfaceThickScalar8=0.0
+SurfaceDeltaScalar8=0.0
+ProfileScalar9=none
+MeanScalar9=0.0
+YCoorScalar9=0.5
+ThickScalar9=0.0
+DeltaScalar9=0.0
+ReferenceScalar9=0.000000000000000
+DiamScalar9=0.0
+BottomSlopeScalar9=0.0
+UpperSlopeScalar9=0.0
+SurfaceThickScalar9=0.0
+SurfaceDeltaScalar9=0.0
+ProfileScalar10=none
+MeanScalar10=0.0
+YCoorScalar10=0.5
+ThickScalar10=0.0
+DeltaScalar10=0.0
+ReferenceScalar10=0.000000000000000
+DiamScalar10=0.0
+BottomSlopeScalar10=0.0
+UpperSlopeScalar10=0.0
+SurfaceThickScalar10=0.0
+SurfaceDeltaScalar10=0.0
+ChemkinFile=none
+#
+#
+#[Broadband]
+#Spectrum=<none/uniform/quartic/quadratic/gaussian>
+#f0=<frequencies>
+#Distribution=<none/uniform/gaussian>
+#Covariance=<Rxx,Ryy,Rzz,Rxy,Rxz,Ryz>
+#Seed=<random seed>
+Seed=7
+Spectrum=gaussian
+f0=19.89
+Sigma=3.32
+Distribution=gaussian
+Covariance=-1
+#[Version]
+#Major=<mayor version number>
+#Minor=<minor version number>
+Major=7
+Minor=0
+#
+#[Main]
+#FileFormat=<RawArray/RawSplit/NetCDF>
+#VerbosityLevel=<0/1/2>
+#Type=<temporal/spatial>
+#CalculateFlow=<yes/no>
+#CalculateScalar=<yes/no>
+#Equations=<total/internal/incompressible/anelastic>
+#TermAdvection=<divergence/skewsymmetric>
+#TermViscous=<divergence/explicit>
+#TermDiffusion=<divergence/explicit>
+#TermBodyForce=<none/Explicit/Linear/Bilinear/Quadratic>
+#TermCoriolis=<none/explicit/normalized>
+#TermRadiation=<none/Bulk1dGlobal/Bulk1dLocal>
+#TermSubsidence=<none/ConstantDivergenceLocal/ConstantDivergenceGlobal>
+#TermTransport=<constant/powerlaw/sutherland/Airwater/AirwaterSimplified>
+#TermChemistry=<none/quadratic/layeredrelaxation/ozone>
+#SpaceOrder=<CompactJacobian4/CompactJacobian6/CompactJacobian8/CompactDirect6>
+#ComModeITranspose=<none,asynchronous,sendrecv>
+#ComModeKTranspose=<none,asynchronous,sendrecv>
+FileFormat=none
+VerbosityLevel=1
+Type=temporal
+CalculateFlow=yes
+CalculateScalar=no
+CalculateParticle=no
+Equations=incompressible
+Mixture=none
+TermAdvection=convective
+TermViscous=explicit
+TermDiffusion=explicit
+TermBodyForce=linear
+TermCoriolis=normalized
+TermRadiation=none
+TermSubsidence=none
+TermTransport=constant
+TermChemistry=none
+SpaceOrder=compactdirect6
+ComModeITranspose=asynchronous
+ComModeKTranspose=asynchronous
+#
+#[Parameters]
+#Reynolds=<value>
+#Prandtl=<value>
+#Froude=<value>
+#Rossby=<value>
+#Mach=<value>
+#Gama=<value>
+#Schmidt=<value>
+#Damkohler=<value>
+#Stokes=<value>
+#Settling=<value>
+Reynolds=25000
+Gama=1.4
+Prandtl=1.0
+Mach=1.0
+Froude=0.01
+Rossby=1.0
+Stokes=0.0
+Settling=0.0
+Schmidt=1.0
+Damkohler=0.0
+#
+#[BodyForce]
+#Vector=<Gx,Gy,Gz>
+#Parameters=<value>
+Vector=0.0,0.0,0.0
+Parameters=0.0
+#
+#[Rotation]
+#Vector=<Fx,Fy,Fz>
+#Parameters=<value>
+Vector=0.0,1.0,0.0
+Parameters=0.0,1.0
+#
+#[Radiation]
+#Scalar=<value>
+#Parameters=<value>
+#
+#[Subsidence]
+#Parameters=<value>
+#
+#[Transport]
+#Parameters=<value>
+#Exponent=<value>
+#
+#[Chemistry]
+#Parameters=<value>
+#
+#[Thermodynamics]
+#Parameters=<value>
+#
+#[Grid]
+#Imax=<imax>
+#Imax(*)=<imax_proc>
+#Jmax=<jmax>
+#Kmax=<kmax>
+#Kmax(*)=<kmax_proc>
+#XUniform=<yes/no>
+#YUniform=<yes/no>
+#ZUniform=<yes/no>
+#XPeriodic=<yes/no>
+#YPeriodic=<yes/no>
+#ZPeriodic=<yes/no>
+Imax=1536
+Jmax=1152
+Kmax=768
+Kmax(*)=768
+Imax(*)=24
+XUniform=yes
+YUniform=no
+ZUniform=yes
+XPeriodic=yes
+YPeriodic=no
+ZPeriodic=yes
+#
+#[Filter]
+#Type=<none/compact/explicit6/explicit4/adm/helmholtz/SpectralBand/SpectralErf/tophat>
+#Parameters=<values>
+#ActiveX=<yes/no>
+#ActiveY=<yes/no>
+#ActiveZ=<yes/no>
+#BcsJmin=<free,solid,zero>
+#BcsJmax=<free,solid,zero>
+#Step=<filter step>
+Type=none
+BcsJmin=biased
+BcsJmax=biased
+Parameters=void
+Repeat=1
+ActiveX=yes
+ActiveY=yes
+ActiveZ=yes
+#
+#[Statistics]
+#IAvera=<plane1,plane2,...>
+IAvera=1
+#
+#[Flow]
+#VelocityX=<mean velocity X>
+#VelocityY=<mean velocity Y>
+#VelocityZ=<mean velocity Z>
+#Pressure=<mean pressure>
+#Density=<mean density>
+#Temperature=<mean temperature>
+#ProfileVelocity=<None/Linear/Tanh/Erf/Ekman/EkmanP/Parabolic>
+#YCoorVelocity=<Relative Y reference point>
+#DiamVelocity=<value>
+#ThickVelocity=<value>
+#DeltaVelocity=<value>
+#ProfileDensity=<None/Linear/Tanh/Erf>
+#YCoorDensity=<Relative Y reference point>
+#DiamDensity=<value>
+#ThickDensity=<value>
+#DeltaDensity=<value>
+#ProfileTemperature=<None/Linear/Tanh/Erf>
+#YCoorTemperature=<Relative Y reference point>
+#DiamTemperature=<value>
+#ThickTemperature=<value>
+#DeltaTemperature=<value>
+ProfileVelocity=ekman
+VelocityX=0.0
+YCoorVelocity=0.0
+ThickVelocity=0.004
+DeltaVelocity=1.0
+DiamVelocity=0.0
+SurfaceThickVelocity=1.0
+SurfaceDeltaVelocity=0.0
+ProfileVelocityY=none
+VelocityY=0.0
+YCoorVelocityY=0.5
+ThickVelocityY=0.0
+DeltaVelocityY=0.0
+DiamVelocityY=0.0
+SurfaceThickVelocityY=1.0
+SurfaceDeltaVelocityY=0.0
+ProfileVelocityZ=none
+VelocityZ=0.0
+YCoorVelocityZ=0.5
+ThickVelocityZ=0.0
+DeltaVelocityZ=0.0
+DiamVelocityZ=0.0
+SurfaceThickVelocityZ=1.0
+SurfaceDeltaVelocityZ=0.0
+ProfileDensity=none
+Density=1.0
+YCoorDensity=0.5
+ThickDensity=0.0
+DeltaDensity=0.0
+DiamDensity=0.0
+ProfileTemperature=none
+Temperature=0.0
+YCoorTemperature=0.5
+ThickTemperature=0.0
+DeltaTemperature=0.0
+DiamTemperature=0.0
+BottomSlope=0.0
+UpperSlope=0.0
+Pressure=0.0
+YCoorPressure=0.5
+ReferencePressure=0.0
+ScaleHeight=0.0
+#
+#[Scalar]
+#Profile=<value>
+#YCoor=<value>
+#Diam=<value>
+#Thick=<value>
+#Mean=<value>
+#Delta=<value>
+ProfileScalar1=erf
+MeanScalar1=1.0
+YCoorScalar1=0.0
+ThickScalar1=0.0006
+DeltaScalar1=2.0
+ReferenceScalar1=1.000000000000000
+DiamScalar1=0.0
+BottomSlopeScalar1=0.0
+UpperSlopeScalar1=0.0
+SurfaceThickScalar1=0.0
+SurfaceDeltaScalar1=0.0
+ProfileScalar2=none
+MeanScalar2=0.0
+YCoorScalar2=0.5
+ThickScalar2=0.0
+DeltaScalar2=0.0
+ReferenceScalar2=0.000000000000000
+DiamScalar2=0.0
+BottomSlopeScalar2=0.0
+UpperSlopeScalar2=0.0
+SurfaceThickScalar2=0.0
+SurfaceDeltaScalar2=0.0
+ProfileScalar3=none
+MeanScalar3=0.0
+YCoorScalar3=0.5
+ThickScalar3=0.0
+DeltaScalar3=0.0
+ReferenceScalar3=0.000000000000000
+DiamScalar3=0.0
+BottomSlopeScalar3=0.0
+UpperSlopeScalar3=0.0
+SurfaceThickScalar3=0.0
+SurfaceDeltaScalar3=0.0
+ProfileScalar4=none
+MeanScalar4=0.0
+YCoorScalar4=0.5
+ThickScalar4=0.0
+DeltaScalar4=0.0
+ReferenceScalar4=0.000000000000000
+DiamScalar4=0.0
+BottomSlopeScalar4=0.0
+UpperSlopeScalar4=0.0
+SurfaceThickScalar4=0.0
+SurfaceDeltaScalar4=0.0
+ProfileScalar5=none
+MeanScalar5=0.0
+YCoorScalar5=0.5
+ThickScalar5=0.0
+DeltaScalar5=0.0
+ReferenceScalar5=0.000000000000000
+DiamScalar5=0.0
+BottomSlopeScalar5=0.0
+UpperSlopeScalar5=0.0
+SurfaceThickScalar5=0.0
+SurfaceDeltaScalar5=0.0
+ProfileScalar6=none
+MeanScalar6=0.0
+YCoorScalar6=0.5
+ThickScalar6=0.0
+DeltaScalar6=0.0
+ReferenceScalar6=0.000000000000000
+DiamScalar6=0.0
+BottomSlopeScalar6=0.0
+UpperSlopeScalar6=0.0
+SurfaceThickScalar6=0.0
+SurfaceDeltaScalar6=0.0
+ProfileScalar7=none
+MeanScalar7=0.0
+YCoorScalar7=0.5
+ThickScalar7=0.0
+DeltaScalar7=0.0
+ReferenceScalar7=0.000000000000000
+DiamScalar7=0.0
+BottomSlopeScalar7=0.0
+UpperSlopeScalar7=0.0
+SurfaceThickScalar7=0.0
+SurfaceDeltaScalar7=0.0
+ProfileScalar8=none
+MeanScalar8=0.0
+YCoorScalar8=0.5
+ThickScalar8=0.0
+DeltaScalar8=0.0
+ReferenceScalar8=0.000000000000000
+DiamScalar8=0.0
+BottomSlopeScalar8=0.0
+UpperSlopeScalar8=0.0
+SurfaceThickScalar8=0.0
+SurfaceDeltaScalar8=0.0
+ProfileScalar9=none
+MeanScalar9=0.0
+YCoorScalar9=0.5
+ThickScalar9=0.0
+DeltaScalar9=0.0
+ReferenceScalar9=0.000000000000000
+DiamScalar9=0.0
+BottomSlopeScalar9=0.0
+UpperSlopeScalar9=0.0
+SurfaceThickScalar9=0.0
+SurfaceDeltaScalar9=0.0
+ProfileScalar10=none
+MeanScalar10=0.0
+YCoorScalar10=0.5
+ThickScalar10=0.0
+DeltaScalar10=0.0
+ReferenceScalar10=0.000000000000000
+DiamScalar10=0.0
+BottomSlopeScalar10=0.0
+UpperSlopeScalar10=0.0
+SurfaceThickScalar10=0.0
+SurfaceDeltaScalar10=0.0
+ChemkinFile=none
+#
+#
+#[Main]
+#TimeOrder=<RungeKuttaExplicit3/RungeKuttaExplicit4/RungeKuttaDiffusion3>
+#TimeStep=<value (used if CFL is negative)>
+#TimeCFL=<value>
+#TimeDiffusiveCFL=<value>
+#TimeReactiveCFL=<value>
+#TermDivergence=<none/remove>
+#RhsMode=<split/combined/nonblocking>
+TimeOrder=rungekuttaexplicit4
+TimeCFL=1.20000
+TimeDiffusiveCFL=0.3000000000000000
+TimeReactiveCFL=0.6000000000000000
+TimeStep=-0.016000
+TermDivergence=remove
+RhsMode=combined
+#
+#[Iteration]
+#Start=<integral start time>
+#End=<integral stop time>
+#Restart=<restart time step>
+#Statistics=<statistics time step>
+#IteraLog=<value>
+#Saveplanes=<value>
+#RunAvera=<yes/no>
+Start=0
+End=6
+Restart=6
+Statistics=7
+IteraLog=2
+Saveplanes=-1
+SaveStats=-1
+#
+#[Control]
+#FlowLimit=<yes/no>
+#MinPressure=<pressure>
+#MaxPressure=<pressure>
+#MinDensity=<density>
+#MaxDensity=<density>
+#ScalLimit=<yes/no>
+#MinScalar=<scalar>
+#MaxScalar=<scalar>
+FlowLimit=no
+ScalLimit=yes
+MinPressure=-1.0
+MaxPressure=-1.0
+MinDensity=-1.0
+MaxDensity=-1.0
+MaxDilatation=void
+MinScalar=void
+MaxScalar=void
+#
+#[BoundaryConditions]
+#ScalarImin=<none/dirichlet/neumman>
+#ScalarJmin=<none/dirichlet/neumman>
+#ScalarSfcTypeJmin=<static/linear>
+#ScalarSfcTypeJmax=<static/linear>
+#ScalarCouplingJmin=<value>
+#ScalarCouplingJmax=<value>
+#ScalarKmin=<none/dirichlet/neumman>
+#VelocityImin=<none/dirichlet/neumman>
+#VelocityJmin=<none/dirichlet/neumman>
+#VelocityKmin=<none/dirichlet/neumman>
+#ViscousI=<none/inflow/outflow>
+#ViscousJ=<none/inflow/outflow>
+#ViscousK=<none/inflow/outflow>
+#SigmaOut=<value>
+#SigmaInf=<value>
+#BetaTransverse=<value>
+Scalar1Jmin=dirichlet
+Scalar1SfcTypeJmin=static
+Scalar1CouplingJmin=0.0
+Scalar1Jmax=neumann
+Scalar1SfcTypeJmax=static
+Scalar1CouplingJmax=0.0
+VelocityImin=freeslip
+VelocityImax=freeslip
+VelocityJmin=noslip
+VelocityJmax=freeslip
+VelocityKmin=freeslip
+VelocityKmax=freeslip
+ViscousI=none
+ViscousJ=none
+ViscousK=none
+SigmaInf=-1.0
+SigmaOut=-1.0
+BetaTransverse=-1.0
+#
+#
+#[BufferZone]
+#Type=<none/relaxation/filter/both>
+#LoadBuffer=<yes/no>
+#PointsJmin=<value>
+#PointsJmax=<value>
+#PointsImin=<value>
+#PointsImax=<value>
+#ParametersJmin=<values>
+#ParametersJmax=<values>
+#ParametersImin=<values>
+#ParametersImax=<values>
+#HardValuesJmin=<values>
+#HardValuesJmax=<values>
+#HardValuesImin=<values>
+#HardValuesImax=<values>
+Type=none
+LoadBuffer=no
+PointsUImin=0
+PointsUImax=0
+PointsUJmin=0
+PointsUJmax=0
+PointsSImin=0
+PointsSImax=0
+PointsSJmin=0
+PointsSJmax=0
+#
+#[ViscChange]
+#Time=<time>
+Time=0.01
+Step=0
+#
+#[InflowFilter]
+#Type=<yes/no>
+#IWidth=<value>
+#JWidth=<value>
+#Step=<value>
+#Parameters=<value>
+Type=none
+Parameters=void
+Step=0
+#
+#[SavePlanes]
+#PlanesI=<value>
+#PlanesJ=<value>
+#PlanesK=<value>
+#IntegralsJ=<yes/no>
+PlanesI=void
+PlanesJ=void
+PressureJ=no
+IntegralsJ=no
+PlanesK=void
+#
+#[SaveTowers]
+Stride=<value_i,value_j,value_k>
+Stride=0,0,0
+#
+#[Statsitics]
+#Averages=<yes/no>
+#Pdfs=<yes/no>
+#ConditionalAverages=<yes/no>
+#Intermittency=<yes/no>
+Averages=yes
+Pdfs=no
+Intermittency=no
+FilterEnergy=no
+#
+#[Inflow]
+#Type=<None/Discrete/Broadband/Both>
+#Adapt=<value>
+#Imax=<imax>
+#Jmax=<jmax>
+#Kmax=<kmax>
+Type=none
+Adapt=0.0
+#
+#[Discrete]
+#Aplitude=<value>
+#ModeX=<value>
+#ModeZ=<value>
+#PhaseX=<value>
+#PhaseZ=<value>
+#Type=<Varicose/Sinuous>
+#Parameters=<values>
+Amplitude=void
+2DAmpl=0.0
+ModeX=void
+ModeZ=void
+PhaseX=void
+2DPhi=void
+PhaseZ=void
+Type=varicose
+Parameters=-1.0,-1.0
+#[Version]
+#Major=<mayor version number>
+#Minor=<minor version number>
+Major=7
+Minor=0
+#
+#[Main]
+#FileFormat=<RawArray/RawSplit/NetCDF>
+#VerbosityLevel=<0/1/2>
+#Type=<temporal/spatial>
+#CalculateFlow=<yes/no>
+#CalculateScalar=<yes/no>
+#Equations=<total/internal/incompressible/anelastic>
+#TermAdvection=<divergence/skewsymmetric>
+#TermViscous=<divergence/explicit>
+#TermDiffusion=<divergence/explicit>
+#TermBodyForce=<none/Explicit/Linear/Bilinear/Quadratic>
+#TermCoriolis=<none/explicit/normalized>
+#TermRadiation=<none/Bulk1dGlobal/Bulk1dLocal>
+#TermSubsidence=<none/ConstantDivergenceLocal/ConstantDivergenceGlobal>
+#TermTransport=<constant/powerlaw/sutherland/Airwater/AirwaterSimplified>
+#TermChemistry=<none/quadratic/layeredrelaxation/ozone>
+#SpaceOrder=<CompactJacobian4/CompactJacobian6/CompactJacobian8/CompactDirect6>
+#ComModeITranspose=<none,asynchronous,sendrecv>
+#ComModeKTranspose=<none,asynchronous,sendrecv>
+FileFormat=none
+VerbosityLevel=1
+Type=temporal
+CalculateFlow=yes
+CalculateScalar=no
+CalculateParticle=no
+Equations=incompressible
+Mixture=none
+TermAdvection=convective
+TermViscous=explicit
+TermDiffusion=explicit
+TermBodyForce=linear
+TermCoriolis=normalized
+TermRadiation=none
+TermSubsidence=none
+TermTransport=constant
+TermChemistry=none
+SpaceOrder=compactdirect6
+ComModeITranspose=asynchronous
+ComModeKTranspose=asynchronous
+#
+#[Parameters]
+#Reynolds=<value>
+#Prandtl=<value>
+#Froude=<value>
+#Rossby=<value>
+#Mach=<value>
+#Gama=<value>
+#Schmidt=<value>
+#Damkohler=<value>
+#Stokes=<value>
+#Settling=<value>
+Reynolds=25000
+Gama=1.4
+Prandtl=1.0
+Mach=1.0
+Froude=0.01
+Rossby=1.0
+Stokes=0.0
+Settling=0.0
+Schmidt=1.0
+Damkohler=0.0
+#
+#[BodyForce]
+#Vector=<Gx,Gy,Gz>
+#Parameters=<value>
+Vector=0.0,0.0,0.0
+Parameters=0.0
+#
+#[Rotation]
+#Vector=<Fx,Fy,Fz>
+#Parameters=<value>
+Vector=0.0,1.0,0.0
+Parameters=0.0,1.0
+#
+#[Radiation]
+#Scalar=<value>
+#Parameters=<value>
+#
+#[Subsidence]
+#Parameters=<value>
+#
+#[Transport]
+#Parameters=<value>
+#Exponent=<value>
+#
+#[Chemistry]
+#Parameters=<value>
+#
+#[Thermodynamics]
+#Parameters=<value>
+#
+#[Grid]
+#Imax=<imax>
+#Imax(*)=<imax_proc>
+#Jmax=<jmax>
+#Kmax=<kmax>
+#Kmax(*)=<kmax_proc>
+#XUniform=<yes/no>
+#YUniform=<yes/no>
+#ZUniform=<yes/no>
+#XPeriodic=<yes/no>
+#YPeriodic=<yes/no>
+#ZPeriodic=<yes/no>
+Imax=1536
+Jmax=1152
+Kmax=768
+Kmax(*)=768
+Imax(*)=24
+XUniform=yes
+YUniform=no
+ZUniform=yes
+XPeriodic=yes
+YPeriodic=no
+ZPeriodic=yes
+#
+#[Filter]
+#Type=<none/compact/explicit6/explicit4/adm/helmholtz/SpectralBand/SpectralErf/tophat>
+#Parameters=<values>
+#ActiveX=<yes/no>
+#ActiveY=<yes/no>
+#ActiveZ=<yes/no>
+#BcsJmin=<free,solid,zero>
+#BcsJmax=<free,solid,zero>
+#Step=<filter step>
+Type=none
+BcsJmin=biased
+BcsJmax=biased
+Parameters=void
+Repeat=1
+ActiveX=yes
+ActiveY=yes
+ActiveZ=yes
+#
+#[Statistics]
+#IAvera=<plane1,plane2,...>
+IAvera=1
+#
+#[Flow]
+#VelocityX=<mean velocity X>
+#VelocityY=<mean velocity Y>
+#VelocityZ=<mean velocity Z>
+#Pressure=<mean pressure>
+#Density=<mean density>
+#Temperature=<mean temperature>
+#ProfileVelocity=<None/Linear/Tanh/Erf/Ekman/EkmanP/Parabolic>
+#YCoorVelocity=<Relative Y reference point>
+#DiamVelocity=<value>
+#ThickVelocity=<value>
+#DeltaVelocity=<value>
+#ProfileDensity=<None/Linear/Tanh/Erf>
+#YCoorDensity=<Relative Y reference point>
+#DiamDensity=<value>
+#ThickDensity=<value>
+#DeltaDensity=<value>
+#ProfileTemperature=<None/Linear/Tanh/Erf>
+#YCoorTemperature=<Relative Y reference point>
+#DiamTemperature=<value>
+#ThickTemperature=<value>
+#DeltaTemperature=<value>
+ProfileVelocity=ekman
+VelocityX=0.0
+YCoorVelocity=0.0
+ThickVelocity=0.004
+DeltaVelocity=1.0
+DiamVelocity=0.0
+SurfaceThickVelocity=1.0
+SurfaceDeltaVelocity=0.0
+ProfileVelocityY=none
+VelocityY=0.0
+YCoorVelocityY=0.5
+ThickVelocityY=0.0
+DeltaVelocityY=0.0
+DiamVelocityY=0.0
+SurfaceThickVelocityY=1.0
+SurfaceDeltaVelocityY=0.0
+ProfileVelocityZ=none
+VelocityZ=0.0
+YCoorVelocityZ=0.5
+ThickVelocityZ=0.0
+DeltaVelocityZ=0.0
+DiamVelocityZ=0.0
+SurfaceThickVelocityZ=1.0
+SurfaceDeltaVelocityZ=0.0
+ProfileDensity=none
+Density=1.0
+YCoorDensity=0.5
+ThickDensity=0.0
+DeltaDensity=0.0
+DiamDensity=0.0
+ProfileTemperature=none
+Temperature=0.0
+YCoorTemperature=0.5
+ThickTemperature=0.0
+DeltaTemperature=0.0
+DiamTemperature=0.0
+BottomSlope=0.0
+UpperSlope=0.0
+Pressure=0.0
+YCoorPressure=0.5
+ReferencePressure=0.0
+ScaleHeight=0.0
+#
+#[Scalar]
+#Profile=<value>
+#YCoor=<value>
+#Diam=<value>
+#Thick=<value>
+#Mean=<value>
+#Delta=<value>
+ProfileScalar1=erf
+MeanScalar1=1.0
+YCoorScalar1=0.0
+ThickScalar1=0.0006
+DeltaScalar1=2.0
+ReferenceScalar1=1.000000000000000
+DiamScalar1=0.0
+BottomSlopeScalar1=0.0
+UpperSlopeScalar1=0.0
+SurfaceThickScalar1=0.0
+SurfaceDeltaScalar1=0.0
+ProfileScalar2=none
+MeanScalar2=0.0
+YCoorScalar2=0.5
+ThickScalar2=0.0
+DeltaScalar2=0.0
+ReferenceScalar2=0.000000000000000
+DiamScalar2=0.0
+BottomSlopeScalar2=0.0
+UpperSlopeScalar2=0.0
+SurfaceThickScalar2=0.0
+SurfaceDeltaScalar2=0.0
+ProfileScalar3=none
+MeanScalar3=0.0
+YCoorScalar3=0.5
+ThickScalar3=0.0
+DeltaScalar3=0.0
+ReferenceScalar3=0.000000000000000
+DiamScalar3=0.0
+BottomSlopeScalar3=0.0
+UpperSlopeScalar3=0.0
+SurfaceThickScalar3=0.0
+SurfaceDeltaScalar3=0.0
+ProfileScalar4=none
+MeanScalar4=0.0
+YCoorScalar4=0.5
+ThickScalar4=0.0
+DeltaScalar4=0.0
+ReferenceScalar4=0.000000000000000
+DiamScalar4=0.0
+BottomSlopeScalar4=0.0
+UpperSlopeScalar4=0.0
+SurfaceThickScalar4=0.0
+SurfaceDeltaScalar4=0.0
+ProfileScalar5=none
+MeanScalar5=0.0
+YCoorScalar5=0.5
+ThickScalar5=0.0
+DeltaScalar5=0.0
+ReferenceScalar5=0.000000000000000
+DiamScalar5=0.0
+BottomSlopeScalar5=0.0
+UpperSlopeScalar5=0.0
+SurfaceThickScalar5=0.0
+SurfaceDeltaScalar5=0.0
+ProfileScalar6=none
+MeanScalar6=0.0
+YCoorScalar6=0.5
+ThickScalar6=0.0
+DeltaScalar6=0.0
+ReferenceScalar6=0.000000000000000
+DiamScalar6=0.0
+BottomSlopeScalar6=0.0
+UpperSlopeScalar6=0.0
+SurfaceThickScalar6=0.0
+SurfaceDeltaScalar6=0.0
+ProfileScalar7=none
+MeanScalar7=0.0
+YCoorScalar7=0.5
+ThickScalar7=0.0
+DeltaScalar7=0.0
+ReferenceScalar7=0.000000000000000
+DiamScalar7=0.0
+BottomSlopeScalar7=0.0
+UpperSlopeScalar7=0.0
+SurfaceThickScalar7=0.0
+SurfaceDeltaScalar7=0.0
+ProfileScalar8=none
+MeanScalar8=0.0
+YCoorScalar8=0.5
+ThickScalar8=0.0
+DeltaScalar8=0.0
+ReferenceScalar8=0.000000000000000
+DiamScalar8=0.0
+BottomSlopeScalar8=0.0
+UpperSlopeScalar8=0.0
+SurfaceThickScalar8=0.0
+SurfaceDeltaScalar8=0.0
+ProfileScalar9=none
+MeanScalar9=0.0
+YCoorScalar9=0.5
+ThickScalar9=0.0
+DeltaScalar9=0.0
+ReferenceScalar9=0.000000000000000
+DiamScalar9=0.0
+BottomSlopeScalar9=0.0
+UpperSlopeScalar9=0.0
+SurfaceThickScalar9=0.0
+SurfaceDeltaScalar9=0.0
+ProfileScalar10=none
+MeanScalar10=0.0
+YCoorScalar10=0.5
+ThickScalar10=0.0
+DeltaScalar10=0.0
+ReferenceScalar10=0.000000000000000
+DiamScalar10=0.0
+BottomSlopeScalar10=0.0
+UpperSlopeScalar10=0.0
+SurfaceThickScalar10=0.0
+SurfaceDeltaScalar10=0.0
+ChemkinFile=none
+#
+#
+#[Main]
+#TimeOrder=<RungeKuttaExplicit3/RungeKuttaExplicit4/RungeKuttaDiffusion3>
+#TimeStep=<value (used if CFL is negative)>
+#TimeCFL=<value>
+#TimeDiffusiveCFL=<value>
+#TimeReactiveCFL=<value>
+#TermDivergence=<none/remove>
+#RhsMode=<split/combined/nonblocking>
+TimeOrder=rungekuttaexplicit4
+TimeCFL=1.20000
+TimeDiffusiveCFL=0.3000000000000000
+TimeReactiveCFL=0.6000000000000000
+TimeStep=-0.016000
+TermDivergence=remove
+RhsMode=combined
+#
+#[Iteration]
+#Start=<integral start time>
+#End=<integral stop time>
+#Restart=<restart time step>
+#Statistics=<statistics time step>
+#IteraLog=<value>
+#Saveplanes=<value>
+#RunAvera=<yes/no>
+Start=0
+End=6
+Restart=6
+Statistics=7
+IteraLog=2
+Saveplanes=-1
+SaveStats=-1
+#
+#[Control]
+#FlowLimit=<yes/no>
+#MinPressure=<pressure>
+#MaxPressure=<pressure>
+#MinDensity=<density>
+#MaxDensity=<density>
+#ScalLimit=<yes/no>
+#MinScalar=<scalar>
+#MaxScalar=<scalar>
+FlowLimit=no
+ScalLimit=yes
+MinPressure=-1.0
+MaxPressure=-1.0
+MinDensity=-1.0
+MaxDensity=-1.0
+MaxDilatation=void
+MinScalar=void
+MaxScalar=void
+#
+#[BoundaryConditions]
+#ScalarImin=<none/dirichlet/neumman>
+#ScalarJmin=<none/dirichlet/neumman>
+#ScalarSfcTypeJmin=<static/linear>
+#ScalarSfcTypeJmax=<static/linear>
+#ScalarCouplingJmin=<value>
+#ScalarCouplingJmax=<value>
+#ScalarKmin=<none/dirichlet/neumman>
+#VelocityImin=<none/dirichlet/neumman>
+#VelocityJmin=<none/dirichlet/neumman>
+#VelocityKmin=<none/dirichlet/neumman>
+#ViscousI=<none/inflow/outflow>
+#ViscousJ=<none/inflow/outflow>
+#ViscousK=<none/inflow/outflow>
+#SigmaOut=<value>
+#SigmaInf=<value>
+#BetaTransverse=<value>
+Scalar1Jmin=dirichlet
+Scalar1SfcTypeJmin=static
+Scalar1CouplingJmin=0.0
+Scalar1Jmax=neumann
+Scalar1SfcTypeJmax=static
+Scalar1CouplingJmax=0.0
+VelocityImin=freeslip
+VelocityImax=freeslip
+VelocityJmin=noslip
+VelocityJmax=freeslip
+VelocityKmin=freeslip
+VelocityKmax=freeslip
+ViscousI=none
+ViscousJ=none
+ViscousK=none
+SigmaInf=-1.0
+SigmaOut=-1.0
+BetaTransverse=-1.0
+#
+#
+#[BufferZone]
+#Type=<none/relaxation/filter/both>
+#LoadBuffer=<yes/no>
+#PointsJmin=<value>
+#PointsJmax=<value>
+#PointsImin=<value>
+#PointsImax=<value>
+#ParametersJmin=<values>
+#ParametersJmax=<values>
+#ParametersImin=<values>
+#ParametersImax=<values>
+#HardValuesJmin=<values>
+#HardValuesJmax=<values>
+#HardValuesImin=<values>
+#HardValuesImax=<values>
+Type=none
+LoadBuffer=no
+PointsUImin=0
+PointsUImax=0
+PointsUJmin=0
+PointsUJmax=0
+PointsSImin=0
+PointsSImax=0
+PointsSJmin=0
+PointsSJmax=0
+#
+#[ViscChange]
+#Time=<time>
+Time=0.01
+Step=0
+#
+#[InflowFilter]
+#Type=<yes/no>
+#IWidth=<value>
+#JWidth=<value>
+#Step=<value>
+#Parameters=<value>
+Type=none
+Parameters=void
+Step=0
+#
+#[SavePlanes]
+#PlanesI=<value>
+#PlanesJ=<value>
+#PlanesK=<value>
+#IntegralsJ=<yes/no>
+PlanesI=void
+PlanesJ=void
+PressureJ=no
+IntegralsJ=no
+PlanesK=void
+#
+#[SaveTowers]
+Stride=<value_i,value_j,value_k>
+Stride=0,0,0
+#
+#[Statsitics]
+#Averages=<yes/no>
+#Pdfs=<yes/no>
+#ConditionalAverages=<yes/no>
+#Intermittency=<yes/no>
+Averages=yes
+Pdfs=no
+Intermittency=no
+FilterEnergy=no
+#
+#[Inflow]
+#Type=<None/Discrete/Broadband/Both>
+#Adapt=<value>
+#Imax=<imax>
+#Jmax=<jmax>
+#Kmax=<kmax>
+Type=none
+Adapt=0.0
+#
+#[Discrete]
+#Aplitude=<value>
+#ModeX=<value>
+#ModeZ=<value>
+#PhaseX=<value>
+#PhaseZ=<value>
+#Type=<Varicose/Sinuous>
+#Parameters=<values>
+Amplitude=void
+2DAmpl=0.0
+ModeX=void
+ModeZ=void
+PhaseX=void
+2DPhi=void
+PhaseZ=void
+Type=varicose
+Parameters=-1.0,-1.0
+#[Version]
+#Major=<mayor version number>
+#Minor=<minor version number>
+Major=7
+Minor=0
+#
+#[Main]
+#FileFormat=<RawArray/RawSplit/NetCDF>
+#VerbosityLevel=<0/1/2>
+#Type=<temporal/spatial>
+#CalculateFlow=<yes/no>
+#CalculateScalar=<yes/no>
+#Equations=<total/internal/incompressible/anelastic>
+#TermAdvection=<divergence/skewsymmetric>
+#TermViscous=<divergence/explicit>
+#TermDiffusion=<divergence/explicit>
+#TermBodyForce=<none/Explicit/Linear/Bilinear/Quadratic>
+#TermCoriolis=<none/explicit/normalized>
+#TermRadiation=<none/Bulk1dGlobal/Bulk1dLocal>
+#TermSubsidence=<none/ConstantDivergenceLocal/ConstantDivergenceGlobal>
+#TermTransport=<constant/powerlaw/sutherland/Airwater/AirwaterSimplified>
+#TermChemistry=<none/quadratic/layeredrelaxation/ozone>
+#SpaceOrder=<CompactJacobian4/CompactJacobian6/CompactJacobian8/CompactDirect6>
+#ComModeITranspose=<none,asynchronous,sendrecv>
+#ComModeKTranspose=<none,asynchronous,sendrecv>
+FileFormat=none
+VerbosityLevel=1
+Type=temporal
+CalculateFlow=yes
+CalculateScalar=no
+CalculateParticle=no
+Equations=incompressible
+Mixture=none
+TermAdvection=convective
+TermViscous=explicit
+TermDiffusion=explicit
+TermBodyForce=linear
+TermCoriolis=normalized
+TermRadiation=none
+TermSubsidence=none
+TermTransport=constant
+TermChemistry=none
+SpaceOrder=compactdirect6
+ComModeITranspose=asynchronous
+ComModeKTranspose=asynchronous
+#
+#[Parameters]
+#Reynolds=<value>
+#Prandtl=<value>
+#Froude=<value>
+#Rossby=<value>
+#Mach=<value>
+#Gama=<value>
+#Schmidt=<value>
+#Damkohler=<value>
+#Stokes=<value>
+#Settling=<value>
+Reynolds=25000
+Gama=1.4
+Prandtl=1.0
+Mach=1.0
+Froude=0.01
+Rossby=1.0
+Stokes=0.0
+Settling=0.0
+Schmidt=1.0
+Damkohler=0.0
+#
+#[BodyForce]
+#Vector=<Gx,Gy,Gz>
+#Parameters=<value>
+Vector=0.0,0.0,0.0
+Parameters=0.0
+#
+#[Rotation]
+#Vector=<Fx,Fy,Fz>
+#Parameters=<value>
+Vector=0.0,1.0,0.0
+Parameters=0.0,1.0
+#
+#[Radiation]
+#Scalar=<value>
+#Parameters=<value>
+#
+#[Subsidence]
+#Parameters=<value>
+#
+#[Transport]
+#Parameters=<value>
+#Exponent=<value>
+#
+#[Chemistry]
+#Parameters=<value>
+#
+#[Thermodynamics]
+#Parameters=<value>
+#
+#[Grid]
+#Imax=<imax>
+#Imax(*)=<imax_proc>
+#Jmax=<jmax>
+#Kmax=<kmax>
+#Kmax(*)=<kmax_proc>
+#XUniform=<yes/no>
+#YUniform=<yes/no>
+#ZUniform=<yes/no>
+#XPeriodic=<yes/no>
+#YPeriodic=<yes/no>
+#ZPeriodic=<yes/no>
+Imax=1536
+Jmax=1152
+Kmax=768
+Kmax(*)=768
+Imax(*)=12
+XUniform=yes
+YUniform=no
+ZUniform=yes
+XPeriodic=yes
+YPeriodic=no
+ZPeriodic=yes
+#
+#[Filter]
+#Type=<none/compact/explicit6/explicit4/adm/helmholtz/SpectralBand/SpectralErf/tophat>
+#Parameters=<values>
+#ActiveX=<yes/no>
+#ActiveY=<yes/no>
+#ActiveZ=<yes/no>
+#BcsJmin=<free,solid,zero>
+#BcsJmax=<free,solid,zero>
+#Step=<filter step>
+Type=none
+BcsJmin=biased
+BcsJmax=biased
+Parameters=void
+Repeat=1
+ActiveX=yes
+ActiveY=yes
+ActiveZ=yes
+#
+#[Statistics]
+#IAvera=<plane1,plane2,...>
+IAvera=1
+#
+#[Flow]
+#VelocityX=<mean velocity X>
+#VelocityY=<mean velocity Y>
+#VelocityZ=<mean velocity Z>
+#Pressure=<mean pressure>
+#Density=<mean density>
+#Temperature=<mean temperature>
+#ProfileVelocity=<None/Linear/Tanh/Erf/Ekman/EkmanP/Parabolic>
+#YCoorVelocity=<Relative Y reference point>
+#DiamVelocity=<value>
+#ThickVelocity=<value>
+#DeltaVelocity=<value>
+#ProfileDensity=<None/Linear/Tanh/Erf>
+#YCoorDensity=<Relative Y reference point>
+#DiamDensity=<value>
+#ThickDensity=<value>
+#DeltaDensity=<value>
+#ProfileTemperature=<None/Linear/Tanh/Erf>
+#YCoorTemperature=<Relative Y reference point>
+#DiamTemperature=<value>
+#ThickTemperature=<value>
+#DeltaTemperature=<value>
+ProfileVelocity=ekman
+VelocityX=0.0
+YCoorVelocity=0.0
+ThickVelocity=0.004
+DeltaVelocity=1.0
+DiamVelocity=0.0
+SurfaceThickVelocity=1.0
+SurfaceDeltaVelocity=0.0
+ProfileVelocityY=none
+VelocityY=0.0
+YCoorVelocityY=0.5
+ThickVelocityY=0.0
+DeltaVelocityY=0.0
+DiamVelocityY=0.0
+SurfaceThickVelocityY=1.0
+SurfaceDeltaVelocityY=0.0
+ProfileVelocityZ=none
+VelocityZ=0.0
+YCoorVelocityZ=0.5
+ThickVelocityZ=0.0
+DeltaVelocityZ=0.0
+DiamVelocityZ=0.0
+SurfaceThickVelocityZ=1.0
+SurfaceDeltaVelocityZ=0.0
+ProfileDensity=none
+Density=1.0
+YCoorDensity=0.5
+ThickDensity=0.0
+DeltaDensity=0.0
+DiamDensity=0.0
+ProfileTemperature=none
+Temperature=0.0
+YCoorTemperature=0.5
+ThickTemperature=0.0
+DeltaTemperature=0.0
+DiamTemperature=0.0
+BottomSlope=0.0
+UpperSlope=0.0
+Pressure=0.0
+YCoorPressure=0.5
+ReferencePressure=0.0
+ScaleHeight=0.0
+#
+#[Scalar]
+#Profile=<value>
+#YCoor=<value>
+#Diam=<value>
+#Thick=<value>
+#Mean=<value>
+#Delta=<value>
+ProfileScalar1=erf
+MeanScalar1=1.0
+YCoorScalar1=0.0
+ThickScalar1=0.0006
+DeltaScalar1=2.0
+ReferenceScalar1=1.000000000000000
+DiamScalar1=0.0
+BottomSlopeScalar1=0.0
+UpperSlopeScalar1=0.0
+SurfaceThickScalar1=0.0
+SurfaceDeltaScalar1=0.0
+ProfileScalar2=none
+MeanScalar2=0.0
+YCoorScalar2=0.5
+ThickScalar2=0.0
+DeltaScalar2=0.0
+ReferenceScalar2=0.000000000000000
+DiamScalar2=0.0
+BottomSlopeScalar2=0.0
+UpperSlopeScalar2=0.0
+SurfaceThickScalar2=0.0
+SurfaceDeltaScalar2=0.0
+ProfileScalar3=none
+MeanScalar3=0.0
+YCoorScalar3=0.5
+ThickScalar3=0.0
+DeltaScalar3=0.0
+ReferenceScalar3=0.000000000000000
+DiamScalar3=0.0
+BottomSlopeScalar3=0.0
+UpperSlopeScalar3=0.0
+SurfaceThickScalar3=0.0
+SurfaceDeltaScalar3=0.0
+ProfileScalar4=none
+MeanScalar4=0.0
+YCoorScalar4=0.5
+ThickScalar4=0.0
+DeltaScalar4=0.0
+ReferenceScalar4=0.000000000000000
+DiamScalar4=0.0
+BottomSlopeScalar4=0.0
+UpperSlopeScalar4=0.0
+SurfaceThickScalar4=0.0
+SurfaceDeltaScalar4=0.0
+ProfileScalar5=none
+MeanScalar5=0.0
+YCoorScalar5=0.5
+ThickScalar5=0.0
+DeltaScalar5=0.0
+ReferenceScalar5=0.000000000000000
+DiamScalar5=0.0
+BottomSlopeScalar5=0.0
+UpperSlopeScalar5=0.0
+SurfaceThickScalar5=0.0
+SurfaceDeltaScalar5=0.0
+ProfileScalar6=none
+MeanScalar6=0.0
+YCoorScalar6=0.5
+ThickScalar6=0.0
+DeltaScalar6=0.0
+ReferenceScalar6=0.000000000000000
+DiamScalar6=0.0
+BottomSlopeScalar6=0.0
+UpperSlopeScalar6=0.0
+SurfaceThickScalar6=0.0
+SurfaceDeltaScalar6=0.0
+ProfileScalar7=none
+MeanScalar7=0.0
+YCoorScalar7=0.5
+ThickScalar7=0.0
+DeltaScalar7=0.0
+ReferenceScalar7=0.000000000000000
+DiamScalar7=0.0
+BottomSlopeScalar7=0.0
+UpperSlopeScalar7=0.0
+SurfaceThickScalar7=0.0
+SurfaceDeltaScalar7=0.0
+ProfileScalar8=none
+MeanScalar8=0.0
+YCoorScalar8=0.5
+ThickScalar8=0.0
+DeltaScalar8=0.0
+ReferenceScalar8=0.000000000000000
+DiamScalar8=0.0
+BottomSlopeScalar8=0.0
+UpperSlopeScalar8=0.0
+SurfaceThickScalar8=0.0
+SurfaceDeltaScalar8=0.0
+ProfileScalar9=none
+MeanScalar9=0.0
+YCoorScalar9=0.5
+ThickScalar9=0.0
+DeltaScalar9=0.0
+ReferenceScalar9=0.000000000000000
+DiamScalar9=0.0
+BottomSlopeScalar9=0.0
+UpperSlopeScalar9=0.0
+SurfaceThickScalar9=0.0
+SurfaceDeltaScalar9=0.0
+ProfileScalar10=none
+MeanScalar10=0.0
+YCoorScalar10=0.5
+ThickScalar10=0.0
+DeltaScalar10=0.0
+ReferenceScalar10=0.000000000000000
+DiamScalar10=0.0
+BottomSlopeScalar10=0.0
+UpperSlopeScalar10=0.0
+SurfaceThickScalar10=0.0
+SurfaceDeltaScalar10=0.0
+ChemkinFile=none
+#
+#
+#[Main]
+#TimeOrder=<RungeKuttaExplicit3/RungeKuttaExplicit4/RungeKuttaDiffusion3>
+#TimeStep=<value (used if CFL is negative)>
+#TimeCFL=<value>
+#TimeDiffusiveCFL=<value>
+#TimeReactiveCFL=<value>
+#TermDivergence=<none/remove>
+#RhsMode=<split/combined/nonblocking>
+TimeOrder=rungekuttaexplicit4
+TimeCFL=1.20000
+TimeDiffusiveCFL=0.3000000000000000
+TimeReactiveCFL=0.6000000000000000
+TimeStep=-0.016000
+TermDivergence=remove
+RhsMode=combined
+#
+#[Iteration]
+#Start=<integral start time>
+#End=<integral stop time>
+#Restart=<restart time step>
+#Statistics=<statistics time step>
+#IteraLog=<value>
+#Saveplanes=<value>
+#RunAvera=<yes/no>
+Start=0
+End=6
+Restart=6
+Statistics=7
+IteraLog=1
+Saveplanes=-1
+SaveStats=-1
+#
+#[Control]
+#FlowLimit=<yes/no>
+#MinPressure=<pressure>
+#MaxPressure=<pressure>
+#MinDensity=<density>
+#MaxDensity=<density>
+#ScalLimit=<yes/no>
+#MinScalar=<scalar>
+#MaxScalar=<scalar>
+FlowLimit=no
+ScalLimit=yes
+MinPressure=-1.0
+MaxPressure=-1.0
+MinDensity=-1.0
+MaxDensity=-1.0
+MaxDilatation=void
+MinScalar=void
+MaxScalar=void
+#
+#[BoundaryConditions]
+#ScalarImin=<none/dirichlet/neumman>
+#ScalarJmin=<none/dirichlet/neumman>
+#ScalarSfcTypeJmin=<static/linear>
+#ScalarSfcTypeJmax=<static/linear>
+#ScalarCouplingJmin=<value>
+#ScalarCouplingJmax=<value>
+#ScalarKmin=<none/dirichlet/neumman>
+#VelocityImin=<none/dirichlet/neumman>
+#VelocityJmin=<none/dirichlet/neumman>
+#VelocityKmin=<none/dirichlet/neumman>
+#ViscousI=<none/inflow/outflow>
+#ViscousJ=<none/inflow/outflow>
+#ViscousK=<none/inflow/outflow>
+#SigmaOut=<value>
+#SigmaInf=<value>
+#BetaTransverse=<value>
+Scalar1Jmin=dirichlet
+Scalar1SfcTypeJmin=static
+Scalar1CouplingJmin=0.0
+Scalar1Jmax=neumann
+Scalar1SfcTypeJmax=static
+Scalar1CouplingJmax=0.0
+VelocityImin=freeslip
+VelocityImax=freeslip
+VelocityJmin=noslip
+VelocityJmax=freeslip
+VelocityKmin=freeslip
+VelocityKmax=freeslip
+ViscousI=none
+ViscousJ=none
+ViscousK=none
+SigmaInf=-1.0
+SigmaOut=-1.0
+BetaTransverse=-1.0
+#
+#
+#[BufferZone]
+#Type=<none/relaxation/filter/both>
+#LoadBuffer=<yes/no>
+#PointsJmin=<value>
+#PointsJmax=<value>
+#PointsImin=<value>
+#PointsImax=<value>
+#ParametersJmin=<values>
+#ParametersJmax=<values>
+#ParametersImin=<values>
+#ParametersImax=<values>
+#HardValuesJmin=<values>
+#HardValuesJmax=<values>
+#HardValuesImin=<values>
+#HardValuesImax=<values>
+Type=none
+LoadBuffer=no
+PointsUImin=0
+PointsUImax=0
+PointsUJmin=0
+PointsUJmax=0
+PointsSImin=0
+PointsSImax=0
+PointsSJmin=0
+PointsSJmax=0
+#
+#[ViscChange]
+#Time=<time>
+Time=0.01
+Step=0
+#
+#[InflowFilter]
+#Type=<yes/no>
+#IWidth=<value>
+#JWidth=<value>
+#Step=<value>
+#Parameters=<value>
+Type=none
+Parameters=void
+Step=0
+#
+#[SavePlanes]
+#PlanesI=<value>
+#PlanesJ=<value>
+#PlanesK=<value>
+#IntegralsJ=<yes/no>
+PlanesI=void
+PlanesJ=void
+PressureJ=no
+IntegralsJ=no
+PlanesK=void
+#
+#[SaveTowers]
+Stride=<value_i,value_j,value_k>
+Stride=0,0,0
+#
+#[Statsitics]
+#Averages=<yes/no>
+#Pdfs=<yes/no>
+#ConditionalAverages=<yes/no>
+#Intermittency=<yes/no>
+Averages=yes
+Pdfs=no
+Intermittency=no
+FilterEnergy=no
+#
+#[Inflow]
+#Type=<None/Discrete/Broadband/Both>
+#Adapt=<value>
+#Imax=<imax>
+#Jmax=<jmax>
+#Kmax=<kmax>
+Type=none
+Adapt=0.0
+#
+#[Discrete]
+#Aplitude=<value>
+#ModeX=<value>
+#ModeZ=<value>
+#PhaseX=<value>
+#PhaseZ=<value>
+#Type=<Varicose/Sinuous>
+#Parameters=<values>
+Amplitude=void
+2DAmpl=0.0
+ModeX=void
+ModeZ=void
+PhaseX=void
+2DPhi=void
+PhaseZ=void
+Type=varicose
+Parameters=-1.0,-1.0
+#[Version]
+#Major=<mayor version number>
+#Minor=<minor version number>
+Major=7
+Minor=0
+#
+#[Main]
+#FileFormat=<RawArray/RawSplit/NetCDF>
+#VerbosityLevel=<0/1/2>
+#Type=<temporal/spatial>
+#CalculateFlow=<yes/no>
+#CalculateScalar=<yes/no>
+#Equations=<total/internal/incompressible/anelastic>
+#TermAdvection=<divergence/skewsymmetric>
+#TermViscous=<divergence/explicit>
+#TermDiffusion=<divergence/explicit>
+#TermBodyForce=<none/Explicit/Linear/Bilinear/Quadratic>
+#TermCoriolis=<none/explicit/normalized>
+#TermRadiation=<none/Bulk1dGlobal/Bulk1dLocal>
+#TermSubsidence=<none/ConstantDivergenceLocal/ConstantDivergenceGlobal>
+#TermTransport=<constant/powerlaw/sutherland/Airwater/AirwaterSimplified>
+#TermChemistry=<none/quadratic/layeredrelaxation/ozone>
+#SpaceOrder=<CompactJacobian4/CompactJacobian6/CompactJacobian8/CompactDirect6>
+#ComModeITranspose=<none,asynchronous,sendrecv>
+#ComModeKTranspose=<none,asynchronous,sendrecv>
+FileFormat=none
+VerbosityLevel=1
+Type=temporal
+CalculateFlow=yes
+CalculateScalar=no
+CalculateParticle=no
+Equations=incompressible
+Mixture=none
+TermAdvection=convective
+TermViscous=explicit
+TermDiffusion=explicit
+TermBodyForce=linear
+TermCoriolis=normalized
+TermRadiation=none
+TermSubsidence=none
+TermTransport=constant
+TermChemistry=none
+SpaceOrder=compactdirect6
+ComModeITranspose=asynchronous
+ComModeKTranspose=asynchronous
+#
+#[Parameters]
+#Reynolds=<value>
+#Prandtl=<value>
+#Froude=<value>
+#Rossby=<value>
+#Mach=<value>
+#Gama=<value>
+#Schmidt=<value>
+#Damkohler=<value>
+#Stokes=<value>
+#Settling=<value>
+Reynolds=25000
+Gama=1.4
+Prandtl=1.0
+Mach=1.0
+Froude=0.01
+Rossby=1.0
+Stokes=0.0
+Settling=0.0
+Schmidt=1.0
+Damkohler=0.0
+#
+#[BodyForce]
+#Vector=<Gx,Gy,Gz>
+#Parameters=<value>
+Vector=0.0,0.0,0.0
+Parameters=0.0
+#
+#[Rotation]
+#Vector=<Fx,Fy,Fz>
+#Parameters=<value>
+Vector=0.0,1.0,0.0
+Parameters=0.0,1.0
+#
+#[Radiation]
+#Scalar=<value>
+#Parameters=<value>
+#
+#[Subsidence]
+#Parameters=<value>
+#
+#[Transport]
+#Parameters=<value>
+#Exponent=<value>
+#
+#[Chemistry]
+#Parameters=<value>
+#
+#[Thermodynamics]
+#Parameters=<value>
+#
+#[Grid]
+#Imax=<imax>
+#Imax(*)=<imax_proc>
+#Jmax=<jmax>
+#Kmax=<kmax>
+#Kmax(*)=<kmax_proc>
+#XUniform=<yes/no>
+#YUniform=<yes/no>
+#ZUniform=<yes/no>
+#XPeriodic=<yes/no>
+#YPeriodic=<yes/no>
+#ZPeriodic=<yes/no>
+Imax=1536
+Jmax=1152
+Kmax=768
+Kmax(*)=768
+Imax(*)=12
+XUniform=yes
+YUniform=no
+ZUniform=yes
+XPeriodic=yes
+YPeriodic=no
+ZPeriodic=yes
+#
+#[Filter]
+#Type=<none/compact/explicit6/explicit4/adm/helmholtz/SpectralBand/SpectralErf/tophat>
+#Parameters=<values>
+#ActiveX=<yes/no>
+#ActiveY=<yes/no>
+#ActiveZ=<yes/no>
+#BcsJmin=<free,solid,zero>
+#BcsJmax=<free,solid,zero>
+#Step=<filter step>
+Type=none
+BcsJmin=biased
+BcsJmax=biased
+Parameters=void
+Repeat=1
+ActiveX=yes
+ActiveY=yes
+ActiveZ=yes
+#
+#[Statistics]
+#IAvera=<plane1,plane2,...>
+IAvera=1
+#
+#[Flow]
+#VelocityX=<mean velocity X>
+#VelocityY=<mean velocity Y>
+#VelocityZ=<mean velocity Z>
+#Pressure=<mean pressure>
+#Density=<mean density>
+#Temperature=<mean temperature>
+#ProfileVelocity=<None/Linear/Tanh/Erf/Ekman/EkmanP/Parabolic>
+#YCoorVelocity=<Relative Y reference point>
+#DiamVelocity=<value>
+#ThickVelocity=<value>
+#DeltaVelocity=<value>
+#ProfileDensity=<None/Linear/Tanh/Erf>
+#YCoorDensity=<Relative Y reference point>
+#DiamDensity=<value>
+#ThickDensity=<value>
+#DeltaDensity=<value>
+#ProfileTemperature=<None/Linear/Tanh/Erf>
+#YCoorTemperature=<Relative Y reference point>
+#DiamTemperature=<value>
+#ThickTemperature=<value>
+#DeltaTemperature=<value>
+ProfileVelocity=ekman
+VelocityX=0.0
+YCoorVelocity=0.0
+ThickVelocity=0.004
+DeltaVelocity=1.0
+DiamVelocity=0.0
+SurfaceThickVelocity=1.0
+SurfaceDeltaVelocity=0.0
+ProfileVelocityY=none
+VelocityY=0.0
+YCoorVelocityY=0.5
+ThickVelocityY=0.0
+DeltaVelocityY=0.0
+DiamVelocityY=0.0
+SurfaceThickVelocityY=1.0
+SurfaceDeltaVelocityY=0.0
+ProfileVelocityZ=none
+VelocityZ=0.0
+YCoorVelocityZ=0.5
+ThickVelocityZ=0.0
+DeltaVelocityZ=0.0
+DiamVelocityZ=0.0
+SurfaceThickVelocityZ=1.0
+SurfaceDeltaVelocityZ=0.0
+ProfileDensity=none
+Density=1.0
+YCoorDensity=0.5
+ThickDensity=0.0
+DeltaDensity=0.0
+DiamDensity=0.0
+ProfileTemperature=none
+Temperature=0.0
+YCoorTemperature=0.5
+ThickTemperature=0.0
+DeltaTemperature=0.0
+DiamTemperature=0.0
+BottomSlope=0.0
+UpperSlope=0.0
+Pressure=0.0
+YCoorPressure=0.5
+ReferencePressure=0.0
+ScaleHeight=0.0
+#
+#[Scalar]
+#Profile=<value>
+#YCoor=<value>
+#Diam=<value>
+#Thick=<value>
+#Mean=<value>
+#Delta=<value>
+ProfileScalar1=erf
+MeanScalar1=1.0
+YCoorScalar1=0.0
+ThickScalar1=0.0006
+DeltaScalar1=2.0
+ReferenceScalar1=1.000000000000000
+DiamScalar1=0.0
+BottomSlopeScalar1=0.0
+UpperSlopeScalar1=0.0
+SurfaceThickScalar1=0.0
+SurfaceDeltaScalar1=0.0
+ProfileScalar2=none
+MeanScalar2=0.0
+YCoorScalar2=0.5
+ThickScalar2=0.0
+DeltaScalar2=0.0
+ReferenceScalar2=0.000000000000000
+DiamScalar2=0.0
+BottomSlopeScalar2=0.0
+UpperSlopeScalar2=0.0
+SurfaceThickScalar2=0.0
+SurfaceDeltaScalar2=0.0
+ProfileScalar3=none
+MeanScalar3=0.0
+YCoorScalar3=0.5
+ThickScalar3=0.0
+DeltaScalar3=0.0
+ReferenceScalar3=0.000000000000000
+DiamScalar3=0.0
+BottomSlopeScalar3=0.0
+UpperSlopeScalar3=0.0
+SurfaceThickScalar3=0.0
+SurfaceDeltaScalar3=0.0
+ProfileScalar4=none
+MeanScalar4=0.0
+YCoorScalar4=0.5
+ThickScalar4=0.0
+DeltaScalar4=0.0
+ReferenceScalar4=0.000000000000000
+DiamScalar4=0.0
+BottomSlopeScalar4=0.0
+UpperSlopeScalar4=0.0
+SurfaceThickScalar4=0.0
+SurfaceDeltaScalar4=0.0
+ProfileScalar5=none
+MeanScalar5=0.0
+YCoorScalar5=0.5
+ThickScalar5=0.0
+DeltaScalar5=0.0
+ReferenceScalar5=0.000000000000000
+DiamScalar5=0.0
+BottomSlopeScalar5=0.0
+UpperSlopeScalar5=0.0
+SurfaceThickScalar5=0.0
+SurfaceDeltaScalar5=0.0
+ProfileScalar6=none
+MeanScalar6=0.0
+YCoorScalar6=0.5
+ThickScalar6=0.0
+DeltaScalar6=0.0
+ReferenceScalar6=0.000000000000000
+DiamScalar6=0.0
+BottomSlopeScalar6=0.0
+UpperSlopeScalar6=0.0
+SurfaceThickScalar6=0.0
+SurfaceDeltaScalar6=0.0
+ProfileScalar7=none
+MeanScalar7=0.0
+YCoorScalar7=0.5
+ThickScalar7=0.0
+DeltaScalar7=0.0
+ReferenceScalar7=0.000000000000000
+DiamScalar7=0.0
+BottomSlopeScalar7=0.0
+UpperSlopeScalar7=0.0
+SurfaceThickScalar7=0.0
+SurfaceDeltaScalar7=0.0
+ProfileScalar8=none
+MeanScalar8=0.0
+YCoorScalar8=0.5
+ThickScalar8=0.0
+DeltaScalar8=0.0
+ReferenceScalar8=0.000000000000000
+DiamScalar8=0.0
+BottomSlopeScalar8=0.0
+UpperSlopeScalar8=0.0
+SurfaceThickScalar8=0.0
+SurfaceDeltaScalar8=0.0
+ProfileScalar9=none
+MeanScalar9=0.0
+YCoorScalar9=0.5
+ThickScalar9=0.0
+DeltaScalar9=0.0
+ReferenceScalar9=0.000000000000000
+DiamScalar9=0.0
+BottomSlopeScalar9=0.0
+UpperSlopeScalar9=0.0
+SurfaceThickScalar9=0.0
+SurfaceDeltaScalar9=0.0
+ProfileScalar10=none
+MeanScalar10=0.0
+YCoorScalar10=0.5
+ThickScalar10=0.0
+DeltaScalar10=0.0
+ReferenceScalar10=0.000000000000000
+DiamScalar10=0.0
+BottomSlopeScalar10=0.0
+UpperSlopeScalar10=0.0
+SurfaceThickScalar10=0.0
+SurfaceDeltaScalar10=0.0
+ChemkinFile=none
+#
+#
+#[Main]
+#TimeOrder=<RungeKuttaExplicit3/RungeKuttaExplicit4/RungeKuttaDiffusion3>
+#TimeStep=<value (used if CFL is negative)>
+#TimeCFL=<value>
+#TimeDiffusiveCFL=<value>
+#TimeReactiveCFL=<value>
+#TermDivergence=<none/remove>
+#RhsMode=<split/combined/nonblocking>
+TimeOrder=rungekuttaexplicit4
+TimeCFL=1.20000
+TimeDiffusiveCFL=0.3000000000000000
+TimeReactiveCFL=0.6000000000000000
+TimeStep=-0.016000
+TermDivergence=remove
+RhsMode=combined
+#
+#[Iteration]
+#Start=<integral start time>
+#End=<integral stop time>
+#Restart=<restart time step>
+#Statistics=<statistics time step>
+#IteraLog=<value>
+#Saveplanes=<value>
+#RunAvera=<yes/no>
+Start=0
+End=6
+Restart=6
+Statistics=7
+IteraLog=1
+Saveplanes=-1
+SaveStats=-1
+#
+#[Control]
+#FlowLimit=<yes/no>
+#MinPressure=<pressure>
+#MaxPressure=<pressure>
+#MinDensity=<density>
+#MaxDensity=<density>
+#ScalLimit=<yes/no>
+#MinScalar=<scalar>
+#MaxScalar=<scalar>
+FlowLimit=no
+ScalLimit=yes
+MinPressure=-1.0
+MaxPressure=-1.0
+MinDensity=-1.0
+MaxDensity=-1.0
+MaxDilatation=void
+MinScalar=void
+MaxScalar=void
+#
+#[BoundaryConditions]
+#ScalarImin=<none/dirichlet/neumman>
+#ScalarJmin=<none/dirichlet/neumman>
+#ScalarSfcTypeJmin=<static/linear>
+#ScalarSfcTypeJmax=<static/linear>
+#ScalarCouplingJmin=<value>
+#ScalarCouplingJmax=<value>
+#ScalarKmin=<none/dirichlet/neumman>
+#VelocityImin=<none/dirichlet/neumman>
+#VelocityJmin=<none/dirichlet/neumman>
+#VelocityKmin=<none/dirichlet/neumman>
+#ViscousI=<none/inflow/outflow>
+#ViscousJ=<none/inflow/outflow>
+#ViscousK=<none/inflow/outflow>
+#SigmaOut=<value>
+#SigmaInf=<value>
+#BetaTransverse=<value>
+Scalar1Jmin=dirichlet
+Scalar1SfcTypeJmin=static
+Scalar1CouplingJmin=0.0
+Scalar1Jmax=neumann
+Scalar1SfcTypeJmax=static
+Scalar1CouplingJmax=0.0
+VelocityImin=freeslip
+VelocityImax=freeslip
+VelocityJmin=noslip
+VelocityJmax=freeslip
+VelocityKmin=freeslip
+VelocityKmax=freeslip
+ViscousI=none
+ViscousJ=none
+ViscousK=none
+SigmaInf=-1.0
+SigmaOut=-1.0
+BetaTransverse=-1.0
+#
+#
+#[BufferZone]
+#Type=<none/relaxation/filter/both>
+#LoadBuffer=<yes/no>
+#PointsJmin=<value>
+#PointsJmax=<value>
+#PointsImin=<value>
+#PointsImax=<value>
+#ParametersJmin=<values>
+#ParametersJmax=<values>
+#ParametersImin=<values>
+#ParametersImax=<values>
+#HardValuesJmin=<values>
+#HardValuesJmax=<values>
+#HardValuesImin=<values>
+#HardValuesImax=<values>
+Type=none
+LoadBuffer=no
+PointsUImin=0
+PointsUImax=0
+PointsUJmin=0
+PointsUJmax=0
+PointsSImin=0
+PointsSImax=0
+PointsSJmin=0
+PointsSJmax=0
+#
+#[ViscChange]
+#Time=<time>
+Time=0.01
+Step=0
+#
+#[InflowFilter]
+#Type=<yes/no>
+#IWidth=<value>
+#JWidth=<value>
+#Step=<value>
+#Parameters=<value>
+Type=none
+Parameters=void
+Step=0
+#
+#[SavePlanes]
+#PlanesI=<value>
+#PlanesJ=<value>
+#PlanesK=<value>
+#IntegralsJ=<yes/no>
+PlanesI=void
+PlanesJ=void
+PressureJ=no
+IntegralsJ=no
+PlanesK=void
+#
+#[SaveTowers]
+Stride=<value_i,value_j,value_k>
+Stride=0,0,0
+#
+#[Statsitics]
+#Averages=<yes/no>
+#Pdfs=<yes/no>
+#ConditionalAverages=<yes/no>
+#Intermittency=<yes/no>
+Averages=yes
+Pdfs=no
+Intermittency=no
+FilterEnergy=no
+#
+#[Inflow]
+#Type=<None/Discrete/Broadband/Both>
+#Adapt=<value>
+#Imax=<imax>
+#Jmax=<jmax>
+#Kmax=<kmax>
+Type=none
+Adapt=0.0
+#
+#[Discrete]
+#Aplitude=<value>
+#ModeX=<value>
+#ModeZ=<value>
+#PhaseX=<value>
+#PhaseZ=<value>
+#Type=<Varicose/Sinuous>
+#Parameters=<values>
+Amplitude=void
+2DAmpl=0.0
+ModeX=void
+ModeZ=void
+PhaseX=void
+2DPhi=void
+PhaseZ=void
+Type=varicose
+Parameters=-1.0,-1.0
+#[Version]
+#Major=<mayor version number>
+#Minor=<minor version number>
+Major=7
+Minor=0
+#
+#[Main]
+#FileFormat=<RawArray/RawSplit/NetCDF>
+#VerbosityLevel=<0/1/2>
+#Type=<temporal/spatial>
+#CalculateFlow=<yes/no>
+#CalculateScalar=<yes/no>
+#Equations=<total/internal/incompressible/anelastic>
+#TermAdvection=<divergence/skewsymmetric>
+#TermViscous=<divergence/explicit>
+#TermDiffusion=<divergence/explicit>
+#TermBodyForce=<none/Explicit/Linear/Bilinear/Quadratic>
+#TermCoriolis=<none/explicit/normalized>
+#TermRadiation=<none/Bulk1dGlobal/Bulk1dLocal>
+#TermSubsidence=<none/ConstantDivergenceLocal/ConstantDivergenceGlobal>
+#TermTransport=<constant/powerlaw/sutherland/Airwater/AirwaterSimplified>
+#TermChemistry=<none/quadratic/layeredrelaxation/ozone>
+#SpaceOrder=<CompactJacobian4/CompactJacobian6/CompactJacobian8/CompactDirect6>
+#ComModeITranspose=<none,asynchronous,sendrecv>
+#ComModeKTranspose=<none,asynchronous,sendrecv>
+FileFormat=none
+VerbosityLevel=1
+Type=temporal
+CalculateFlow=yes
+CalculateScalar=no
+CalculateParticle=no
+Equations=incompressible
+Mixture=none
+TermAdvection=convective
+TermViscous=explicit
+TermDiffusion=explicit
+TermBodyForce=linear
+TermCoriolis=normalized
+TermRadiation=none
+TermSubsidence=none
+TermTransport=constant
+TermChemistry=none
+SpaceOrder=compactdirect6
+ComModeITranspose=asynchronous
+ComModeKTranspose=asynchronous
+#
+#[Parameters]
+#Reynolds=<value>
+#Prandtl=<value>
+#Froude=<value>
+#Rossby=<value>
+#Mach=<value>
+#Gama=<value>
+#Schmidt=<value>
+#Damkohler=<value>
+#Stokes=<value>
+#Settling=<value>
+Reynolds=25000
+Gama=1.4
+Prandtl=1.0
+Mach=1.0
+Froude=0.01
+Rossby=1.0
+Stokes=0.0
+Settling=0.0
+Schmidt=1.0
+Damkohler=0.0
+#
+#[BodyForce]
+#Vector=<Gx,Gy,Gz>
+#Parameters=<value>
+Vector=0.0,0.0,0.0
+Parameters=0.0
+#
+#[Rotation]
+#Vector=<Fx,Fy,Fz>
+#Parameters=<value>
+Vector=0.0,1.0,0.0
+Parameters=0.0,1.0
+#
+#[Radiation]
+#Scalar=<value>
+#Parameters=<value>
+#
+#[Subsidence]
+#Parameters=<value>
+#
+#[Transport]
+#Parameters=<value>
+#Exponent=<value>
+#
+#[Chemistry]
+#Parameters=<value>
+#
+#[Thermodynamics]
+#Parameters=<value>
+#
+#[Grid]
+#Imax=<imax>
+#Imax(*)=<imax_proc>
+#Jmax=<jmax>
+#Kmax=<kmax>
+#Kmax(*)=<kmax_proc>
+#XUniform=<yes/no>
+#YUniform=<yes/no>
+#ZUniform=<yes/no>
+#XPeriodic=<yes/no>
+#YPeriodic=<yes/no>
+#ZPeriodic=<yes/no>
+Imax=1536
+Jmax=1152
+Kmax=768
+Kmax(*)=768
+Imax(*)=12
+XUniform=yes
+YUniform=no
+ZUniform=yes
+XPeriodic=yes
+YPeriodic=no
+ZPeriodic=yes
+#
+#[Filter]
+#Type=<none/compact/explicit6/explicit4/adm/helmholtz/SpectralBand/SpectralErf/tophat>
+#Parameters=<values>
+#ActiveX=<yes/no>
+#ActiveY=<yes/no>
+#ActiveZ=<yes/no>
+#BcsJmin=<free,solid,zero>
+#BcsJmax=<free,solid,zero>
+#Step=<filter step>
+Type=none
+BcsJmin=biased
+BcsJmax=biased
+Parameters=void
+Repeat=1
+ActiveX=yes
+ActiveY=yes
+ActiveZ=yes
+#
+#[Statistics]
+#IAvera=<plane1,plane2,...>
+IAvera=1
+#
+#[Flow]
+#VelocityX=<mean velocity X>
+#VelocityY=<mean velocity Y>
+#VelocityZ=<mean velocity Z>
+#Pressure=<mean pressure>
+#Density=<mean density>
+#Temperature=<mean temperature>
+#ProfileVelocity=<None/Linear/Tanh/Erf/Ekman/EkmanP/Parabolic>
+#YCoorVelocity=<Relative Y reference point>
+#DiamVelocity=<value>
+#ThickVelocity=<value>
+#DeltaVelocity=<value>
+#ProfileDensity=<None/Linear/Tanh/Erf>
+#YCoorDensity=<Relative Y reference point>
+#DiamDensity=<value>
+#ThickDensity=<value>
+#DeltaDensity=<value>
+#ProfileTemperature=<None/Linear/Tanh/Erf>
+#YCoorTemperature=<Relative Y reference point>
+#DiamTemperature=<value>
+#ThickTemperature=<value>
+#DeltaTemperature=<value>
+ProfileVelocity=ekman
+VelocityX=0.0
+YCoorVelocity=0.0
+ThickVelocity=0.004
+DeltaVelocity=1.0
+DiamVelocity=0.0
+SurfaceThickVelocity=1.0
+SurfaceDeltaVelocity=0.0
+ProfileVelocityY=none
+VelocityY=0.0
+YCoorVelocityY=0.5
+ThickVelocityY=0.0
+DeltaVelocityY=0.0
+DiamVelocityY=0.0
+SurfaceThickVelocityY=1.0
+SurfaceDeltaVelocityY=0.0
+ProfileVelocityZ=none
+VelocityZ=0.0
+YCoorVelocityZ=0.5
+ThickVelocityZ=0.0
+DeltaVelocityZ=0.0
+DiamVelocityZ=0.0
+SurfaceThickVelocityZ=1.0
+SurfaceDeltaVelocityZ=0.0
+ProfileDensity=none
+Density=1.0
+YCoorDensity=0.5
+ThickDensity=0.0
+DeltaDensity=0.0
+DiamDensity=0.0
+ProfileTemperature=none
+Temperature=0.0
+YCoorTemperature=0.5
+ThickTemperature=0.0
+DeltaTemperature=0.0
+DiamTemperature=0.0
+BottomSlope=0.0
+UpperSlope=0.0
+Pressure=0.0
+YCoorPressure=0.5
+ReferencePressure=0.0
+ScaleHeight=0.0
+#
+#[Scalar]
+#Profile=<value>
+#YCoor=<value>
+#Diam=<value>
+#Thick=<value>
+#Mean=<value>
+#Delta=<value>
+ProfileScalar1=erf
+MeanScalar1=1.0
+YCoorScalar1=0.0
+ThickScalar1=0.0006
+DeltaScalar1=2.0
+ReferenceScalar1=1.000000000000000
+DiamScalar1=0.0
+BottomSlopeScalar1=0.0
+UpperSlopeScalar1=0.0
+SurfaceThickScalar1=0.0
+SurfaceDeltaScalar1=0.0
+ProfileScalar2=none
+MeanScalar2=0.0
+YCoorScalar2=0.5
+ThickScalar2=0.0
+DeltaScalar2=0.0
+ReferenceScalar2=0.000000000000000
+DiamScalar2=0.0
+BottomSlopeScalar2=0.0
+UpperSlopeScalar2=0.0
+SurfaceThickScalar2=0.0
+SurfaceDeltaScalar2=0.0
+ProfileScalar3=none
+MeanScalar3=0.0
+YCoorScalar3=0.5
+ThickScalar3=0.0
+DeltaScalar3=0.0
+ReferenceScalar3=0.000000000000000
+DiamScalar3=0.0
+BottomSlopeScalar3=0.0
+UpperSlopeScalar3=0.0
+SurfaceThickScalar3=0.0
+SurfaceDeltaScalar3=0.0
+ProfileScalar4=none
+MeanScalar4=0.0
+YCoorScalar4=0.5
+ThickScalar4=0.0
+DeltaScalar4=0.0
+ReferenceScalar4=0.000000000000000
+DiamScalar4=0.0
+BottomSlopeScalar4=0.0
+UpperSlopeScalar4=0.0
+SurfaceThickScalar4=0.0
+SurfaceDeltaScalar4=0.0
+ProfileScalar5=none
+MeanScalar5=0.0
+YCoorScalar5=0.5
+ThickScalar5=0.0
+DeltaScalar5=0.0
+ReferenceScalar5=0.000000000000000
+DiamScalar5=0.0
+BottomSlopeScalar5=0.0
+UpperSlopeScalar5=0.0
+SurfaceThickScalar5=0.0
+SurfaceDeltaScalar5=0.0
+ProfileScalar6=none
+MeanScalar6=0.0
+YCoorScalar6=0.5
+ThickScalar6=0.0
+DeltaScalar6=0.0
+ReferenceScalar6=0.000000000000000
+DiamScalar6=0.0
+BottomSlopeScalar6=0.0
+UpperSlopeScalar6=0.0
+SurfaceThickScalar6=0.0
+SurfaceDeltaScalar6=0.0
+ProfileScalar7=none
+MeanScalar7=0.0
+YCoorScalar7=0.5
+ThickScalar7=0.0
+DeltaScalar7=0.0
+ReferenceScalar7=0.000000000000000
+DiamScalar7=0.0
+BottomSlopeScalar7=0.0
+UpperSlopeScalar7=0.0
+SurfaceThickScalar7=0.0
+SurfaceDeltaScalar7=0.0
+ProfileScalar8=none
+MeanScalar8=0.0
+YCoorScalar8=0.5
+ThickScalar8=0.0
+DeltaScalar8=0.0
+ReferenceScalar8=0.000000000000000
+DiamScalar8=0.0
+BottomSlopeScalar8=0.0
+UpperSlopeScalar8=0.0
+SurfaceThickScalar8=0.0
+SurfaceDeltaScalar8=0.0
+ProfileScalar9=none
+MeanScalar9=0.0
+YCoorScalar9=0.5
+ThickScalar9=0.0
+DeltaScalar9=0.0
+ReferenceScalar9=0.000000000000000
+DiamScalar9=0.0
+BottomSlopeScalar9=0.0
+UpperSlopeScalar9=0.0
+SurfaceThickScalar9=0.0
+SurfaceDeltaScalar9=0.0
+ProfileScalar10=none
+MeanScalar10=0.0
+YCoorScalar10=0.5
+ThickScalar10=0.0
+DeltaScalar10=0.0
+ReferenceScalar10=0.000000000000000
+DiamScalar10=0.0
+BottomSlopeScalar10=0.0
+UpperSlopeScalar10=0.0
+SurfaceThickScalar10=0.0
+SurfaceDeltaScalar10=0.0
+ChemkinFile=none
+#
+#
+#[Main]
+#TimeOrder=<RungeKuttaExplicit3/RungeKuttaExplicit4/RungeKuttaDiffusion3>
+#TimeStep=<value (used if CFL is negative)>
+#TimeCFL=<value>
+#TimeDiffusiveCFL=<value>
+#TimeReactiveCFL=<value>
+#TermDivergence=<none/remove>
+#RhsMode=<split/combined/nonblocking>
+TimeOrder=rungekuttaexplicit4
+TimeCFL=1.20000
+TimeDiffusiveCFL=0.3000000000000000
+TimeReactiveCFL=0.6000000000000000
+TimeStep=-0.016000
+TermDivergence=remove
+RhsMode=combined
+#
+#[Iteration]
+#Start=<integral start time>
+#End=<integral stop time>
+#Restart=<restart time step>
+#Statistics=<statistics time step>
+#IteraLog=<value>
+#Saveplanes=<value>
+#RunAvera=<yes/no>
+Start=0
+End=6
+Restart=6
+Statistics=7
+IteraLog=1
+Saveplanes=-1
+SaveStats=-1
+#
+#[Control]
+#FlowLimit=<yes/no>
+#MinPressure=<pressure>
+#MaxPressure=<pressure>
+#MinDensity=<density>
+#MaxDensity=<density>
+#ScalLimit=<yes/no>
+#MinScalar=<scalar>
+#MaxScalar=<scalar>
+FlowLimit=no
+ScalLimit=yes
+MinPressure=-1.0
+MaxPressure=-1.0
+MinDensity=-1.0
+MaxDensity=-1.0
+MaxDilatation=void
+MinScalar=void
+MaxScalar=void
+#
+#[BoundaryConditions]
+#ScalarImin=<none/dirichlet/neumman>
+#ScalarJmin=<none/dirichlet/neumman>
+#ScalarSfcTypeJmin=<static/linear>
+#ScalarSfcTypeJmax=<static/linear>
+#ScalarCouplingJmin=<value>
+#ScalarCouplingJmax=<value>
+#ScalarKmin=<none/dirichlet/neumman>
+#VelocityImin=<none/dirichlet/neumman>
+#VelocityJmin=<none/dirichlet/neumman>
+#VelocityKmin=<none/dirichlet/neumman>
+#ViscousI=<none/inflow/outflow>
+#ViscousJ=<none/inflow/outflow>
+#ViscousK=<none/inflow/outflow>
+#SigmaOut=<value>
+#SigmaInf=<value>
+#BetaTransverse=<value>
+Scalar1Jmin=dirichlet
+Scalar1SfcTypeJmin=static
+Scalar1CouplingJmin=0.0
+Scalar1Jmax=neumann
+Scalar1SfcTypeJmax=static
+Scalar1CouplingJmax=0.0
+VelocityImin=freeslip
+VelocityImax=freeslip
+VelocityJmin=noslip
+VelocityJmax=freeslip
+VelocityKmin=freeslip
+VelocityKmax=freeslip
+ViscousI=none
+ViscousJ=none
+ViscousK=none
+SigmaInf=-1.0
+SigmaOut=-1.0
+BetaTransverse=-1.0
+#
+#
+#[BufferZone]
+#Type=<none/relaxation/filter/both>
+#LoadBuffer=<yes/no>
+#PointsJmin=<value>
+#PointsJmax=<value>
+#PointsImin=<value>
+#PointsImax=<value>
+#ParametersJmin=<values>
+#ParametersJmax=<values>
+#ParametersImin=<values>
+#ParametersImax=<values>
+#HardValuesJmin=<values>
+#HardValuesJmax=<values>
+#HardValuesImin=<values>
+#HardValuesImax=<values>
+Type=none
+LoadBuffer=no
+PointsUImin=0
+PointsUImax=0
+PointsUJmin=0
+PointsUJmax=0
+PointsSImin=0
+PointsSImax=0
+PointsSJmin=0
+PointsSJmax=0
+#
+#[ViscChange]
+#Time=<time>
+Time=0.01
+Step=0
+#
+#[InflowFilter]
+#Type=<yes/no>
+#IWidth=<value>
+#JWidth=<value>
+#Step=<value>
+#Parameters=<value>
+Type=none
+Parameters=void
+Step=0
+#
+#[SavePlanes]
+#PlanesI=<value>
+#PlanesJ=<value>
+#PlanesK=<value>
+#IntegralsJ=<yes/no>
+PlanesI=void
+PlanesJ=void
+PressureJ=no
+IntegralsJ=no
+PlanesK=void
+#
+#[SaveTowers]
+Stride=<value_i,value_j,value_k>
+Stride=0,0,0
+#
+#[Statsitics]
+#Averages=<yes/no>
+#Pdfs=<yes/no>
+#ConditionalAverages=<yes/no>
+#Intermittency=<yes/no>
+Averages=yes
+Pdfs=no
+Intermittency=no
+FilterEnergy=no
+#
+#[Inflow]
+#Type=<None/Discrete/Broadband/Both>
+#Adapt=<value>
+#Imax=<imax>
+#Jmax=<jmax>
+#Kmax=<kmax>
+Type=none
+Adapt=0.0
+#
+#[Discrete]
+#Aplitude=<value>
+#ModeX=<value>
+#ModeZ=<value>
+#PhaseX=<value>
+#PhaseZ=<value>
+#Type=<Varicose/Sinuous>
+#Parameters=<values>
+Amplitude=void
+2DAmpl=0.0
+ModeX=void
+ModeZ=void
+PhaseX=void
+2DPhi=void
+PhaseZ=void
+Type=varicose
+Parameters=-1.0,-1.0
+#[Version]
+#Major=<mayor version number>
+#Minor=<minor version number>
+Major=7
+Minor=0
+#
+#[Main]
+#FileFormat=<RawArray/RawSplit/NetCDF>
+#VerbosityLevel=<0/1/2>
+#Type=<temporal/spatial>
+#CalculateFlow=<yes/no>
+#CalculateScalar=<yes/no>
+#Equations=<total/internal/incompressible/anelastic>
+#TermAdvection=<divergence/skewsymmetric>
+#TermViscous=<divergence/explicit>
+#TermDiffusion=<divergence/explicit>
+#TermBodyForce=<none/Explicit/Linear/Bilinear/Quadratic>
+#TermCoriolis=<none/explicit/normalized>
+#TermRadiation=<none/Bulk1dGlobal/Bulk1dLocal>
+#TermSubsidence=<none/ConstantDivergenceLocal/ConstantDivergenceGlobal>
+#TermTransport=<constant/powerlaw/sutherland/Airwater/AirwaterSimplified>
+#TermChemistry=<none/quadratic/layeredrelaxation/ozone>
+#SpaceOrder=<CompactJacobian4/CompactJacobian6/CompactJacobian8/CompactDirect6>
+#ComModeITranspose=<none,asynchronous,sendrecv>
+#ComModeKTranspose=<none,asynchronous,sendrecv>
+FileFormat=none
+VerbosityLevel=1
+Type=temporal
+CalculateFlow=yes
+CalculateScalar=no
+CalculateParticle=no
+Equations=incompressible
+Mixture=none
+TermAdvection=convective
+TermViscous=explicit
+TermDiffusion=explicit
+TermBodyForce=linear
+TermCoriolis=normalized
+TermRadiation=none
+TermSubsidence=none
+TermTransport=constant
+TermChemistry=none
+SpaceOrder=compactdirect6
+ComModeITranspose=asynchronous
+ComModeKTranspose=asynchronous
+#
+#[Parameters]
+#Reynolds=<value>
+#Prandtl=<value>
+#Froude=<value>
+#Rossby=<value>
+#Mach=<value>
+#Gama=<value>
+#Schmidt=<value>
+#Damkohler=<value>
+#Stokes=<value>
+#Settling=<value>
+Reynolds=25000
+Gama=1.4
+Prandtl=1.0
+Mach=1.0
+Froude=0.01
+Rossby=1.0
+Stokes=0.0
+Settling=0.0
+Schmidt=1.0
+Damkohler=0.0
+#
+#[BodyForce]
+#Vector=<Gx,Gy,Gz>
+#Parameters=<value>
+Vector=0.0,0.0,0.0
+Parameters=0.0
+#
+#[Rotation]
+#Vector=<Fx,Fy,Fz>
+#Parameters=<value>
+Vector=0.0,1.0,0.0
+Parameters=0.0,1.0
+#
+#[Radiation]
+#Scalar=<value>
+#Parameters=<value>
+#
+#[Subsidence]
+#Parameters=<value>
+#
+#[Transport]
+#Parameters=<value>
+#Exponent=<value>
+#
+#[Chemistry]
+#Parameters=<value>
+#
+#[Thermodynamics]
+#Parameters=<value>
+#
+#[Grid]
+#Imax=<imax>
+#Imax(*)=<imax_proc>
+#Jmax=<jmax>
+#Kmax=<kmax>
+#Kmax(*)=<kmax_proc>
+#XUniform=<yes/no>
+#YUniform=<yes/no>
+#ZUniform=<yes/no>
+#XPeriodic=<yes/no>
+#YPeriodic=<yes/no>
+#ZPeriodic=<yes/no>
+Imax=1536
+Jmax=1152
+Kmax=768
+Kmax(*)=768
+Imax(*)=12
+XUniform=yes
+YUniform=no
+ZUniform=yes
+XPeriodic=yes
+YPeriodic=no
+ZPeriodic=yes
+#
+#[Filter]
+#Type=<none/compact/explicit6/explicit4/adm/helmholtz/SpectralBand/SpectralErf/tophat>
+#Parameters=<values>
+#ActiveX=<yes/no>
+#ActiveY=<yes/no>
+#ActiveZ=<yes/no>
+#BcsJmin=<free,solid,zero>
+#BcsJmax=<free,solid,zero>
+#Step=<filter step>
+Type=none
+BcsJmin=biased
+BcsJmax=biased
+Parameters=void
+Repeat=1
+ActiveX=yes
+ActiveY=yes
+ActiveZ=yes
+#
+#[Statistics]
+#IAvera=<plane1,plane2,...>
+IAvera=1
+#
+#[Flow]
+#VelocityX=<mean velocity X>
+#VelocityY=<mean velocity Y>
+#VelocityZ=<mean velocity Z>
+#Pressure=<mean pressure>
+#Density=<mean density>
+#Temperature=<mean temperature>
+#ProfileVelocity=<None/Linear/Tanh/Erf/Ekman/EkmanP/Parabolic>
+#YCoorVelocity=<Relative Y reference point>
+#DiamVelocity=<value>
+#ThickVelocity=<value>
+#DeltaVelocity=<value>
+#ProfileDensity=<None/Linear/Tanh/Erf>
+#YCoorDensity=<Relative Y reference point>
+#DiamDensity=<value>
+#ThickDensity=<value>
+#DeltaDensity=<value>
+#ProfileTemperature=<None/Linear/Tanh/Erf>
+#YCoorTemperature=<Relative Y reference point>
+#DiamTemperature=<value>
+#ThickTemperature=<value>
+#DeltaTemperature=<value>
+ProfileVelocity=ekman
+VelocityX=0.0
+YCoorVelocity=0.0
+ThickVelocity=0.004
+DeltaVelocity=1.0
+DiamVelocity=0.0
+SurfaceThickVelocity=1.0
+SurfaceDeltaVelocity=0.0
+ProfileVelocityY=none
+VelocityY=0.0
+YCoorVelocityY=0.5
+ThickVelocityY=0.0
+DeltaVelocityY=0.0
+DiamVelocityY=0.0
+SurfaceThickVelocityY=1.0
+SurfaceDeltaVelocityY=0.0
+ProfileVelocityZ=none
+VelocityZ=0.0
+YCoorVelocityZ=0.5
+ThickVelocityZ=0.0
+DeltaVelocityZ=0.0
+DiamVelocityZ=0.0
+SurfaceThickVelocityZ=1.0
+SurfaceDeltaVelocityZ=0.0
+ProfileDensity=none
+Density=1.0
+YCoorDensity=0.5
+ThickDensity=0.0
+DeltaDensity=0.0
+DiamDensity=0.0
+ProfileTemperature=none
+Temperature=0.0
+YCoorTemperature=0.5
+ThickTemperature=0.0
+DeltaTemperature=0.0
+DiamTemperature=0.0
+BottomSlope=0.0
+UpperSlope=0.0
+Pressure=0.0
+YCoorPressure=0.5
+ReferencePressure=0.0
+ScaleHeight=0.0
+#
+#[Scalar]
+#Profile=<value>
+#YCoor=<value>
+#Diam=<value>
+#Thick=<value>
+#Mean=<value>
+#Delta=<value>
+ProfileScalar1=erf
+MeanScalar1=1.0
+YCoorScalar1=0.0
+ThickScalar1=0.0006
+DeltaScalar1=2.0
+ReferenceScalar1=1.000000000000000
+DiamScalar1=0.0
+BottomSlopeScalar1=0.0
+UpperSlopeScalar1=0.0
+SurfaceThickScalar1=0.0
+SurfaceDeltaScalar1=0.0
+ProfileScalar2=none
+MeanScalar2=0.0
+YCoorScalar2=0.5
+ThickScalar2=0.0
+DeltaScalar2=0.0
+ReferenceScalar2=0.000000000000000
+DiamScalar2=0.0
+BottomSlopeScalar2=0.0
+UpperSlopeScalar2=0.0
+SurfaceThickScalar2=0.0
+SurfaceDeltaScalar2=0.0
+ProfileScalar3=none
+MeanScalar3=0.0
+YCoorScalar3=0.5
+ThickScalar3=0.0
+DeltaScalar3=0.0
+ReferenceScalar3=0.000000000000000
+DiamScalar3=0.0
+BottomSlopeScalar3=0.0
+UpperSlopeScalar3=0.0
+SurfaceThickScalar3=0.0
+SurfaceDeltaScalar3=0.0
+ProfileScalar4=none
+MeanScalar4=0.0
+YCoorScalar4=0.5
+ThickScalar4=0.0
+DeltaScalar4=0.0
+ReferenceScalar4=0.000000000000000
+DiamScalar4=0.0
+BottomSlopeScalar4=0.0
+UpperSlopeScalar4=0.0
+SurfaceThickScalar4=0.0
+SurfaceDeltaScalar4=0.0
+ProfileScalar5=none
+MeanScalar5=0.0
+YCoorScalar5=0.5
+ThickScalar5=0.0
+DeltaScalar5=0.0
+ReferenceScalar5=0.000000000000000
+DiamScalar5=0.0
+BottomSlopeScalar5=0.0
+UpperSlopeScalar5=0.0
+SurfaceThickScalar5=0.0
+SurfaceDeltaScalar5=0.0
+ProfileScalar6=none
+MeanScalar6=0.0
+YCoorScalar6=0.5
+ThickScalar6=0.0
+DeltaScalar6=0.0
+ReferenceScalar6=0.000000000000000
+DiamScalar6=0.0
+BottomSlopeScalar6=0.0
+UpperSlopeScalar6=0.0
+SurfaceThickScalar6=0.0
+SurfaceDeltaScalar6=0.0
+ProfileScalar7=none
+MeanScalar7=0.0
+YCoorScalar7=0.5
+ThickScalar7=0.0
+DeltaScalar7=0.0
+ReferenceScalar7=0.000000000000000
+DiamScalar7=0.0
+BottomSlopeScalar7=0.0
+UpperSlopeScalar7=0.0
+SurfaceThickScalar7=0.0
+SurfaceDeltaScalar7=0.0
+ProfileScalar8=none
+MeanScalar8=0.0
+YCoorScalar8=0.5
+ThickScalar8=0.0
+DeltaScalar8=0.0
+ReferenceScalar8=0.000000000000000
+DiamScalar8=0.0
+BottomSlopeScalar8=0.0
+UpperSlopeScalar8=0.0
+SurfaceThickScalar8=0.0
+SurfaceDeltaScalar8=0.0
+ProfileScalar9=none
+MeanScalar9=0.0
+YCoorScalar9=0.5
+ThickScalar9=0.0
+DeltaScalar9=0.0
+ReferenceScalar9=0.000000000000000
+DiamScalar9=0.0
+BottomSlopeScalar9=0.0
+UpperSlopeScalar9=0.0
+SurfaceThickScalar9=0.0
+SurfaceDeltaScalar9=0.0
+ProfileScalar10=none
+MeanScalar10=0.0
+YCoorScalar10=0.5
+ThickScalar10=0.0
+DeltaScalar10=0.0
+ReferenceScalar10=0.000000000000000
+DiamScalar10=0.0
+BottomSlopeScalar10=0.0
+UpperSlopeScalar10=0.0
+SurfaceThickScalar10=0.0
+SurfaceDeltaScalar10=0.0
+ChemkinFile=none
+#
+#
+#[Main]
+#TimeOrder=<RungeKuttaExplicit3/RungeKuttaExplicit4/RungeKuttaDiffusion3>
+#TimeStep=<value (used if CFL is negative)>
+#TimeCFL=<value>
+#TimeDiffusiveCFL=<value>
+#TimeReactiveCFL=<value>
+#TermDivergence=<none/remove>
+#RhsMode=<split/combined/nonblocking>
+TimeOrder=rungekuttaexplicit4
+TimeCFL=1.20000
+TimeDiffusiveCFL=0.3000000000000000
+TimeReactiveCFL=0.6000000000000000
+TimeStep=-0.016000
+TermDivergence=remove
+RhsMode=combined
+#
+#[Iteration]
+#Start=<integral start time>
+#End=<integral stop time>
+#Restart=<restart time step>
+#Statistics=<statistics time step>
+#IteraLog=<value>
+#Saveplanes=<value>
+#RunAvera=<yes/no>
+Start=0
+End=6
+Restart=6
+Statistics=7
+IteraLog=1
+Saveplanes=-1
+SaveStats=-1
+#
+#[Control]
+#FlowLimit=<yes/no>
+#MinPressure=<pressure>
+#MaxPressure=<pressure>
+#MinDensity=<density>
+#MaxDensity=<density>
+#ScalLimit=<yes/no>
+#MinScalar=<scalar>
+#MaxScalar=<scalar>
+FlowLimit=no
+ScalLimit=yes
+MinPressure=-1.0
+MaxPressure=-1.0
+MinDensity=-1.0
+MaxDensity=-1.0
+MaxDilatation=void
+MinScalar=void
+MaxScalar=void
+#
+#[BoundaryConditions]
+#ScalarImin=<none/dirichlet/neumman>
+#ScalarJmin=<none/dirichlet/neumman>
+#ScalarSfcTypeJmin=<static/linear>
+#ScalarSfcTypeJmax=<static/linear>
+#ScalarCouplingJmin=<value>
+#ScalarCouplingJmax=<value>
+#ScalarKmin=<none/dirichlet/neumman>
+#VelocityImin=<none/dirichlet/neumman>
+#VelocityJmin=<none/dirichlet/neumman>
+#VelocityKmin=<none/dirichlet/neumman>
+#ViscousI=<none/inflow/outflow>
+#ViscousJ=<none/inflow/outflow>
+#ViscousK=<none/inflow/outflow>
+#SigmaOut=<value>
+#SigmaInf=<value>
+#BetaTransverse=<value>
+Scalar1Jmin=dirichlet
+Scalar1SfcTypeJmin=static
+Scalar1CouplingJmin=0.0
+Scalar1Jmax=neumann
+Scalar1SfcTypeJmax=static
+Scalar1CouplingJmax=0.0
+VelocityImin=freeslip
+VelocityImax=freeslip
+VelocityJmin=noslip
+VelocityJmax=freeslip
+VelocityKmin=freeslip
+VelocityKmax=freeslip
+ViscousI=none
+ViscousJ=none
+ViscousK=none
+SigmaInf=-1.0
+SigmaOut=-1.0
+BetaTransverse=-1.0
+#
+#
+#[BufferZone]
+#Type=<none/relaxation/filter/both>
+#LoadBuffer=<yes/no>
+#PointsJmin=<value>
+#PointsJmax=<value>
+#PointsImin=<value>
+#PointsImax=<value>
+#ParametersJmin=<values>
+#ParametersJmax=<values>
+#ParametersImin=<values>
+#ParametersImax=<values>
+#HardValuesJmin=<values>
+#HardValuesJmax=<values>
+#HardValuesImin=<values>
+#HardValuesImax=<values>
+Type=none
+LoadBuffer=no
+PointsUImin=0
+PointsUImax=0
+PointsUJmin=0
+PointsUJmax=0
+PointsSImin=0
+PointsSImax=0
+PointsSJmin=0
+PointsSJmax=0
+#
+#[ViscChange]
+#Time=<time>
+Time=0.01
+Step=0
+#
+#[InflowFilter]
+#Type=<yes/no>
+#IWidth=<value>
+#JWidth=<value>
+#Step=<value>
+#Parameters=<value>
+Type=none
+Parameters=void
+Step=0
+#
+#[SavePlanes]
+#PlanesI=<value>
+#PlanesJ=<value>
+#PlanesK=<value>
+#IntegralsJ=<yes/no>
+PlanesI=void
+PlanesJ=void
+PressureJ=no
+IntegralsJ=no
+PlanesK=void
+#
+#[SaveTowers]
+Stride=<value_i,value_j,value_k>
+Stride=0,0,0
+#
+#[Statsitics]
+#Averages=<yes/no>
+#Pdfs=<yes/no>
+#ConditionalAverages=<yes/no>
+#Intermittency=<yes/no>
+Averages=yes
+Pdfs=no
+Intermittency=no
+FilterEnergy=no
+#
+#[Inflow]
+#Type=<None/Discrete/Broadband/Both>
+#Adapt=<value>
+#Imax=<imax>
+#Jmax=<jmax>
+#Kmax=<kmax>
+Type=none
+Adapt=0.0
+#
+#[Discrete]
+#Aplitude=<value>
+#ModeX=<value>
+#ModeZ=<value>
+#PhaseX=<value>
+#PhaseZ=<value>
+#Type=<Varicose/Sinuous>
+#Parameters=<values>
+Amplitude=void
+2DAmpl=0.0
+ModeX=void
+ModeZ=void
+PhaseX=void
+2DPhi=void
+PhaseZ=void
+Type=varicose
+Parameters=-1.0,-1.0
+#[Version]
+#Major=<mayor version number>
+#Minor=<minor version number>
+Major=7
+Minor=0
+#
+#[Main]
+#FileFormat=<RawArray/RawSplit/NetCDF>
+#VerbosityLevel=<0/1/2>
+#Type=<temporal/spatial>
+#CalculateFlow=<yes/no>
+#CalculateScalar=<yes/no>
+#Equations=<total/internal/incompressible/anelastic>
+#TermAdvection=<divergence/skewsymmetric>
+#TermViscous=<divergence/explicit>
+#TermDiffusion=<divergence/explicit>
+#TermBodyForce=<none/Explicit/Linear/Bilinear/Quadratic>
+#TermCoriolis=<none/explicit/normalized>
+#TermRadiation=<none/Bulk1dGlobal/Bulk1dLocal>
+#TermSubsidence=<none/ConstantDivergenceLocal/ConstantDivergenceGlobal>
+#TermTransport=<constant/powerlaw/sutherland/Airwater/AirwaterSimplified>
+#TermChemistry=<none/quadratic/layeredrelaxation/ozone>
+#SpaceOrder=<CompactJacobian4/CompactJacobian6/CompactJacobian8/CompactDirect6>
+#ComModeITranspose=<none,asynchronous,sendrecv>
+#ComModeKTranspose=<none,asynchronous,sendrecv>
+FileFormat=none
+[121700.602] VerbosityLevel=2
+[121700.603] Type=temporal
+[121700.604] CalculateFlow=yes
+[121700.605] CalculateScalar=no
+[121700.606] CalculateParticle=no
+[121700.607] Equations=incompressible
+[121700.608] Mixture=none
+[121700.609] TermAdvection=convective
+[121700.611] TermViscous=explicit
+[121700.612] TermDiffusion=explicit
+[121700.613] TermBodyForce=linear
+[121700.614] TermCoriolis=normalized
+[121700.615] TermRadiation=none
+[121700.617] TermSubsidence=none
+[121700.618] TermTransport=constant
+[121700.619] TermChemistry=none
+[121700.620] SpaceOrder=compactdirect6
+[121700.622] ComModeITranspose=asynchronous
+[121700.623] ComModeKTranspose=asynchronous
+[121700.624] #
+[121700.625] #[Parameters]
+[121700.625] #Reynolds=<value>
+[121700.626] #Prandtl=<value>
+[121700.627] #Froude=<value>
+[121700.628] #Rossby=<value>
+[121700.629] #Mach=<value>
+[121700.629] #Gama=<value>
+[121700.630] #Schmidt=<value>
+[121700.631] #Damkohler=<value>
+[121700.632] #Stokes=<value>
+[121700.633] #Settling=<value>
+[121700.634] Reynolds=25000
+[121700.635] Gama=1.4
+[121700.637] Prandtl=1.0
+[121700.638] Mach=1.0
+[121700.639] Froude=0.01
+[121700.640] Rossby=1.0
+[121700.642] Stokes=0.0
+[121700.643] Settling=0.0
+[121700.644] Schmidt=1.0
+[121700.645] Damkohler=0.0
+[121700.646] #
+[121700.647] #[BodyForce]
+[121700.648] #Vector=<Gx,Gy,Gz>
+[121700.649] #Parameters=<value>
+[121700.650] Vector=0.0,0.0,0.0
+[121700.651] Parameters=0.0
+[121700.652] #
+[121700.652] #[Rotation]
+[121700.653] #Vector=<Fx,Fy,Fz>
+[121700.654] #Parameters=<value>
+[121700.655] Vector=0.0,1.0,0.0
+[121700.657] Parameters=0.0,1.0
+[121700.658] #
+[121700.658] #[Radiation]
+[121700.659] #Scalar=<value>
+[121700.660] #Parameters=<value>
+[121700.660] #
+[121700.661] #[Subsidence]
+[121700.661] #Parameters=<value>
+[121700.662] #
+[121700.663] #[Transport]
+[121700.663] #Parameters=<value>
+[121700.664] #Exponent=<value>
+[121700.664] #
+[121700.665] #[Chemistry]
+[121700.666] #Parameters=<value>
+[121700.666] #
+[121700.667] #[Thermodynamics]
+[121700.668] #Parameters=<value>
+[121700.668] #
+[121700.669] #[Grid]
+[121700.670] #Imax=<imax>
+[121700.670] #Imax(*)=<imax_proc>
+[121700.671] #Jmax=<jmax>
+[121700.671] #Kmax=<kmax>
+[121700.672] #Kmax(*)=<kmax_proc>
+[121700.673] #XUniform=<yes/no>
+[121700.673] #YUniform=<yes/no>
+[121700.674] #ZUniform=<yes/no>
+[121700.674] #XPeriodic=<yes/no>
+[121700.675] #YPeriodic=<yes/no>
+[121700.676] #ZPeriodic=<yes/no>
+[121700.677] Imax=1536
+[121700.678] Jmax=1152
+[121700.679] Kmax=768
+[121700.680] Kmax(*)=768
+[121700.681] Imax(*)=12
+[121700.683] XUniform=yes
+[121700.684] YUniform=no
+[121700.685] ZUniform=yes
+[121700.686] XPeriodic=yes
+[121700.687] YPeriodic=no
+[121700.688] ZPeriodic=yes
+[121700.689] #
+[121700.689] #[Filter]
+[121700.690] #Type=<none/compact/explicit6/explicit4/adm/helmholtz/SpectralBand/SpectralErf/tophat>
+[121700.691] #Parameters=<values>
+[121700.692] #ActiveX=<yes/no>
+[121700.692] #ActiveY=<yes/no>
+[121700.693] #ActiveZ=<yes/no>
+[121700.693] #BcsJmin=<free,solid,zero>
+[121700.694] #BcsJmax=<free,solid,zero>
+[121700.695] #Step=<filter step>
+[121700.696] Type=none
+[121700.697] BcsJmin=biased
+[121700.699] BcsJmax=biased
+[121700.700] Parameters=void
+[121700.702] Repeat=1
+[121700.703] ActiveX=yes
+[121700.704] ActiveY=yes
+[121700.706] ActiveZ=yes
+[121700.706] #
+[121700.707] #[Statistics]
+[121700.708] #IAvera=<plane1,plane2,...>
+[121700.709] IAvera=1
+[121700.710] #
+[121700.710] #[Flow]
+[121700.711] #VelocityX=<mean velocity X>
+[121700.712] #VelocityY=<mean velocity Y>
+[121700.713] #VelocityZ=<mean velocity Z>
+[121700.713] #Pressure=<mean pressure>
+[121700.714] #Density=<mean density>
+[121700.715] #Temperature=<mean temperature>
+[121700.716] #ProfileVelocity=<None/Linear/Tanh/Erf/Ekman/EkmanP/Parabolic>
+[121700.716] #YCoorVelocity=<Relative Y reference point>
+[121700.717] #DiamVelocity=<value>
+[121700.718] #ThickVelocity=<value>
+[121700.719] #DeltaVelocity=<value>
+[121700.719] #ProfileDensity=<None/Linear/Tanh/Erf>
+[121700.720] #YCoorDensity=<Relative Y reference point>
+[121700.720] #DiamDensity=<value>
+[121700.721] #ThickDensity=<value>
+[121700.722] #DeltaDensity=<value>
+[121700.722] #ProfileTemperature=<None/Linear/Tanh/Erf>
+[121700.723] #YCoorTemperature=<Relative Y reference point>
+[121700.724] #DiamTemperature=<value>
+[121700.725] #ThickTemperature=<value>
+[121700.725] #DeltaTemperature=<value>
+[121700.727] ProfileVelocity=ekman
+[121700.728] VelocityX=0.0
+[121700.729] YCoorVelocity=0.0
+[121700.730] ThickVelocity=0.004
+[121700.731] DeltaVelocity=1.0
+[121700.732] DiamVelocity=0.0
+[121700.734] SurfaceThickVelocity=1.0
+[121700.735] SurfaceDeltaVelocity=0.0
+[121700.737] ProfileVelocityY=none
+[121700.738] VelocityY=0.0
+[121700.739] YCoorVelocityY=0.5
+[121700.741] ThickVelocityY=0.0
+[121700.742] DeltaVelocityY=0.0
+[121700.744] DiamVelocityY=0.0
+[121700.745] SurfaceThickVelocityY=1.0
+[121700.747] SurfaceDeltaVelocityY=0.0
+[121700.748] ProfileVelocityZ=none
+[121700.749] VelocityZ=0.0
+[121700.751] YCoorVelocityZ=0.5
+[121700.752] ThickVelocityZ=0.0
+[121700.754] DeltaVelocityZ=0.0
+[121700.755] DiamVelocityZ=0.0
+[121700.756] SurfaceThickVelocityZ=1.0
+[121700.758] SurfaceDeltaVelocityZ=0.0
+[121700.759] ProfileDensity=none
+[121700.760] Density=1.0
+[121700.762] YCoorDensity=0.5
+[121700.763] ThickDensity=0.0
+[121700.765] DeltaDensity=0.0
+[121700.766] DiamDensity=0.0
+[121700.768] ProfileTemperature=none
+[121700.769] Temperature=0.0
+[121700.770] YCoorTemperature=0.5
+[121700.771] ThickTemperature=0.0
+[121700.773] DeltaTemperature=0.0
+[121700.774] DiamTemperature=0.0
+[121700.776] BottomSlope=0.0
+[121700.777] UpperSlope=0.0
+[121700.778] Pressure=0.0
+[121700.780] YCoorPressure=0.5
+[121700.781] ReferencePressure=0.0
+[121700.782] ScaleHeight=0.0
+[121700.783] #
+[121700.783] #[Scalar]
+[121700.784] #Profile=<value>
+[121700.784] #YCoor=<value>
+[121700.785] #Diam=<value>
+[121700.786] #Thick=<value>
+[121700.787] #Mean=<value>
+[121700.787] #Delta=<value>
+[121700.788] ProfileScalar1=erf
+[121700.789] MeanScalar1=1.0
+[121700.790] YCoorScalar1=0.0
+[121700.791] ThickScalar1=0.0006
+[121700.793] DeltaScalar1=2.0
+[121700.794] ReferenceScalar1=1.000000000000000
+[121700.795] DiamScalar1=0.0
+[121700.796] BottomSlopeScalar1=0.0
+[121700.798] UpperSlopeScalar1=0.0
+[121700.799] SurfaceThickScalar1=0.0
+[121700.800] SurfaceDeltaScalar1=0.0
+[121700.802] ProfileScalar2=none
+[121700.803] MeanScalar2=0.0
+[121700.804] YCoorScalar2=0.5
+[121700.806] ThickScalar2=0.0
+[121700.807] DeltaScalar2=0.0
+[121700.809] ReferenceScalar2=0.000000000000000
+[121700.810] DiamScalar2=0.0
+[121700.811] BottomSlopeScalar2=0.0
+[121700.812] UpperSlopeScalar2=0.0
+[121700.813] SurfaceThickScalar2=0.0
+[121700.815] SurfaceDeltaScalar2=0.0
+[121700.816] ProfileScalar3=none
+[121700.817] MeanScalar3=0.0
+[121700.819] YCoorScalar3=0.5
+[121700.820] ThickScalar3=0.0
+[121700.821] DeltaScalar3=0.0
+[121700.822] ReferenceScalar3=0.000000000000000
+[121700.824] DiamScalar3=0.0
+[121700.825] BottomSlopeScalar3=0.0
+[121700.827] UpperSlopeScalar3=0.0
+[121700.828] SurfaceThickScalar3=0.0
+[121700.829] SurfaceDeltaScalar3=0.0
+[121700.831] ProfileScalar4=none
+[121700.832] MeanScalar4=0.0
+[121700.834] YCoorScalar4=0.5
+[121700.835] ThickScalar4=0.0
+[121700.836] DeltaScalar4=0.0
+[121700.838] ReferenceScalar4=0.000000000000000
+[121700.839] DiamScalar4=0.0
+[121700.841] BottomSlopeScalar4=0.0
+[121700.842] UpperSlopeScalar4=0.0
+[121700.843] SurfaceThickScalar4=0.0
+[121700.845] SurfaceDeltaScalar4=0.0
+[121700.846] ProfileScalar5=none
+[121700.848] MeanScalar5=0.0
+[121700.849] YCoorScalar5=0.5
+[121700.850] ThickScalar5=0.0
+[121700.852] DeltaScalar5=0.0
+[121700.853] ReferenceScalar5=0.000000000000000
+[121700.855] DiamScalar5=0.0
+[121700.856] BottomSlopeScalar5=0.0
+[121700.857] UpperSlopeScalar5=0.0
+[121700.859] SurfaceThickScalar5=0.0
+[121700.860] SurfaceDeltaScalar5=0.0
+[121700.862] ProfileScalar6=none
+[121700.863] MeanScalar6=0.0
+[121700.865] YCoorScalar6=0.5
+[121700.866] ThickScalar6=0.0
+[121700.867] DeltaScalar6=0.0
+[121700.869] ReferenceScalar6=0.000000000000000
+[121700.870] DiamScalar6=0.0
+[121700.872] BottomSlopeScalar6=0.0
+[121700.873] UpperSlopeScalar6=0.0
+[121700.875] SurfaceThickScalar6=0.0
+[121700.876] SurfaceDeltaScalar6=0.0
+[121700.878] ProfileScalar7=none
+[121700.879] MeanScalar7=0.0
+[121700.881] YCoorScalar7=0.5
+[121700.882] ThickScalar7=0.0
+[121700.883] DeltaScalar7=0.0
+[121700.885] ReferenceScalar7=0.000000000000000
+[121700.886] DiamScalar7=0.0
+[121700.888] BottomSlopeScalar7=0.0
+[121700.889] UpperSlopeScalar7=0.0
+[121700.890] SurfaceThickScalar7=0.0
+[121700.892] SurfaceDeltaScalar7=0.0
+[121700.893] ProfileScalar8=none
+[121700.895] MeanScalar8=0.0
+[121700.896] YCoorScalar8=0.5
+[121700.898] ThickScalar8=0.0
+[121700.899] DeltaScalar8=0.0
+[121700.900] ReferenceScalar8=0.000000000000000
+[121700.902] DiamScalar8=0.0
+[121700.903] BottomSlopeScalar8=0.0
+[121700.905] UpperSlopeScalar8=0.0
+[121700.906] SurfaceThickScalar8=0.0
+[121700.908] SurfaceDeltaScalar8=0.0
+[121700.909] ProfileScalar9=none
+[121700.910] MeanScalar9=0.0
+[121700.912] YCoorScalar9=0.5
+[121700.913] ThickScalar9=0.0
+[121700.915] DeltaScalar9=0.0
+[121700.916] ReferenceScalar9=0.000000000000000
+[121700.918] DiamScalar9=0.0
+[121700.919] BottomSlopeScalar9=0.0
+[121700.920] UpperSlopeScalar9=0.0
+[121700.922] SurfaceThickScalar9=0.0
+[121700.923] SurfaceDeltaScalar9=0.0
+[121700.925] ProfileScalar10=none
+[121700.926] MeanScalar10=0.0
+[121700.928] YCoorScalar10=0.5
+[121700.929] ThickScalar10=0.0
+[121700.931] DeltaScalar10=0.0
+[121700.932] ReferenceScalar10=0.000000000000000
+[121700.934] DiamScalar10=0.0
+[121700.935] BottomSlopeScalar10=0.0
+[121700.937] UpperSlopeScalar10=0.0
+[121700.938] SurfaceThickScalar10=0.0
+[121700.939] SurfaceDeltaScalar10=0.0
+[121700.941] ChemkinFile=none
+[121700.941] #
+[121700.943] #
+[121700.944] #[Main]
+[121700.944] #TimeOrder=<RungeKuttaExplicit3/RungeKuttaExplicit4/RungeKuttaDiffusion3>
+[121700.945] #TimeStep=<value (used if CFL is negative)>
+[121700.946] #TimeCFL=<value>
+[121700.946] #TimeDiffusiveCFL=<value>
+[121700.947] #TimeReactiveCFL=<value>
+[121700.948] #TermDivergence=<none/remove>
+[121700.948] #RhsMode=<split/combined/nonblocking>
+[121700.949] TimeOrder=rungekuttaexplicit4
+[121700.950] TimeCFL=1.20000
+[121700.952] TimeDiffusiveCFL=0.3000000000000000
+[121700.953] TimeReactiveCFL=0.6000000000000000
+[121700.954] TimeStep=-0.016000
+[121700.955] TermDivergence=remove
+[121700.956] RhsMode=combined
+[121700.957] #
+[121700.958] #[Iteration]
+[121700.958] #Start=<integral start time>
+[121700.959] #End=<integral stop time>
+[121700.959] #Restart=<restart time step>
+[121700.960] #Statistics=<statistics time step>
+[121700.961] #IteraLog=<value>
+[121700.961] #Saveplanes=<value>
+[121700.962] #RunAvera=<yes/no>
+[121700.963] Start=0
+[121700.964] End=6
+[121700.965] Restart=6
+[121700.966] Statistics=7
+[121700.967] IteraLog=1
+[121700.968] Saveplanes=-1
+[121700.970] SaveStats=-1
+[121700.970] #
+[121700.971] #[Control]
+[121700.971] #FlowLimit=<yes/no>
+[121700.972] #MinPressure=<pressure>
+[121700.973] #MaxPressure=<pressure>
+[121700.973] #MinDensity=<density>
+[121700.974] #MaxDensity=<density>
+[121700.975] #ScalLimit=<yes/no>
+[121700.975] #MinScalar=<scalar>
+[121700.976] #MaxScalar=<scalar>
+[121700.977] FlowLimit=no
+[121700.978] ScalLimit=yes
+[121700.980] MinPressure=-1.0
+[121700.981] MaxPressure=-1.0
+[121700.983] MinDensity=-1.0
+[121700.984] MaxDensity=-1.0
+[121700.986] MaxDilatation=void
+[121700.987] MinScalar=void
+[121700.988] MaxScalar=void
+[121700.989] #
+[121700.990] #[BoundaryConditions]
+[121700.990] #ScalarImin=<none/dirichlet/neumman>
+[121700.991] #ScalarJmin=<none/dirichlet/neumman>
+[121700.992] #ScalarSfcTypeJmin=<static/linear>
+[121700.993] #ScalarSfcTypeJmax=<static/linear>
+[121700.993] #ScalarCouplingJmin=<value>
+[121700.994] #ScalarCouplingJmax=<value>
+[121700.995] #ScalarKmin=<none/dirichlet/neumman>
+[121700.995] #VelocityImin=<none/dirichlet/neumman>
+[121700.996] #VelocityJmin=<none/dirichlet/neumman>
+[121700.997] #VelocityKmin=<none/dirichlet/neumman>
+[121700.997] #ViscousI=<none/inflow/outflow>
+[121700.998] #ViscousJ=<none/inflow/outflow>
+[121700.999] #ViscousK=<none/inflow/outflow>
+[121701.000] #SigmaOut=<value>
+[121701.000] #SigmaInf=<value>
+[121701.001] #BetaTransverse=<value>
+[121701.002] Scalar1Jmin=dirichlet
+[121701.004] Scalar1SfcTypeJmin=static
+[121701.005] Scalar1CouplingJmin=0.0
+[121701.006] Scalar1Jmax=neumann
+[121701.008] Scalar1SfcTypeJmax=static
+[121701.009] Scalar1CouplingJmax=0.0
+[121701.011] VelocityImin=freeslip
+[121701.012] VelocityImax=freeslip
+[121701.013] VelocityJmin=noslip
+[121701.015] VelocityJmax=freeslip
+[121701.016] VelocityKmin=freeslip
+[121701.018] VelocityKmax=freeslip
+[121701.019] ViscousI=none
+[121701.021] ViscousJ=none
+[121701.022] ViscousK=none
+[121701.024] SigmaInf=-1.0
+[121701.025] SigmaOut=-1.0
+[121701.026] BetaTransverse=-1.0
+[121701.027] #
+[121701.028] #
+[121701.028] #[BufferZone]
+[121701.029] #Type=<none/relaxation/filter/both>
+[121701.030] #LoadBuffer=<yes/no>
+[121701.031] #PointsJmin=<value>
+[121701.032] #PointsJmax=<value>
+[121701.032] #PointsImin=<value>
+[121701.033] #PointsImax=<value>
+[121701.034] #ParametersJmin=<values>
+[121701.035] #ParametersJmax=<values>
+[121701.035] #ParametersImin=<values>
+[121701.036] #ParametersImax=<values>
+[121701.037] #HardValuesJmin=<values>
+[121701.038] #HardValuesJmax=<values>
+[121701.038] #HardValuesImin=<values>
+[121701.039] #HardValuesImax=<values>
+[121701.040] Type=none
+[121701.042] LoadBuffer=no
+[121701.043] PointsUImin=0
+[121701.044] PointsUImax=0
+[121701.046] PointsUJmin=0
+[121701.047] PointsUJmax=0
+[121701.049] PointsSImin=0
+[121701.050] PointsSImax=0
+[121701.051] PointsSJmin=0
+[121701.052] PointsSJmax=0
+[121701.053] #
+[121701.054] #[ViscChange]
+[121701.054] #Time=<time>
+[121701.056] Time=0.01
+[121701.057] Step=0
+[121701.058] #
+[121701.058] #[InflowFilter]
+[121701.059] #Type=<yes/no>
+[121701.060] #IWidth=<value>
+[121701.061] #JWidth=<value>
+[121701.061] #Step=<value>
+[121701.062] #Parameters=<value>
+[121701.063] Type=none
+[121701.065] Parameters=void
+[121701.066] Step=0
+[121701.067] #
+[121701.067] #[SavePlanes]
+[121701.068] #PlanesI=<value>
+[121701.069] #PlanesJ=<value>
+[121701.069] #PlanesK=<value>
+[121701.070] #IntegralsJ=<yes/no>
+[121701.071] PlanesI=void
+[121701.072] PlanesJ=void
+[121701.074] PressureJ=no
+[121701.075] IntegralsJ=no
+[121701.076] PlanesK=void
+[121701.077] #
+[121701.078] #[SaveTowers]
+[121701.079] Stride=<value_i,value_j,value_k>
+[121701.080] Stride=0,0,0
+[121701.081] #
+[121701.081] #[Statsitics]
+[121701.082] #Averages=<yes/no>
+[121701.083] #Pdfs=<yes/no>
+[121701.083] #ConditionalAverages=<yes/no>
+[121701.084] #Intermittency=<yes/no>
+[121701.085] Averages=yes
+[121701.086] Pdfs=no
+[121701.087] Intermittency=no
+[121701.088] FilterEnergy=no
+[121701.089] #
+[121701.089] #[Inflow]
+[121701.090] #Type=<None/Discrete/Broadband/Both>
+[121701.091] #Adapt=<value>
+[121701.091] #Imax=<imax>
+[121701.092] #Jmax=<jmax>
+[121701.092] #Kmax=<kmax>
+[121701.094] Type=none
+[121701.095] Adapt=0.0
+[121701.096] #
+[121701.096] #[Discrete]
+[121701.097] #Aplitude=<value>
+[121701.098] #ModeX=<value>
+[121701.098] #ModeZ=<value>
+[121701.099] #PhaseX=<value>
+[121701.099] #PhaseZ=<value>
+[121701.100] #Type=<Varicose/Sinuous>
+[121701.101] #Parameters=<values>
+[121701.102] Amplitude=void
+[121701.103] 2DAmpl=0.0
+[121701.105] ModeX=void
+[121701.106] ModeZ=void
+[121701.107] PhaseX=void
+[121701.109] 2DPhi=void
+[121701.110] PhaseZ=void
+[121701.111] Type=varicose
+[121701.113] Parameters=-1.0,-1.0

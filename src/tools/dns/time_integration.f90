@@ -14,6 +14,7 @@ SUBROUTINE TIME_INTEGRATION(q,hq, s,hs, q_inf,s_inf, txc, wrk1d,wrk2d,wrk3d, &
 
   USE DNS_CONSTANTS, ONLY : tag_flow, tag_scal, tag_part, tag_traj, lfile
   USE DNS_GLOBAL, ONLY : imax,jmax,kmax, isize_field
+  USE DNS_MPI,    ONLY : ims_pro 
   USE DNS_GLOBAL, ONLY : isize_particle
   USE DNS_GLOBAL, ONLY : imode_sim
   USE DNS_GLOBAL, ONLY : icalc_flow, icalc_scal, icalc_part
@@ -44,6 +45,9 @@ SUBROUTINE TIME_INTEGRATION(q,hq, s,hs, q_inf,s_inf, txc, wrk1d,wrk2d,wrk3d, &
   TREAL, DIMENSION(isize_particle,*) :: l_q, l_hq, l_txc
   TREAL, DIMENSION(*)                :: l_comm
 
+  TREAL uloc,vloc,wloc
+  TINTEGER iloc
+  
   ! -------------------------------------------------------------------
   CHARACTER*32 fname
   CHARACTER*250 line1
@@ -61,8 +65,16 @@ SUBROUTINE TIME_INTEGRATION(q,hq, s,hs, q_inf,s_inf, txc, wrk1d,wrk2d,wrk3d, &
 
     CALL TIME_RUNGEKUTTA(q,hq, s,hs, q_inf,s_inf, txc, wrk1d,wrk2d,wrk3d, l_q, l_hq, l_txc, l_comm)
 
+    IF ( ims_pro .EQ. 0 ) THEN 
+       iloc = imax*289
+       WRITE(line1,531) itime, q(iloc,1), q(iloc,2), q(iloc,3) 
+531    FORMAT('   End of it', I3, ' LOC=(1,289,1); (u,v,w) = (', G13.5,',',G13.5,',',G13.5,')')
+       CALL IO_WRITE_ASCII(lfile,line1) 
+    ENDIF
     itime = itime + 1
     rtime = rtime + dtime
+
+    
 
     ! -----------------------------------------------------------------------
     IF ( MOD(itime-nitera_first,FilterDomainStep) == 0 ) THEN
@@ -173,6 +185,6 @@ SUBROUTINE TIME_INTEGRATION(q,hq, s,hs, q_inf,s_inf, txc, wrk1d,wrk2d,wrk3d, &
     IF ( INT(logs_data(1)) /= 0 ) CALL DNS_STOP(INT(logs_data(1)))
 
   ENDDO
-
+  
   RETURN
 END SUBROUTINE TIME_INTEGRATION
