@@ -1,47 +1,34 @@
-Starting on 20200704 at 155802.837
+Starting on 20210521 at 121700.570
 Git-hash not available
-Number of MPI tasks 192
+Number of MPI tasks 128
 Reading global input data.
-Angular velocity along Oy.
-Initializing domain partition 16x12
-Reading local input data.
-Initializing MPI communicators.
-Initializing MPI types for Ox derivatives.
-Initializing MPI types for Oz derivatives.
-Initializing MPI types for Ox FFTW in Poisson solver.
-Initializing MPI types for Ox FFTW in Poisson solver.
-Initializing MPI types for Oz FFTW in Poisson solver.
-Allocating array x of size 28x1536
-Allocating array y of size 36x1152
-Allocating array z of size 28x768
-Allocating array flow  of size 3x7077888
-Allocating array scal  of size 1x7077888
-Allocating array txc   of size 6x7239168
-Allocating array wrk3d of size 7239168
-Allocating array rhs flow of size 3x7077888
-Allocating array rhs scal of size 1x7077888
-Checking MPI transposition for Ox derivatives: Residual 0.00000E+000. Max. elapsed time 0.44020E+000 sec.
-Checking MPI transposition for Oz derivatives: Residual 0.00000E+000. Max. elapsed time 0.95500E+000 sec.
-Checking FFT routines: Residual 0.95785E-015. Max. elapsed time 0.17515E+001 sec.
-Reading field flow.0 of size 1536x1152x768...
-Writing field flow.bcs.jmax.0.1...
-Writing field flow.bcs.jmax.0.2...
-Writing field flow.bcs.jmax.0.3...
-Writing field scal.bcs.jmax.0.1...
-Checking bounds of field 1 at upper buffer: 0.00000E+000 and 0.00000E+000
-Checking bounds of field 2 at upper buffer: 0.00000E+000 and 0.00000E+000
-Checking bounds of field 3 at upper buffer: 0.00000E+000 and 0.00000E+000
-Checking bounds of field 1 at upper buffer: 0.00000E+000 and 0.00000E+000
-Starting time integration at It0.
-it=  1 LOC= (  1,289,  1):(0.560689120E-11,0.124493518E-21,-.334869857E-05)
-it=  2 LOC= (  1,289,  1):(0.224275635E-10,-.534757868E-21,-.669739685E-05)
-it=  3 LOC= (  1,289,  1):(0.504620151E-10,-.114268520E-20,-.100460948E-04)
-Calculating flow statistics at It3...
-it=  4 LOC= (  1,289,  1):(0.897102439E-10,-.269539400E-20,-.133947925E-04)
-it=  5 LOC= (  1,289,  1):(0.140172248E-09,-.918614294E-21,-.167434900E-04)
-it=  6 LOC= (  1,289,  1):(0.201848026E-09,0.243023342E-21,-.200921871E-04)
-Calculating flow statistics at It6...
-Writing field flow.6 of size 1536x1152x768...
-Finalizing program ../../build_PARALLEL/dns.x
-Time elapse ....................: 0.45450E+003
-########################################
+[121700.656] Angular velocity along Oy.
+[121700.681] Initializing domain partition 128x1
+[121700.942] Reading local input data.
+[121701.113] Initializing MPI communicators.
+[121701.114] Initializing MPI types for Ox derivatives.
+[121701.115] Initializing MPI types for Ox FFTW in Poisson solver.
+[121701.116] Initializing MPI types for Ox FFTW in Poisson solver.
+[121701.117] Allocating array x of size 28x1536
+[121701.118] Allocating array y of size 36x1152
+[121701.119] Allocating array z of size 28x768
+[121701.120] Allocating array flow  of size 3x10616832
+[121701.120] Allocating array scal  of size 1x10616832
+[121701.121] Allocating array txc   of size 6x12407808
+[121701.122] Allocating array wrk3d of size 12407808
+[121701.123] Allocating array rhs flow of size 3x10616832
+[121701.124] Allocating array rhs scal of size 1x10616832
+[121705.870] Checking MPI transposition for Ox derivatives: Residual 0.00000E+000. Max. elapsed time 0.64639E+000 sec.
+[121707.467] Checking FFT routines: Residual 0.10422E-014. Max. elapsed time 0.14542E+001 sec.
+[121707.468] Reading field flow.0 of size 1536x1152x768...
+[121708.877] Starting time integration at It0.
+[121813.803] End of it  0 LOC=(1,289,1); (u,v,w) = (  0.56069E-11,   0.0000    , -0.33487E-05)
+[121918.370] End of it  1 LOC=(1,289,1); (u,v,w) = (  0.22428E-10,   0.0000    , -0.66974E-05)
+[122022.957] End of it  2 LOC=(1,289,1); (u,v,w) = (  0.50462E-10,   0.0000    , -0.10046E-04)
+[122127.443] End of it  3 LOC=(1,289,1); (u,v,w) = (  0.89710E-10,   0.0000    , -0.13395E-04)
+[122231.896] End of it  4 LOC=(1,289,1); (u,v,w) = (  0.14017E-09,   0.0000    , -0.16743E-04)
+[122336.490] End of it  5 LOC=(1,289,1); (u,v,w) = (  0.20185E-09,   0.0000    , -0.20092E-04)
+[122336.641] Writing field flow.6 of size 1536x1152x768...
+[122336.642] Finalizing program
+[122336.643] Time elapse ....................: 0.39607E+003
+[122336.643] ########################################
