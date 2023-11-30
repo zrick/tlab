@@ -102,6 +102,30 @@ subroutine IBM_READ_INI(inifile)
     call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Number', '0', xbars_geo%number)
     call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Height', '0', xbars_geo%height)
     call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Width',  '0', xbars_geo%width)
+  else if ( TRIM(ADJUSTL(sRes)) == 'hill' ) then; xbars_geo%name   = 'hill'
+    call SCANINICHAR(bakfile, inifile, 'IBMGeometry', 'Mirrored', 'no', sRes)
+    if      ( TRIM(ADJUSTL(sRes)) == 'yes' ) then; xbars_geo%mirrored = .true.
+    else if ( TRIM(ADJUSTL(sRes)) == 'no'  ) then; xbars_geo%mirrored = .false.
+    end if
+    call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Number', '0', xbars_geo%number)
+    call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Height', '0', xbars_geo%height)
+    call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Width',  '0', xbars_geo%width)
+  else if ( TRIM(ADJUSTL(sRes)) == 'valley' ) then; xbars_geo%name   = 'valley'
+    call SCANINICHAR(bakfile, inifile, 'IBMGeometry', 'Mirrored', 'no', sRes)
+    if      ( TRIM(ADJUSTL(sRes)) == 'yes' ) then; xbars_geo%mirrored = .true.
+    else if ( TRIM(ADJUSTL(sRes)) == 'no'  ) then; xbars_geo%mirrored = .false.
+    end if
+    call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Number', '0', xbars_geo%number)
+    call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Height', '0', xbars_geo%height)
+    call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Width',  '0', xbars_geo%width)
+  else if ( TRIM(ADJUSTL(sRes)) == 'box' ) then; xbars_geo%name   = 'box'
+    call SCANINICHAR(bakfile, inifile, 'IBMGeometry', 'Mirrored', 'no', sRes)
+    if      ( TRIM(ADJUSTL(sRes)) == 'yes' ) then; xbars_geo%mirrored = .true.
+    else if ( TRIM(ADJUSTL(sRes)) == 'no'  ) then; xbars_geo%mirrored = .false.
+    end if
+    call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Number', '0', xbars_geo%number)
+    call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Height', '0', xbars_geo%height)
+    call SCANINIINT(bakfile, inifile, 'IBMGeometry',  'Width',  '0', xbars_geo%width)
   else
     call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. Wrong IBMGeometryType option.')
     call TLAB_STOP(DNS_ERROR_OPTION)
@@ -159,6 +183,54 @@ subroutine IBM_READ_CONSISTENCY_CHECK(imode_rhs,                              &
     call TLAB_STOP(DNS_ERROR_OPTION)
   end if 
   if ( xbars_geo%name == 'xbars' ) then
+    if ( ( mod(g(3)%size,2*xbars_geo%number) == 0 ) .and. ( mod(xbars_geo%width,2) /= 0 ) ) then
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Interfaces of bars have to be on gridpoints.')
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Requirenments: mod(kmax_total,(2*nbars))==0 & mod(wbar,2)==0.')
+      call TLAB_STOP(DNS_ERROR_UNDEVELOP)
+    else if ( ( mod(g(3)%size,2*xbars_geo%number) /= 0 ) .and. & 
+              ( mod(real(g(3)%size/(2*xbars_geo%number), wp),0.5) == 0 ) .and. &
+              ( mod(xbars_geo%width,2) /= 1) ) then
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Interfaces of bars have to be on gridpoints.')
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Requirenments: mod(kmax_total/(2*nbars),0.5)==0 & mod(wbar,2)==1.')
+      call TLAB_STOP(DNS_ERROR_UNDEVELOP)    
+    end if
+    if ( xbars_geo%mirrored .and. imode_ibm_scal == 1 ) then
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. No IBM for scalars possible with objects on upper domain.')
+      call TLAB_STOP(DNS_ERROR_UNDEVELOP)   
+    end if
+  else if ( xbars_geo%name == 'hill' ) then
+    if ( ( mod(g(3)%size,2*xbars_geo%number) == 0 ) .and. ( mod(xbars_geo%width,2) /= 0 ) ) then
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Interfaces of bars have to be on gridpoints.')
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Requirenments: mod(kmax_total,(2*nbars))==0 & mod(wbar,2)==0.')
+      call TLAB_STOP(DNS_ERROR_UNDEVELOP)
+    else if ( ( mod(g(3)%size,2*xbars_geo%number) /= 0 ) .and. & 
+              ( mod(real(g(3)%size/(2*xbars_geo%number), wp),0.5) == 0 ) .and. &
+              ( mod(xbars_geo%width,2) /= 1) ) then
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Interfaces of bars have to be on gridpoints.')
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Requirenments: mod(kmax_total/(2*nbars),0.5)==0 & mod(wbar,2)==1.')
+      call TLAB_STOP(DNS_ERROR_UNDEVELOP)    
+    end if
+    if ( xbars_geo%mirrored .and. imode_ibm_scal == 1 ) then
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. No IBM for scalars possible with objects on upper domain.')
+      call TLAB_STOP(DNS_ERROR_UNDEVELOP)   
+    end if
+  else if ( xbars_geo%name == 'valley' ) then
+    if ( ( mod(g(3)%size,2*xbars_geo%number) == 0 ) .and. ( mod(xbars_geo%width,2) /= 0 ) ) then
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Interfaces of bars have to be on gridpoints.')
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Requirenments: mod(kmax_total,(2*nbars))==0 & mod(wbar,2)==0.')
+      call TLAB_STOP(DNS_ERROR_UNDEVELOP)
+    else if ( ( mod(g(3)%size,2*xbars_geo%number) /= 0 ) .and. & 
+              ( mod(real(g(3)%size/(2*xbars_geo%number), wp),0.5) == 0 ) .and. &
+              ( mod(xbars_geo%width,2) /= 1) ) then
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Interfaces of bars have to be on gridpoints.')
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Requirenments: mod(kmax_total/(2*nbars),0.5)==0 & mod(wbar,2)==1.')
+      call TLAB_STOP(DNS_ERROR_UNDEVELOP)    
+    end if
+    if ( xbars_geo%mirrored .and. imode_ibm_scal == 1 ) then
+      call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. No IBM for scalars possible with objects on upper domain.')
+      call TLAB_STOP(DNS_ERROR_UNDEVELOP)   
+    end if
+   else if ( xbars_geo%name == 'box' ) then
     if ( ( mod(g(3)%size,2*xbars_geo%number) == 0 ) .and. ( mod(xbars_geo%width,2) /= 0 ) ) then
       call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Interfaces of bars have to be on gridpoints.')
       call TLAB_WRITE_ASCII(efile, 'IBM_READ_INI. IBM. Requirenments: mod(kmax_total,(2*nbars))==0 & mod(wbar,2)==0.')
