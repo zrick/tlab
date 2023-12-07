@@ -22,7 +22,6 @@ subroutine FI_PRESSURE_BOUSSINESQ(q, s, p, tmp1, tmp2, tmp)
     use OPR_ELLIPTIC
     use FI_SOURCES
     use OPR_FILTERS
-
     use THERMO_ANELASTIC
 
     implicit none
