@@ -90,7 +90,18 @@ program VBURGERS
 
   visc = 1.0_wp/big_wp
 
+  ! Call everything once to get the memory initialized on the APUs
+  ! (avoids measuring the first-touch penalty) 
+  call OPR_PARTIAL_X(OPR_P2_P1, imax, jmax, kmax, bcs, g(1), a, b, c)
+  call OPR_BURGERS_X(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(1), a, a, c, tmp1)
+  call OPR_PARTIAL_Y(OPR_P2_P1, imax, jmax, kmax, bcs, g(2), a, b, c)
+  call OPR_BURGERS_Y(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(2), a, a, c, tmp1)
+  call OPR_PARTIAL_Z(OPR_P2_P1, imax, jmax, kmax, bcs, g(3), a, b, c)
+  call OPR_BURGERS_Z(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(3), a, a, c, tmp1)
+  
   DO irun=1,nrun
+
+  
      call SYSTEM_CLOCK(clock_0) 
      ! ###################################################################
      call OPR_PARTIAL_X(OPR_P2_P1, imax, jmax, kmax, bcs, g(1), a, b, c)
@@ -116,7 +127,7 @@ program VBURGERS
      ! ###################################################################
      if (g(3)%size > 1) then
 
-        call OPR_PARTIAL_Z(OPR_P2_P1, imax, jmax, kmax, bcs, g(3), a, b, c)
+  
         do k = 1, kmax
            do j = 1, jmax
               do i = 1, imax
