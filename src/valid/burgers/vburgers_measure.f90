@@ -86,7 +86,6 @@ program VBURGERS
   ! ###################################################################
   ! Define forcing term
   ! ###################################################################
-  PRINT *,'Reading input' 
   call IO_READ_FIELDS('field.inp', IO_SCAL, imax, jmax, kmax, 1, 0, a)
 
   visc = 1.0_wp/big_wp
