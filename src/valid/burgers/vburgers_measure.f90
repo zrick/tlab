@@ -39,9 +39,11 @@ program VBURGERS
   trans_time = 0.0 
 
   call SYSTEM_CLOCK(clock_0,clock_cycle)
-  call GetArg(1,nrun_String)
-  PRINT *,nrun_String 
-  read(nrun_string,*) nrun
+  IF ( IARGC() .GE. 1 ) THEN 
+     call GetArg(1,nrun_String)
+     read(nrun_string,*) nrun
+  ELSE
+     nrun = 1 
 
   PRINT *,'EXECUTING ',nrun, ' RUNS for Performance Measurement'
   
