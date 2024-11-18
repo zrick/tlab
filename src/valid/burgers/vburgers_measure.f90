@@ -78,13 +78,12 @@ program VBURGERS
 
   call SYSTEM_CLOCK(clock_0,clock_cycle)
   call GetArg(1,nrun_String)
+  PRINT *,nrun_String 
   read(nrun_string,*) nrun
-  IF ( stat /= 0 ) THEN
-     nrun = 1
-  ENDIF
+
+  PRINT *,'EXECUTING ',nrun, ' RUNS for Performance Measurement'
   
   ALLOCATE(runtime(nrun))
-  PRINT *,'EXECUTING ',nrun, ' RUNS for Performance Measurement'
 
   DO irun=1,nrun
      call SYSTEM_CLOCK(clock_0) 
@@ -126,6 +125,7 @@ program VBURGERS
      end if
      call SYSTEM_CLOCK(clock_1)
      runtime(irun) = real(clock_1-clock_0)/clock_cycle
+     PRINT *,irun,runtime(irun) 
   ENDDO
   PRINT *,SUM(runtime)/nrun, MINVAL(runtime),MAXVAL(runtime)
   call TLAB_STOP(0)
