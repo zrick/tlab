@@ -14,6 +14,7 @@
 subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
     use TLab_Constants, only: wp, wi
     use TLab_OpenMP
+    use Tlab_VARS, only : trans_time 
     implicit none
 
     integer(wi), intent(in) :: nra      ! Number of rows in a
@@ -25,7 +26,6 @@ subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
 
 ! -------------------------------------------------------------------
     integer(wi) jb, kb
-    use Tlab_VARS, only : trans_time 
     integer clock_0, clock_1, clock_cycle
 
 #ifdef HLRS_HAWK
