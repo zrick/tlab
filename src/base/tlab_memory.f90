@@ -141,8 +141,6 @@ module TLab_Memory
     interface TLab_Allocate_LONG_INT
         module procedure TLab_Allocate_LONG_INT1, TLab_Allocate_LONG_INT2, TLab_Allocate_LONG_INT3, TLab_Allocate_LONG_INT4
     end interface TLab_Allocate_LONG_INT
-#else
-    public :: Tlab_Allocate_Real_Long
 #endif
 
     public :: TLab_Initialize_Memory
@@ -150,6 +148,7 @@ module TLab_Memory
     public :: TLab_Allocate_Real
     public :: TLab_Allocate_INT
     public :: TLab_Allocate_LONG_INT
+    public :: Tlab_Allocate_Real_Long
 contains
 
     ! ###################################################################
@@ -271,6 +270,18 @@ contains
         return
     end subroutine TLab_Set_Pointers_C
 
+    ! ### DOUBLE ALLOCATION ROUTINES FOR LARGE 1D ARRAYS
+    subroutine Tlab_Allocate_Real_Long(C_FILE_LOC, a, dims, s)
+        character(len=*), intent(in) :: C_FILE_LOC,s
+        real(8), allocatable, intent(inout) :: a(:)
+        integer(8), intent(in) :: dims(1)
+        integer id
+        !#####################################################################
+        call TLAB_ALLOCATE_LOG_LONG(lfile,dims,s)
+        allocate (a(dims(1)), stat=ierr)
+        call TLAB_ALLOCATE_ERR(C_FILE_LOC, efile, s)
+    end subroutine Tlab_Allocate_Real_Long
+
     ! ######################################################################
     ! ######################################################################
 #ifndef NO_ASSUMED_RANKS
@@ -300,18 +311,6 @@ contains
         call TLAB_ALLOCATE_ERR(C_FILE_LOC, efile, s)
 
     end subroutine TLab_Allocate_Real
-
-! ### DOUBLE ALLOCATION ROUTINES FOR LARGE 1D ARRAYS
-    subroutine Tlab_Allocate_Real_Long(C_FILE_LOC, a, dims, s)
-      character(len=*), intent(in) :: C_FILE_LOC,s
-      real(8), allocatable, intent(inout) :: a(:)
-      integer(8), intent(in) :: dims(1)
-      integer id
-      !#####################################################################
-      call TLAB_ALLOCATE_LOG_LONG(lfile,dims,s)
-      allocate (a(dims(1)), stat=ierr)
-      call TLAB_ALLOCATE_ERR(C_FILE_LOC, efile, s)
-    end subroutine Tlab_Allocate_Real_Long
 
    ! ### DOUBLE ALLOCATION ROUTINES FOR LARGE 1D ARRAYS
     subroutine TLAB_ALLOCATE_ARRAY_DOUBLE1_LONG(C_FILE_LOC, a, dims, s)
