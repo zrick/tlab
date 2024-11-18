@@ -698,6 +698,7 @@ subroutine DNS_READ_LOCAL(inifile)
     ! -------------------------------------------------------------------
     ! Array sizes
     ! -------------------------------------------------------------------
+
     inb_txc = 9
 
     if (imode_sim == DNS_MODE_SPATIAL) then ! because of the statistics
