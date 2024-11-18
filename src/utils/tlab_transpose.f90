@@ -25,6 +25,9 @@ subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
 
 ! -------------------------------------------------------------------
     integer(wi) jb, kb
+    use Tlab_VARS, only :: trans_time 
+    integer clock_0, clock_1, clock_cycle
+
 #ifdef HLRS_HAWK
     parameter(jb=16, kb=8)
 #else
@@ -35,6 +38,8 @@ subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
 
     integer(wi) k, j, jj, kk
     integer(wi) last_k, last_j
+
+    CALL SYSTEM_CLOCK(clock_0,clock_cycle) 
 
 ! -------------------------------------------------------------------
 #if defined(USE_MKL)
@@ -97,6 +102,9 @@ subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
 
 !$omp end parallel
 #endif
+    CALL SYSTEM_CLOCK(clock_1)
+    trans_time = trans_time + real(clock_1 - clock_0)/ clock_cycle 
+    
     return
 end subroutine TLab_Transpose
 

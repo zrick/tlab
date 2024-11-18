@@ -36,7 +36,7 @@ program VBURGERS
   CHARACTER(len=64) :: nrun_string 
   real(wp), DIMENSION(:), ALLOCATABLE ::  runtime 
 
-
+  trans_time = 0.0 
 
   call SYSTEM_CLOCK(clock_0,clock_cycle)
   call GetArg(1,nrun_String)
@@ -130,5 +130,6 @@ program VBURGERS
      runtime(irun) = real(clock_1-clock_0)/clock_cycle
   ENDDO
   PRINT *,SUM(runtime(2:))/(nrun-1), MINVAL(runtime(2:)),MAXVAL(runtime(2:))
+  PRINT *,trans_time 
   call TLAB_STOP(0)
 end program VBURGERS
