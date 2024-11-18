@@ -76,7 +76,7 @@ program VBURGERS
 
   call SYSTEM_CLOCK(clock_0,clock_cycle)
   call GetArg(1,nrun_String)
-  read(nrun_string,*,iostat=stat) nrun
+  read(nrun_string,*,stat=iostat) nrun
   IF ( iostat /= 0 ) THEN
      nrun = 1
   ENDIF
