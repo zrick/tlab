@@ -7,6 +7,7 @@ program VBURGERS
   use TLAB_Workflow
   use TLAB_ARRAYS
   use TLAB_POINTERS_3D, only: tmp1
+  use TLab_Memory, only : TLab_Initialize_Memory
 #ifdef USE_MPI
   use MPI
   use TLabMPI_PROCS
@@ -16,7 +17,7 @@ program VBURGERS
   use OPR_PARTIAL
   use OPR_BURGERS
   use OPR_FILTERS
-  USE FDM, only : g
+  USE FDM, only : g, FDM_Initialize
   implicit none
 
 #ifdef USE_MPI
