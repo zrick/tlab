@@ -44,7 +44,8 @@ program VBURGERS
      read(nrun_string,*) nrun
   ELSE
      nrun = 1 
-
+  ENDIF
+  
   PRINT *,'EXECUTING ',nrun, ' RUNS for Performance Measurement'
   
   ALLOCATE(runtime(nrun))
