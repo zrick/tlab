@@ -40,6 +40,7 @@ subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
 #if defined(USE_MKL)
     call MKL_DOMATCOPY('c', 't', nra, nca, 1.0_wp, a, ma, b, mb)
 #elif defined(USE_APU)
+    PRINT *,'Using APU implementation'
     if (  nca < nra .AND. nca < 2e4 ) THEN 
        !$omp target teams distribute parallel do collapse(2) default(none) &
        !$omp private(k,j) &
