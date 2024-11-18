@@ -4,7 +4,7 @@ program VBURGERS
 
   use TLAB_CONSTANTS
   use TLAB_VARS
-  use TLAB_PROCS
+  use TLAB_Workflow
   use TLAB_ARRAYS
   use TLAB_POINTERS_3D, only: tmp1
 #ifdef USE_MPI
@@ -73,13 +73,13 @@ program VBURGERS
 
   visc = 1.0_wp/big_wp
 
-  call SYSTEM_CLOCK(clock_0,clock_cycle) 
-  !CALL GetArg(1,nrun_string)
-  !read(nrun_string) nrun 
-  !IF ( stat /= 0 ) THEN
-  !   nrun = 1 
-  !ENDIF
-  nrun=3
+  call SYSTEM_CLOCK(clock_0,clock_cycle)
+  call GetArg(1,nrun_String)
+  read(nrun_string,*,iostat=stat) nrun
+  IF ( iostat /= 0 ) THEN
+     nrun = 1
+  ENDIF
+  
   ALLOCATE(runtime(nrun))
   PRINT *,'EXECUTING ',nrun, ' RUNS for Performance Measurement'
 
@@ -91,51 +91,20 @@ program VBURGERS
         do j = 1, jmax
            do i = 1, imax
               b(i, j, k) = b(i, j, k)*visc - a(i, j, k)*c(i, j, k)
-              ! b(i, j, k) = b(i, j, k)*visc*ribackground(j) - a(i, j, k)*c(i, j, k)
            end do
         end do
      end do
-     !call IO_WRITE_FIELDS('fieldXdirect.out', IO_SCAL, imax, jmax, kmax, 1, b)
 
      call OPR_BURGERS_X(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(1), a, a, c, tmp1)
-     !call IO_WRITE_FIELDS('fieldXburgers.out', IO_SCAL, imax, jmax, kmax, 1, c)
-
-     c = c - b; error = sum(c**2); dummy = sum(b**2)
-#ifdef USE_MPI
-     error2 = error; dummy2 = dummy
-     call MPI_ALLREDUCE(dummy2, dummy, 1, MPI_REAL8, MPI_SUM, MPI_COMM_WORLD, ims_err)
-     call MPI_ALLREDUCE(error2, error, 1, MPI_REAL8, MPI_SUM, MPI_COMM_WORLD, ims_err)
-#endif
-     if (ims_pro == 0) then
-        write (*, *) 'Relative error X ...........: ', sqrt(error)/sqrt(dummy)
-     end if
-     !call IO_WRITE_FIELDS('fieldX.dif', IO_SCAL, imax, jmax, kmax, 1, c)
-
-     ! ###################################################################
      call OPR_PARTIAL_Y(OPR_P2_P1, imax, jmax, kmax, bcs, g(2), a, b, c)
      do k = 1, kmax
         do j = 1, jmax
            do i = 1, imax
               b(i, j, k) = b(i, j, k)*visc - a(i, j, k)*c(i, j, k)
-              ! b(i, j, k) = b(i, j, k)*visc*ribackground(j) - a(i, j, k)*c(i, j, k)
            end do
         end do
      end do
-     !call IO_WRITE_FIELDS('fieldYdirect.out', IO_SCAL, imax, jmax, kmax, 1, b)
-
      call OPR_BURGERS_Y(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(2), a, a, c, tmp1)
-     !call IO_WRITE_FIELDS('fieldYburgers.out', IO_SCAL, imax, jmax, kmax, 1, c)
-
-     c = c - b; error = sum(c**2); dummy = sum(b**2)
-#ifdef USE_MPI
-     error2 = error; dummy2 = dummy
-     call MPI_ALLREDUCE(dummy2, dummy, 1, MPI_REAL8, MPI_SUM, MPI_COMM_WORLD, ims_err)
-     call MPI_ALLREDUCE(error2, error, 1, MPI_REAL8, MPI_SUM, MPI_COMM_WORLD, ims_err)
-#endif
-     if (ims_pro == 0) then
-        write (*, *) 'Relative error Y ...........: ', sqrt(error)/sqrt(dummy)
-     end if
-     !call IO_WRITE_FIELDS('fieldY.dif', IO_SCAL, imax, jmax, kmax, 1, c)
 
      ! ###################################################################
      if (g(3)%size > 1) then
@@ -149,21 +118,7 @@ program VBURGERS
               end do
            end do
         end do
-        !call IO_WRITE_FIELDS('fieldZdirect.out', IO_SCAL, imax, jmax, kmax, 1, b)
-
         call OPR_BURGERS_Z(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(3), a, a, c, tmp1)
-        !call IO_WRITE_FIELDS('fieldZburgers.out', IO_SCAL, imax, jmax, kmax, 1, c)
-
-        c = c - b; error = sum(c**2); dummy = sum(b**2)
-#ifdef USE_MPI
-        error2 = error; dummy2 = dummy
-        call MPI_ALLREDUCE(dummy2, dummy, 1, MPI_REAL8, MPI_SUM, MPI_COMM_WORLD, ims_err)
-        call MPI_ALLREDUCE(error2, error, 1, MPI_REAL8, MPI_SUM, MPI_COMM_WORLD, ims_err)
-#endif
-        if (ims_pro == 0) then
-           write (*, *) 'Relative error Z ...........: ', sqrt(error)/sqrt(dummy)
-        end if
-        !call IO_WRITE_FIELDS('fieldZ.dif', IO_SCAL, imax, jmax, kmax, 1, c)
 
      end if
      call SYSTEM_CLOCK(clock_1)
