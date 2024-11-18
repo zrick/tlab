@@ -67,8 +67,6 @@ program VBURGERS
 
   visc = 1.0_wp/big_wp    ! inviscid
 
-  PRINT *,'Reading grid and initializing FDM' 
-  
   call IO_READ_GRID(gfile, g(1)%size, g(2)%size, g(3)%size, g(1)%scale, g(2)%scale, g(3)%scale, wrk1d(:,1), wrk1d(:,2), wrk1d(:,3))
   call FDM_INITIALIZE(x, g(1), wrk1d(:,1),wrk1d(:,4))
   call FDM_INITIALIZE(y, g(2), wrk1d(:,2),wrk1d(:,4))
@@ -78,8 +76,6 @@ program VBURGERS
 
   bcs = 0
 
-  PRINT *,'Initializing filters' 
-  
   do ig = 1, 3
      call OPR_FILTER_INITIALIZE(g(ig), Dealiasing(ig))
   end do
@@ -93,7 +89,6 @@ program VBURGERS
   visc = 1.0_wp/big_wp
 
   DO irun=1,nrun
-     PRINT *,'Run',irun
      call SYSTEM_CLOCK(clock_0) 
      ! ###################################################################
      call OPR_PARTIAL_X(OPR_P2_P1, imax, jmax, kmax, bcs, g(1), a, b, c)
@@ -133,7 +128,6 @@ program VBURGERS
      end if
      call SYSTEM_CLOCK(clock_1)
      runtime(irun) = real(clock_1-clock_0)/clock_cycle
-     PRINT *,irun,runtime(irun) 
   ENDDO
   PRINT *,SUM(runtime)/nrun, MINVAL(runtime),MAXVAL(runtime)
   call TLAB_STOP(0)
