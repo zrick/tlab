@@ -20,10 +20,12 @@ FILE(GLOB sourcefiles "elliptic/vpoisson.f90")
 add_executable(vpoisson.x ${sourcefiles})
 target_link_libraries(vpoisson.x physics mappings operators io thermodynamics filters fdm ibm ${LEVEL1_LIBS} ${LIBS})
 
-FILE(GLOB sourcefiles "burgers/*.f90")
-add_executable(vburgers.x vburgers.f90)
+FILE(GLOB sourcefiles "burgers/vburgers.f90")
+add_executable(vburgers.x ${sourcefiles})
 target_link_libraries(vburgers.x physics mappings operators io thermodynamics filters fdm ibm ${LEVEL1_LIBS} ${LIBS})
-add_executable(vburgers_measure.x vburgers_measure.f90)
+
+FILE(GLOB sourcefiles "burgers/vburgers_measure.f90")
+add_executable(vburgers_measure.x ${sourcefiles})
 target_link_libraries(vburgers_measure.x physics mappings operators io thermodynamics filters fdm ibm ${LEVEL1_LIBS} ${LIBS})
 
 FILE(GLOB sourcefiles "interpol/*.f90")
