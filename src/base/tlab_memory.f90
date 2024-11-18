@@ -1,4 +1,4 @@
-! ###################################################################
+#ifnd! ###################################################################
 ! ###################################################################
 module TLab_Arrays
     use TLab_Constants, only: wp
@@ -141,6 +141,7 @@ module TLab_Memory
     interface TLab_Allocate_LONG_INT
         module procedure TLab_Allocate_LONG_INT1, TLab_Allocate_LONG_INT2, TLab_Allocate_LONG_INT3, TLab_Allocate_LONG_INT4
     end interface TLab_Allocate_LONG_INT
+    public :: Tlab_Allocate_Real_Long
 #endif
 
     public :: TLab_Initialize_Memory
@@ -148,7 +149,6 @@ module TLab_Memory
     public :: TLab_Allocate_Real
     public :: TLab_Allocate_INT
     public :: TLab_Allocate_LONG_INT
-    public :: Tlab_Allocate_Real_Long
 contains
 
     ! ###################################################################
