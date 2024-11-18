@@ -224,7 +224,6 @@ subroutine TLab_Transpose_COMPLEX(a, nra, nca, ma, b, mb)
     end do
 
 !$omp end parallel
-#endif 
     return
 end subroutine TLab_Transpose_COMPLEX
 
