@@ -132,7 +132,7 @@ program VBURGERS
      call SYSTEM_CLOCK(clock_1)
      runtime(irun) = real(clock_1-clock_0)/clock_cycle
   ENDDO
-  PRINT *,SUM(runtime)/nrun, MINVAL(runtime),MAXVAL(runtime)
-  PRINT *,trans_time/nrun
+  PRINT *,'T_MEAN: ',SUM(runtime)/nrun, '  T_MIN: ',MINVAL(runtime),'  T_MAX: ',MAXVAL(runtime), '[s]'
+  PRINT *,'Time spent in transpositions: ', trans_time/nrun
   call TLAB_STOP(0)
 end program VBURGERS
