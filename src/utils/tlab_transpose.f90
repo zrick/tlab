@@ -25,7 +25,7 @@ subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
 
 ! -------------------------------------------------------------------
     integer(wi) jb, kb
-    use Tlab_VARS, only :: trans_time 
+    use Tlab_VARS, only : trans_time 
     integer clock_0, clock_1, clock_cycle
 
 #ifdef HLRS_HAWK
