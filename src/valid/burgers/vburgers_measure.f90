@@ -16,7 +16,7 @@ program VBURGERS
   use OPR_PARTIAL
   use OPR_BURGERS
   use OPR_FILTERS
-  USE FDM, only : g 
+  USE FDM, only : g, area
   implicit none
 
 #ifdef USE_MPI
