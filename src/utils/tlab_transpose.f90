@@ -37,9 +37,9 @@ subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
     integer(wi) last_k, last_j
 
 ! -------------------------------------------------------------------
-#ifdef USE_MKL
+#if defined(USE_MKL)
     call MKL_DOMATCOPY('c', 't', nra, nca, 1.0_wp, a, ma, b, mb)
-#elifdef USE_APU
+#elif defined(USE_APU)
     if (  nca < nra .AND. nca < 2e4 ) THEN 
        !$omp target teams distribute parallel do collapse(2) default(none) &
        !$omp private(k,j) &
@@ -96,9 +96,7 @@ subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
     end do
 
 !$omp end parallel
-
 #endif
-
     return
 end subroutine TLab_Transpose
 
