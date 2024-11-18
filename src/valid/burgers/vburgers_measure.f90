@@ -39,11 +39,12 @@ program VBURGERS
   ! ###################################################################
   call TLAB_START()
 
-  call IO_READ_GLOBAL(ifile)
+  call Tlab_Initialize_Parameters(ifile) 
 #ifdef USE_MPI
   call TLabMPI_Initialize()
 #endif
-
+  call NavierStokes_Initialize_Parameters(ifile) 
+  
   inb_txc = 4
 
   call TLab_Initialize_Memory(__FILE__)
@@ -54,12 +55,12 @@ program VBURGERS
 
   visc = 1.0_wp/big_wp    ! inviscid
 
-  call IO_READ_GRID(gfile, g(1)%size, g(2)%size, g(3)%size, g(1)%scale, g(2)%scale, g(3)%scale, x, y, z)
-  call FDM_INITIALIZE(x, g(1), wrk1d)
-  call FDM_INITIALIZE(y, g(2), wrk1d)
-  call FDM_INITIALIZE(z, g(3), wrk1d)
+  call IO_READ_GRID(gfile, g(1)%size, g(2)%size, g(3)%size, g(1)%scale, g(2)%scale, g(3)%scale, wrk1d(:,1), wrk1d(:,2), wrk1d(:,3))
+  call FDM_INITIALIZE(x, g(1), wrk1d(:,1),wrk1d(:,4))
+  call FDM_INITIALIZE(y, g(2), wrk1d(:,2),wrk1d(:,4))
+  call FDM_INITIALIZE(z, g(3), wrk1d(:,3),wrk1d(:,4))
 
-  call FI_BACKGROUND_INITIALIZE()
+  call Tlab_Initialize_Background() 
 
   bcs = 0
 
