@@ -141,6 +141,7 @@ module TLab_Memory
     interface TLab_Allocate_LONG_INT
         module procedure TLab_Allocate_LONG_INT1, TLab_Allocate_LONG_INT2, TLab_Allocate_LONG_INT3, TLab_Allocate_LONG_INT4
     end interface TLab_Allocate_LONG_INT
+#else
     public :: Tlab_Allocate_Real_Long
 #endif
 
