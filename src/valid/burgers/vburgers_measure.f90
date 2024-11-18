@@ -129,7 +129,7 @@ program VBURGERS
      call SYSTEM_CLOCK(clock_1)
      runtime(irun) = real(clock_1-clock_0)/clock_cycle
   ENDDO
-  PRINT *,SUM(runtime(2:))/(nrun-1), MINVAL(runtime(2:)),MAXVAL(runtime(2:))
-  PRINT *,trans_time 
+  PRINT *,SUM(runtime)/nrun, MINVAL(runtime),MAXVAL(runtime)
+  PRINT *,trans_time/nrun
   call TLAB_STOP(0)
 end program VBURGERS
