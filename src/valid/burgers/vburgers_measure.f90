@@ -36,7 +36,8 @@ program VBURGERS
   integer clock_add0, clock_add1
   CHARACTER(len=64) :: nrun_string 
   real(wp), DIMENSION(:), ALLOCATABLE ::  runtime 
-
+  real(wp) add_time
+  
   trans_time = 0.0
   add_time = 0.0 
 
