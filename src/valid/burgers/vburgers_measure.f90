@@ -33,10 +33,12 @@ program VBURGERS
 
   integer irun,nrun,stat
   integer clock_0, clock_1,clock_cycle
+  integer clock_add0, clock_add1
   CHARACTER(len=64) :: nrun_string 
   real(wp), DIMENSION(:), ALLOCATABLE ::  runtime 
 
-  trans_time = 0.0 
+  trans_time = 0.0
+  add_time = 0.0 
 
   call SYSTEM_CLOCK(clock_0,clock_cycle)
   IF ( COMMAND_ARGUMENT_COUNT() .GE. 1 ) THEN 
@@ -115,6 +117,10 @@ program VBURGERS
 
      call OPR_BURGERS_X(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(1), a, a, c, tmp1)
      call OPR_PARTIAL_Y(OPR_P2_P1, imax, jmax, kmax, bcs, g(2), a, b, c)
+     CALL SYSTEM_CLOCK(clock_add0) 
+     !$omp target teams distribute parallel do collapse(2) default (none)
+     !$omp private(i,j,k)
+     !$omp shared(a,b,c,imax,jmax,kmax,visc) 
      do k = 1, kmax
         do j = 1, jmax
            do i = 1, imax
@@ -122,12 +128,17 @@ program VBURGERS
            end do
         end do
      end do
+     !$omp end target teams distribute parallel do
+     CALL SYSTEM_CLOCK(clock_add1)
+     add_time = add_time + real(clock_add1 - clock_add0) / clock_cycle 
      call OPR_BURGERS_Y(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(2), a, a, c, tmp1)
 
      ! ###################################################################
      if (g(3)%size > 1) then
-
-  
+        CALL SYSTEM_CLOCK(clock_add0)
+        !$omp target teams distribute parallel do collapse(2) default(none)
+        !$omp private(i,j,k)
+        !$omp shared(imax,jmax,kmax,visc,a,b,c,) 
         do k = 1, kmax
            do j = 1, jmax
               do i = 1, imax
@@ -136,6 +147,9 @@ program VBURGERS
               end do
            end do
         end do
+        !$omp end target teams distribute parallel do
+        CALL SYSTEM_CLOCK(clock_add1)
+        add_time = add_time + real(clock_add1 - clock_add0) / clock_cycle 
         call OPR_BURGERS_Z(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(3), a, a, c, tmp1)
 
      end if
@@ -143,8 +157,9 @@ program VBURGERS
      runtime(irun) = real(clock_1-clock_0)/clock_cycle
   ENDDO
   PRINT 100,SUM(runtime)/nrun, MINVAL(runtime),MAXVAL(runtime)
-  PRINT 101, trans_time/nrun, 100*trans_time/SUM(runtime)
+  PRINT 101, 'Transpos',trans_time/nrun, 100*trans_time/SUM(runtime)
+  PRINT 101, 'Addition',add_time/nrun, 100*add_time/SUM(runtime) 
 100 FORMAT('T MEAN|MIN|MAX [s] : ', F8.4, 1x, F8.4, 1x , F8.4)
-101 FORMAT('Time per run in Transposition:', F8.4,'s (', F3.0,'%)') 
+101 FORMAT('Time per run in ',A9,'[s]:', F8.4,'s (', F3.0,'%)') 
   call TLAB_STOP(0)
 end program VBURGERS
