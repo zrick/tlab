@@ -45,7 +45,8 @@ subroutine TLab_Transpose(a, nra, nca, ma, b, mb)
 #if defined(USE_MKL)
     call MKL_DOMATCOPY('c', 't', nra, nca, 1.0_wp, a, ma, b, mb)
 #elif defined(USE_APU)
-    if (  nca < nra .AND. nca < 2e4 ) THEN 
+    if (  nca < nra .AND. nca < 2e4 ) THEN    ! This 'if' is a workaround for an int-overflow  bug in 
+                                              ! OMP implementation of cray in cpe17
        !$omp target teams distribute parallel do collapse(2) default(none) &
        !$omp private(k,j) &
        !$omp shared(a,b,nca,nra)
