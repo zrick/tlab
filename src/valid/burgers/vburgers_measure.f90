@@ -101,6 +101,10 @@ program VBURGERS
   call OPR_BURGERS_Y(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(2), a, a, c, tmp1)
   call OPR_PARTIAL_Z(OPR_P2_P1, imax, jmax, kmax, bcs, g(3), a, b, c)
   call OPR_BURGERS_Z(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(3), a, a, c, tmp1)
+
+  ! reset time for transpositions to avoid measuring first-touch penalty
+  ! (else nrun needs to be incremented by one in normalization) 
+  trans_time = 0. 
   
   DO irun=1,nrun
 
