@@ -143,7 +143,8 @@ program VBURGERS
      runtime(irun) = real(clock_1-clock_0)/clock_cycle
   ENDDO
   PRINT 100,SUM(runtime)/nrun, MINVAL(runtime),MAXVAL(runtime)
+  PRINT 101, trans_time/nrun, 100*trans_time/SUM(run_time)
 100 FORMAT('T MEAN|MIN|MAX [s] : ', F6.4, 1x, F6.4, 1x , F6.4)
-  PRINT *,'Time spent in transpositions: ', trans_time/nrun
+101 FORMAT('Time per run in Transposition:', F6.4,'s (', F3.0,'%)') 
   call TLAB_STOP(0)
 end program VBURGERS
