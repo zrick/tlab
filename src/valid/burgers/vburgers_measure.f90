@@ -139,7 +139,7 @@ program VBURGERS
         CALL SYSTEM_CLOCK(clock_add0)
         !$omp target teams distribute parallel do collapse(2) default(none) &
         !$omp private(i,j,k) &
-        !$omp shared(imax,jmax,kmax,visc,a,b,c,) 
+        !$omp shared(a,b,c,imax,jmax,kmax,visc) 
         do k = 1, kmax
            do j = 1, jmax
               do i = 1, imax
