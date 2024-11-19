@@ -119,8 +119,8 @@ program VBURGERS
      call OPR_BURGERS_X(OPR_B_SELF, 0, imax, jmax, kmax, bcs, g(1), a, a, c, tmp1)
      call OPR_PARTIAL_Y(OPR_P2_P1, imax, jmax, kmax, bcs, g(2), a, b, c)
      CALL SYSTEM_CLOCK(clock_add0) 
-     !$omp target teams distribute parallel do collapse(2) default (none)
-     !$omp private(i,j,k)
+     !$omp target teams distribute parallel do collapse(2) default (none) &
+     !$omp private(i,j,k) &
      !$omp shared(a,b,c,imax,jmax,kmax,visc) 
      do k = 1, kmax
         do j = 1, jmax
@@ -137,8 +137,8 @@ program VBURGERS
      ! ###################################################################
      if (g(3)%size > 1) then
         CALL SYSTEM_CLOCK(clock_add0)
-        !$omp target teams distribute parallel do collapse(2) default(none)
-        !$omp private(i,j,k)
+        !$omp target teams distribute parallel do collapse(2) default(none) &
+        !$omp private(i,j,k) &
         !$omp shared(imax,jmax,kmax,visc,a,b,c,) 
         do k = 1, kmax
            do j = 1, jmax
